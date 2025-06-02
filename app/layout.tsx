@@ -59,7 +59,9 @@ export default function RootLayout({
   return (
     <html lang="de" dir="ltr">
       <head />
-      <body className={`${orbitron.variable} antialiased`}>{children}</body>
+      <body className={`${orbitron.variable} font-sans antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
