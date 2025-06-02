@@ -1,96 +1,103 @@
-"use client";
-import Layout from "@/components/Layout";
-import Link from "next/link"; // Import Link for navigation
-import { useEffect, useState } from "react"; // For "Kommt bald!" message
+import Image from "next/image";
 
 export default function Home() {
-  const [showComingSoon, setShowComingSoon] = useState(false);
-
-  const handleIchHabNochNieClick = () => {
-    setShowComingSoon(true);
-    setTimeout(() => setShowComingSoon(false), 3000); // Hide after 3 seconds
-  };
-
-  // Temporary DB test (can be removed after verification)
-  // useEffect(() => {
-  //   async function initDB() {
-  //     try {
-  //       const { getDB, addPlayer, getAllPlayers, getRandomQuestion } = await import('@/lib/db');
-  //       const dbInstance = await getDB();
-  //       console.log("Database instance:", dbInstance);
-
-  //       // const newP = await addPlayer({name: "Luis", gender: "m", sexuality: "h"});
-  //       // console.log("Added player:", newP);
-  //       // const allP = await getAllPlayers();
-  //       // console.log("All players:", allP);
-  //       // const randomT = await getRandomQuestion("Default Pack", "truth");
-  //       // console.log("Random Truth:", randomT);
-  //       // const randomD = await getRandomQuestion("Default Pack", "dare");
-  //       // console.log("Random Dare:", randomD);
-
-  //     } catch (error) {
-  //       console.error("Failed to initialize or test DB:", error);
-  //     }
-  //   }
-  //   initDB();
-  // }, []);
-
   return (
-    <Layout>
-      {/* The Layout component itself provides the colored sections. We need to place content within them or structure this page to map to them. */}
-      {/* For this screen, content is primarily in the middle, with clickable areas potentially spanning or being specifically in those sections. */}
-      {/* Assuming Layout children are rendered in the middle blue section by default. */}
-      <div className="flex flex-col items-center justify-around flex-grow text-white relative">
-        {/* This div will try to use the space of the middle blue section provided by Layout */}
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        <Image
+          className="dark:invert"
+          src="/next.svg"
+          alt="Next.js logo"
+          width={180}
+          height={38}
+          priority
+        />
+        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+          <li className="mb-2 tracking-[-.01em]">
+            Get started by editing{" "}
+            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
+              app/page.tsx
+            </code>
+            .
+          </li>
+          <li className="tracking-[-.01em]">
+            Save and see your changes instantly.
+          </li>
+        </ol>
 
-        {/* Combined Clickable Area for "Wahrheit oder Pflicht" & "Wähle" -> /setup/players */}
-        {/* We can make the entire upper part of the middle section clickable, or have specific text elements */}
-        {/* For simplicity, let's make the text elements themselves part of the navigation link. */}
-        {/* The PRD says "Top Red Area: Text 'Wahrheit oder Pflicht'" and "Middle Dark Blue Area: Clickable Text 'Wähle'" */}
-        {/* This implies these texts might live *within* the colored sections of the Layout, not just the children part. */}
-        {/* Let's adjust Layout or make this page structure more explicit. */}
-        {/* For now, let's assume content needs to be absolutely positioned or placed within the Layout's structure more directly. */}
-        {/* Given the Layout structure (divs for each color), we can't easily make one Link span two. */}
-        {/* Re-interpreting: Wahrh/Pflicht is a title in Red. Wähle is clickable in Blue. They BOTH lead to /setup/players */}
-        {/* This is still tricky with the current Layout. */}
-        {/* Alternative: The Layout component is just for the background colors. This page then structures its content ON TOP. */}
-        {/* Let's try making the Layout component allow passing components for each section, or this page rebuilds a similar structure. */}
-
-        {/* Simplified Approach: Place elements and style them to appear in the respective areas. */}
-        {/* The Layout children are in the blue middle. We need to add text to red (top) and green (bottom) specifically. */}
-        {/* This would require modifying the Layout component to accept props for top/bottom content. */}
-
-        {/* Let's assume the `Layout` component is already handling the sections, and we place clickable text: */}
-        {/* Top Red section would be handled by Layout. We need to ensure it has the text. */}
-        {/* For this iteration, let's put all interactive elements in the children part of the Layout (middle blue) */}
-        {/* and style them to appear as if they are in those sections if needed, or simply make them large. */}
-
-        <Link
-          href="/setup/players"
-          className="flex flex-col items-center justify-center text-center p-8 w-full flex-grow"
-        >
-          {/* This Link will effectively cover a large portion of the middle (blue) section */}
-          <div className="absolute top-10 left-1/2 -translate-x-1/2 text-4xl md:text-5xl font-bold text-white cursor-pointer">
-            Wahrheit oder Pflicht
-          </div>
-          <div className="text-6xl md:text-8xl font-bold text-white cursor-pointer">
-            Wähle
-          </div>
-        </Link>
-
-        <div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-4xl md:text-5xl font-bold text-white cursor-pointer p-4"
-          onClick={handleIchHabNochNieClick}
-        >
-          Ich hab noch nie
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <a
+            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              className="dark:invert"
+              src="/vercel.svg"
+              alt="Vercel logomark"
+              width={20}
+              height={20}
+            />
+            Deploy now
+          </a>
+          <a
+            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
+            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read our docs
+          </a>
         </div>
-
-        {showComingSoon && (
-          <div className="absolute bottom-24 left-1/2 -translate-x-1/2 bg-gray-800 text-white p-3 rounded-md shadow-lg z-10">
-            Kommt bald!
-          </div>
-        )}
-      </div>
-    </Layout>
+      </main>
+      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/file.svg"
+            alt="File icon"
+            width={16}
+            height={16}
+          />
+          Learn
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/window.svg"
+            alt="Window icon"
+            width={16}
+            height={16}
+          />
+          Examples
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/globe.svg"
+            alt="Globe icon"
+            width={16}
+            height={16}
+          />
+          Go to nextjs.org →
+        </a>
+      </footer>
+    </div>
   );
 }
