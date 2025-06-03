@@ -105,9 +105,9 @@ export default function TaskScreen() {
       {taskType === "truth" ? (
         <>
           <motion.div
-            initial={{ y: "200%", x: "50%" }}
-            animate={{ y: 0, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
             className={`${titleTextStyle} mb-8 px-4`}
           >
             Wahrheit
@@ -115,7 +115,7 @@ export default function TaskScreen() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
             className={`${taskTextStyle} px-4`}
             dangerouslySetInnerHTML={{ __html: taskText }}
           />
@@ -133,9 +133,9 @@ export default function TaskScreen() {
       {taskType === "dare" ? (
         <>
           <motion.div
-            initial={{ y: "-200%", x: "50%" }}
-            animate={{ y: 0, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
             className={`${titleTextStyle} text-[#0F0F1B] mb-8 px-4`}
           >
             Pflicht
@@ -143,7 +143,7 @@ export default function TaskScreen() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
             className={`${taskTextStyle} text-[#0F0F1B] px-4`}
             dangerouslySetInnerHTML={{ __html: taskText }}
           />
