@@ -32,13 +32,13 @@ const SEXUALITY_OPTIONS = ["Hetero", "Homosexuell", "Bisexuell", "Andere"];
 
 // Styles based on Figma data - resized for mobile
 const titleStyle =
-  "text-white font-bold text-2xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)]";
+  "text-white font-bold text-3xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)]";
 const inputStyle =
-  "text-white font-bold text-4xl bg-transparent border-none outline-none placeholder-[#8E8E99] w-full h-8";
+  "text-white font-bold text-5xl bg-transparent border-none outline-none placeholder-[#8E8E99] w-full h-12";
 const playerCardStyle =
   "bg-white rounded-xl p-3 mb-3 flex items-center justify-between shadow-[0_0_8px_rgba(0,0,0,0.15)]";
 const playerNameStyle = "text-[#FF005C] font-medium text-lg";
-const selectionTextStyle = "text-[#FF005C] font-black text-3xl text-center";
+const selectionTextStyle = "text-[#FF005C] font-medium text-3xl text-center";
 
 export default function PlayerSetupScreen() {
   // State management
@@ -161,7 +161,7 @@ export default function PlayerSetupScreen() {
 
   // Render name input step
   const renderNameInput = () => (
-    <div className="flex items-center justify-between w-full px-2 h-4/5">
+    <div className="relative flex items-center w-full px-2 h-4/5">
       <input
         type="text"
         placeholder="Name...."
@@ -174,12 +174,36 @@ export default function PlayerSetupScreen() {
       {currentName.trim() && (
         <motion.button
           onClick={handleNameNext}
-          className="w-20 h-8 bg-[#FF005C] rounded-lg flex items-center justify-center ml-4"
+          className="w-12 h-12 bg-[#FF005C] rounded-xl flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 right-2"
+          style={{
+            width: "48px",
+            height: "48px",
+            minWidth: "48px",
+            minHeight: "48px",
+          }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <ArrowRight size={20} color="#0F0F1B" />
+          <ArrowRight size={24} color="#0F0F1B" />
         </motion.button>
+      )}
+      {/* Show play button when >= 2 players and not typing */}
+      {playersList.length >= 2 && !currentName.trim() && (
+        <Link href="/play">
+          <motion.button
+            className="w-12 h-12 bg-[#FF005C] rounded-xl flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 right-2"
+            style={{
+              width: "48px",
+              height: "48px",
+              minWidth: "48px",
+              minHeight: "48px",
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Play size={24} color="#0F0F1B" />
+          </motion.button>
+        </Link>
       )}
     </div>
   );
@@ -189,14 +213,23 @@ export default function PlayerSetupScreen() {
     <div className="flex items-center justify-center w-full px-2 h-4/5">
       <motion.button
         onClick={() => handleGenderNavigation("left")}
-        className="w-10 h-8 flex items-center justify-center"
+        className="w-12 h-12 flex items-center justify-center"
+        style={{
+          width: "48px",
+          height: "48px",
+          minWidth: "48px",
+          minHeight: "48px",
+        }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <ChevronLeft size={24} color="#FF005C" />
+        <ChevronLeft size={28} color="#FF005C" />
       </motion.button>
 
-      <div className="flex-1 text-center mx-4">
+      <div
+        className="flex-1 text-center mx-4 flex items-center justify-center"
+        style={{ height: "48px" }}
+      >
         <motion.div
           key={currentGender}
           initial={{ opacity: 0, x: 20 }}
@@ -209,20 +242,32 @@ export default function PlayerSetupScreen() {
 
       <motion.button
         onClick={() => handleGenderNavigation("right")}
-        className="w-10 h-8 flex items-center justify-center"
+        className="w-12 h-12 flex items-center justify-center"
+        style={{
+          width: "48px",
+          height: "48px",
+          minWidth: "48px",
+          minHeight: "48px",
+        }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <ChevronRight size={24} color="#FF005C" />
+        <ChevronRight size={28} color="#FF005C" />
       </motion.button>
 
       <motion.button
         onClick={handleGenderNext}
-        className="w-20 h-8 bg-[#FF005C] rounded-lg flex items-center justify-center ml-4"
+        className="w-12 h-12 bg-[#FF005C] rounded-xl flex items-center justify-center ml-4"
+        style={{
+          width: "48px",
+          height: "48px",
+          minWidth: "48px",
+          minHeight: "48px",
+        }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <ArrowRight size={20} color="#0F0F1B" />
+        <ArrowRight size={24} color="#0F0F1B" />
       </motion.button>
     </div>
   );
@@ -232,14 +277,23 @@ export default function PlayerSetupScreen() {
     <div className="flex items-center justify-center w-full px-2 h-4/5">
       <motion.button
         onClick={() => handleSexualityNavigation("left")}
-        className="w-10 h-8 flex items-center justify-center"
+        className="w-12 h-12 flex items-center justify-center"
+        style={{
+          width: "48px",
+          height: "48px",
+          minWidth: "48px",
+          minHeight: "48px",
+        }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <ChevronLeft size={24} color="#FF005C" />
+        <ChevronLeft size={28} color="#FF005C" />
       </motion.button>
 
-      <div className="flex-1 text-center mx-4">
+      <div
+        className="flex-1 text-center mx-4 flex items-center justify-center"
+        style={{ height: "48px" }}
+      >
         <motion.div
           key={currentSexuality}
           initial={{ opacity: 0, x: 20 }}
@@ -252,52 +306,41 @@ export default function PlayerSetupScreen() {
 
       <motion.button
         onClick={() => handleSexualityNavigation("right")}
-        className="w-10 h-8 flex items-center justify-center"
+        className="w-12 h-12 flex items-center justify-center"
+        style={{
+          width: "48px",
+          height: "48px",
+          minWidth: "48px",
+          minHeight: "48px",
+        }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <ChevronRight size={24} color="#FF005C" />
+        <ChevronRight size={28} color="#FF005C" />
       </motion.button>
 
       <motion.button
         onClick={handleSexualityConfirm}
-        className="w-20 h-8 bg-[#FF005C] rounded-lg flex items-center justify-center ml-4"
+        className="w-12 h-12 bg-[#FF005C] rounded-xl flex items-center justify-center ml-4"
+        style={{
+          width: "48px",
+          height: "48px",
+          minWidth: "48px",
+          minHeight: "48px",
+        }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Check size={20} color="#0F0F1B" />
+        <Check size={24} color="#0F0F1B" />
       </motion.button>
     </div>
   );
-
-  // Render "Spiel starten" button when >= 2 players and not typing
-  const renderStartGameButton = () => {
-    if (playersList.length < 2 || currentStep !== "name" || currentName.trim())
-      return null;
-
-    return (
-      <Link href="/play">
-        <motion.button
-          className="w-20 h-8 bg-[#FF005C] rounded-lg flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 right-2"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Play size={20} color="#0F0F1B" />
-        </motion.button>
-      </Link>
-    );
-  };
 
   // Render middle section content based on current step
   const renderMiddleContent = () => {
     switch (currentStep) {
       case "name":
-        return (
-          <div className="relative w-full">
-            {renderNameInput()}
-            {renderStartGameButton()}
-          </div>
-        );
+        return renderNameInput();
       case "gender":
         return renderGenderSelection();
       case "sexuality":
