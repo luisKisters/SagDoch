@@ -34,6 +34,9 @@ export default function PlayScreen() {
 
   // Load players from IndexedDB on mount
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === "undefined") return;
+
     async function loadPlayers() {
       try {
         const players = await getAllPlayers();

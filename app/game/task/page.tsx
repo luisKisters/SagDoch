@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Layout from "@/components/Layout";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { getPlayerById, getRandomQuestion, Player, Question } from "@/lib/db";
+import { getPlayerById, getRandomQuestion } from "@/lib/db";
 
 type TaskType = "truth" | "dare";
 
@@ -22,14 +22,13 @@ const buttonMotionProps = {
   whileTap: { scale: 0.95 },
 };
 
-export default function TaskScreen() {
+function TaskScreenContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   // State management
   const [taskText, setTaskText] = useState<string>("");
   const [taskType, setTaskType] = useState<TaskType>("truth");
-  const [playerName, setPlayerName] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
 
   // Load task data from URL parameters
@@ -67,7 +66,6 @@ export default function TaskScreen() {
           `<strong style="font-size: 1.1em;">${player.name}</strong>`
         );
 
-        setPlayerName(player.name);
         setTaskType(type);
         setTaskText(processedText);
         setIsLoading(false);
@@ -183,5 +181,25 @@ export default function TaskScreen() {
     >
       {weiterText}
     </Layout>
+  );
+}
+
+export default function TaskScreen() {
+  return (
+    <Suspense
+      fallback={
+        <Layout mainClassName="p-0 flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-white font-bold text-3xl text-center"
+          >
+            Lade...
+          </motion.div>
+        </Layout>
+      }
+    >
+      <TaskScreenContent />
+    </Suspense>
   );
 }

@@ -95,6 +95,11 @@ const defaultQuestions: Omit<Question, "id">[] = [
 ];
 
 async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
+  // Check if running on client side
+  if (typeof window === "undefined") {
+    throw new Error("IndexedDB is not available on the server side");
+  }
+
   const db = await openDB<TruthOrDareDBSchema>(DB_NAME, DB_VERSION, {
     upgrade(db, oldVersion, newVersion, transaction) {
       console.log(
