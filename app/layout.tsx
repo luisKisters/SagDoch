@@ -57,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" dir="ltr">
+    <html lang="de" dir="ltr" suppressHydrationWarning={true}>
       <head />
       <body className={`${orbitron.variable} font-sans antialiased`}>
         {children}
