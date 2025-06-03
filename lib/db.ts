@@ -3,7 +3,7 @@ import { openDB, DBSchema, IDBPDatabase } from "idb";
 const DB_NAME = "truthOrDareDB";
 const DB_VERSION = 1;
 
-interface Player {
+export interface Player {
   id?: number; // Auto-incremented or UUID string if we change strategy
   name: string;
   gender: string;
@@ -11,7 +11,7 @@ interface Player {
   timestamp_added: Date;
 }
 
-interface Question {
+export interface Question {
   id?: number; // Auto-incremented
   pack_name: string;
   type: "truth" | "dare";

@@ -4,16 +4,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { getAllPlayers } from "@/lib/db";
-
-// Types
-interface Player {
-  id?: number;
-  name: string;
-  gender: string;
-  sexuality: string;
-  timestamp_added: Date;
-}
+import { getAllPlayers, Player } from "@/lib/db";
 
 type GameState = "rolling" | "choice_pending";
 

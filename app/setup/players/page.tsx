@@ -13,16 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { getAllPlayers, addPlayer } from "@/lib/db";
-
-// Types
-interface Player {
-  id?: number;
-  name: string;
-  gender: string;
-  sexuality: string;
-  timestamp_added: Date;
-}
+import { getAllPlayers, addPlayer, Player } from "@/lib/db";
 
 type CurrentStep = "name" | "gender" | "sexuality";
 
