@@ -34,3 +34,32 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# TODO
+
+## PWA
+
+- [ ] Add install instructions and get PWA status using https://www.google.com/search?q=how+to+know+wether+app+is+installed+as+pwa+or+in+browser&sourceid=chrome&ie=UTF-8
+- [ ] better pwa and website title
+- [ ] better pwa icon
+- [ ] pwa app preview images
+
+## Screens
+
+- Player Select
+
+  - [ ] Better loading screen/loading state handling
+  - [ ] player list fadding out at the bottom
+  - [ ] higher lucide icon width
+  - [ ] nicer buttons in player cards
+  - [ ] make configuring players and delete button work
+  - [ ] Sticky Spieler:innen heading
+
+- Truth/Dare select screen
+  - [ ] "Wahrheit" and "Pflicht" text sliding up to become the heading for the task
+    - Prompt: okay now actually make it so that the same heading saying wahrheit and saying pflicht just actually w/ an animation slides up and under it the text appears with the task. please. it shouldnt fade out it should just slide to the top and then be the heading for the task.
+
+# Ideas
+
+- Design w/o border radius
+- TTS
