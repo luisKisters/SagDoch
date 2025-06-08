@@ -46,6 +46,7 @@ export default function PlayerSetupScreen() {
   const [currentSexuality, setCurrentSexuality] = useState("");
   const [selectedGenderIndex, setSelectedGenderIndex] = useState(0);
   const [selectedSexualityIndex, setSelectedSexualityIndex] = useState(0);
+  const [showPlayerError, setShowPlayerError] = useState(false);
 
   // Load players from IndexedDB on mount
   useEffect(() => {
@@ -129,6 +130,21 @@ export default function PlayerSetupScreen() {
     }
   };
 
+  // Handle play button click
+  const handlePlayClick = (e: React.MouseEvent) => {
+    if (playersList.length < 2) {
+      e.preventDefault();
+      setShowPlayerError(true);
+      setTimeout(() => setShowPlayerError(false), 3000); // Hide error after 3 seconds
+      return;
+    }
+
+    // Ensure selected pack is in sessionStorage, fallback to Default Pack
+    if (!sessionStorage.getItem("selectedPackName")) {
+      sessionStorage.setItem("selectedPackName", "Default Pack");
+    }
+  };
+
   // Render player cards in top section
   const renderPlayerCards = () => (
     <div className="w-full max-h-full overflow-y-auto px-2">
@@ -155,6 +171,20 @@ export default function PlayerSetupScreen() {
             </div>
           </motion.div>
         ))}
+      </AnimatePresence>
+
+      {/* Error message for insufficient players */}
+      <AnimatePresence>
+        {showPlayerError && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="mt-4 p-3 bg-red-500 text-white rounded-lg text-center font-medium"
+          >
+            Du brauchst mindestens 2 Spieler!
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );
@@ -187,27 +217,29 @@ export default function PlayerSetupScreen() {
           <ArrowRight size={24} color="#0F0F1B" />
         </motion.button>
       )}
-      {/* Show play button when >= 2 players and not typing */}
-      {playersList.length >= 2 && !currentName.trim() && (
-        <Link href="/play">
+      {/* Show play button when not typing - gray if insufficient players */}
+      {!currentName.trim() && (
+        <Link href={playersList.length >= 2 ? "/play" : "#"}>
           <motion.button
-            className="w-12 h-12 bg-[#FF005C] rounded-xl flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 right-2"
+            className={`w-12 h-12 rounded-xl flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 right-2 ${
+              playersList.length >= 2
+                ? "bg-[#FF005C]"
+                : "bg-gray-400 cursor-not-allowed"
+            }`}
             style={{
               width: "48px",
               height: "48px",
               minWidth: "48px",
               minHeight: "48px",
             }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              // Ensure selected pack is in sessionStorage, fallback to Default Pack
-              if (!sessionStorage.getItem("selectedPackName")) {
-                sessionStorage.setItem("selectedPackName", "Default Pack");
-              }
-            }}
+            whileHover={playersList.length >= 2 ? { scale: 1.05 } : {}}
+            whileTap={playersList.length >= 2 ? { scale: 0.95 } : {}}
+            onClick={handlePlayClick}
           >
-            <Play size={24} color="#0F0F1B" />
+            <Play
+              size={24}
+              color={playersList.length >= 2 ? "#0F0F1B" : "#666"}
+            />
           </motion.button>
         </Link>
       )}
