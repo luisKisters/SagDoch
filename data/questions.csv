@@ -1,0 +1,301 @@
+pack_name,type,text_template,requires_target
+"Entspannt",truth,"{playerName}, was war dein peinlichster Moment?",false
+"Entspannt",truth,"{playerName}, was ist dein größter geheimer Wunsch?",false
+"Entspannt",truth,"{playerName}, was machst du wenn du alleine zuhause bist?",false
+"Entspannt",truth,"{playerName}, was denkst du über {targetPlayerName}?",true
+"Entspannt",truth,"{playerName}, was war dein schönstes Kindheitserlebnis?",false
+"Entspannt",dare,"{playerName}, mache 10 Liegestütze.",false
+"Entspannt",dare,"{playerName}, singe dein Lieblingslied vor.",false
+"Entspannt",dare,"{playerName}, gib {targetPlayerName} ein Kompliment.",true
+"Entspannt",dare,"{playerName}, tanze für 30 Sekunden.",false
+"Entspannt",dare,"{playerName}, sprich für 2 Runden mit einem lustigen Akzent.",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon mal jemanden hier geküsst?",false
+"Bisschen Spicy",truth,"{playerName}, wen hier würdest du daten?",false
+"Bisschen Spicy",truth,"{playerName}, was findest du an {targetPlayerName} attraktiv?",true
+"Bisschen Spicy",dare,"{playerName}, gib {targetPlayerName} eine Umarmung.",true
+"Bisschen Spicy",dare,"{playerName}, flirte 30 Sekunden mit {targetPlayerName}.",true
+"Spicy (18+)",truth,"{playerName}, wann hattest du das letzte Mal Sex?",false
+"Spicy (18+)",truth,"{playerName}, mit wem hier würdest du schlafen?",false
+"Spicy (18+)",truth,"{playerName}, findest du {targetPlayerName} sexy?",true
+"Spicy (18+)",dare,"{playerName}, küsse {targetPlayerName} für 10 Sekunden.",true
+"Partyyyy",truth,"{playerName}, welches ist dein liebstes Emoji und warum?",false
+"Partyyyy",truth,"{playerName}, welches ist dein absurdestes Talent?",false
+"Partyyyy",truth,"{playerName}, was war dein peinlichster Moment auf einer Party?",false
+"Partyyyy",truth,"{playerName}, welches Lied würdest du immer wieder hören, auch wenn es alle hassen?",false
+"Partyyyy",truth,"{playerName}, welches absurde Gerücht hast du schon einmal über dich gehört?",false
+"Partyyyy",truth,"{playerName}, wen würdest du auf eine einsame Insel mitnehmen und warum?",false
+"Partyyyy",truth,"{playerName}, was ist das Verrückteste, was du jemals gegessen hast?",false
+"Partyyyy",truth,"{playerName}, was ist dein geheimes Supertalent?",false
+"Partyyyy",truth,"{playerName}, welches ist dein Lieblingswitz (auch wenn er schlecht ist)?",false
+"Partyyyy",truth,"{playerName}, was ist dein schlimmster Schmink-Fail?",false
+"Partyyyy",truth,"{playerName}, was war dein skurrilster Traum?",false
+"Partyyyy",truth,"{playerName}, an welches Outfit aus deiner Vergangenheit denkst du mit Schaudern zurück?",false
+"Partyyyy",truth,"{playerName}, welches ungewöhnliche Hobby hast du?",false
+"Partyyyy",truth,"{playerName}, welches Tier würdest du sein und warum?",false
+"Partyyyy",truth,"{playerName}, was ist dein guilty pleasure?",false
+"Partyyyy",truth,"{playerName}, welche peinliche Angewohnheit hast du?",false
+"Partyyyy",truth,"{playerName}, welches ist dein heimlicher Wunsch?",false
+"Partyyyy",truth,"{playerName}, was war dein lustiges Missverständnis?",false
+"Partyyyy",truth,"{playerName}, welches Lied singst du gerne im Badezimmer?",false
+"Partyyyy",truth,"{playerName}, was ist das Verrückteste, das du jemals online gekauft hast?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblings-Meme?",false
+"Partyyyy",truth,"{playerName}, was ist dein bisher größter Erfolg?",false
+"Partyyyy",truth,"{playerName}, was würdest du tun, wenn du unsichtbar wärst?",false
+"Partyyyy",truth,"{playerName}, welches ist dein komischstes Familienritual?",false
+"Partyyyy",truth,"{playerName}, was ist dein persönlicher Rekord im Essen?",false
+"Partyyyy",truth,"{playerName}, welches ungewöhnliche Talent hast du?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsgericht?",false
+"Partyyyy",truth,"{playerName}, welche Superkraft würdest du gerne haben?",false
+"Partyyyy",truth,"{playerName}, was ist dein größter Traum?",false
+"Partyyyy",truth,"{playerName}, was war dein lustigster Fauxpas?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsfilm?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsbuch?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsspiel?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingstier?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsessen?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsgetränk?",false
+"Partyyyy",truth,"{playerName}, was ist deine Lieblingsfarbe?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsort?",false
+"Partyyyy",truth,"{playerName}, was ist deine Lieblingsjahreszeit?",false
+"Partyyyy",truth,"{playerName}, was machst du am liebsten in deiner Freizeit?",false
+"Partyyyy",truth,"{playerName}, was ist dein größter Wunsch?",false
+"Partyyyy",truth,"{playerName}, was ist dein größtes Geheimnis?",false
+"Partyyyy",truth,"{playerName}, was ist dein größter Fehler?",false
+"Partyyyy",truth,"{playerName}, was ist dein größter Erfolg?",false
+"Partyyyy",truth,"{playerName}, was würdest du ändern, wenn du könntest?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingszitat?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsspruch?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingswitz?",false
+"Partyyyy",truth,"{playerName}, was ist deine Lieblingsgeschichte?",false
+"Partyyyy",truth,"{playerName}, was ist deine Lieblingsaussage?",false
+"Partyyyy",truth,"{playerName}, was denkst du über {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was ist dein erster Eindruck von {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was würdest du mit {targetPlayerName} unternehmen?",true
+"Partyyyy",truth,"{playerName}, was findest du an {targetPlayerName} besonders?",true
+"Partyyyy",truth,"{playerName}, was gefällt dir an {targetPlayerName} nicht?",true
+"Partyyyy",truth,"{playerName}, was würdest du {targetPlayerName} raten?",true
+"Partyyyy",truth,"{playerName}, was ist dein Lieblingsgedanke über {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was ist dein erstes Gefühl bei {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was würdest du mit {targetPlayerName} auf einer einsamen Insel tun?",true
+"Partyyyy",truth,"{playerName}, was ist das Verrückteste, was du mit {targetPlayerName} erlebt hast?",true
+"Partyyyy",truth,"{playerName}, was ist dein lustigstes Erlebnis mit {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was denkst du, ist das Geheimnis von {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, welches Geheimnis von {targetPlayerName} kennst du?",true
+"Partyyyy",truth,"{playerName}, was würdest du {targetPlayerName} schenken?",true
+"Partyyyy",truth,"{playerName}, was würdest du von {targetPlayerName} lernen wollen?",true
+"Partyyyy",truth,"{playerName}, was schätzt du an {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was bewunderst du an {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was findest du besonders einzigartig an {targetPlayerName}?",true
+"Partyyyy",dare,"{playerName}, singe ein Lied!",false
+"Partyyyy",dare,"{playerName}, zeige deinen lustigsten Tanz!",false
+"Partyyyy",dare,"{playerName}, erzähle einen Witz!",false
+"Partyyyy",dare,"{playerName}, mache 10 Liegestütze!",false
+"Partyyyy",dare,"{playerName}, mache einen Handstand!",false
+"Partyyyy",dare,"{playerName}, imitiere jemanden im Raum!",false
+"Partyyyy",dare,"{playerName}, zeige deinen besten Gesichtsausdruck!",false
+"Partyyyy",dare,"{playerName}, mache einen Purzelbaum!",false
+"Partyyyy",dare,"{playerName}, rufe etwas Verrücktes!",false
+"Partyyyy",dare,"{playerName}, mache einen Grimassenschnitt!",false
+"Partyyyy",dare,"{playerName}, stelle dich auf einen Stuhl und singe ein Lied!",false
+"Partyyyy",dare,"{playerName}, tanze den Macarena!",false
+"Partyyyy",dare,"{playerName}, gib {targetPlayerName} ein Kompliment.",true
+"Partyyyy",dare,"{playerName}, stelle {targetPlayerName} eine lustige Frage.",true
+"Partyyyy",dare,"{playerName}, male {targetPlayerName} ein Bild.",true
+"Partyyyy",dare,"{playerName}, singe {targetPlayerName} ein Lied.",true
+"Partyyyy",dare,"{playerName}, erzähle {targetPlayerName} einen Witz.",true
+"Partyyyy",dare,"{playerName}, mache {targetPlayerName} eine Massage (1 Minute).",true
+"Partyyyy",dare,"{playerName},  führe einen Toast auf {targetPlayerName} aus.",true
+"Partyyyy",dare,"{playerName}, spiele ein kurzes Spiel mit {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName}, zeige {targetPlayerName} ein Foto von dir aus deiner Kindheit.",true
+"Partyyyy",dare,"{playerName}, schreibe {targetPlayerName} eine Nachricht auf einen Zettel.",true
+"Partyyyy",dare,"{playerName}, mache einen Toast auf {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName}, tausche mit {targetPlayerName} ein Kleidungsstück.",true
+"Partyyyy",dare,"{playerName}, überzeuge {targetPlayerName}, dass du ein Außerirdischer bist.",true
+"Partyyyy",dare,"{playerName}, erfinde eine Geschichte über {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName}, zeichne {targetPlayerName} karikaturistisch.",true
+"Partyyyy",dare,"{playerName}, flüstere {targetPlayerName} ein Geheimnis zu.",true
+"Partyyyy",dare,"{playerName}, mache eine kurze Pantomime über {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName}, schreibe ein kurzes Lied über {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName},  erfinde einen neuen Namen für {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName},  mache {targetPlayerName} ein Kompliment in einem anderen Dialekt.",true
+"Partyyyy",dare,"{playerName},  nennen 3 Gründe warum {targetPlayerName} toll ist.",true
+"Partyyyy",dare,"{playerName},  erzähl eine Lüge über {targetPlayerName}, die keiner glauben würde.",true
+"Partyyyy",dare,"{playerName},  erfinde ein neues Hobby für {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName},  erfinde ein lustiges Versprechen für {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName},  mache eine lustige Skizze von {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName},  schreibe einen kurzen Rap über {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName},  erzähle eine Geschichte über {targetPlayerName}, die mit 'und dann passierte etwas unglaublich lustiges...' beginnt.",true
+"Partyyyy",dare,"{playerName},  erfinde ein Lied über {targetPlayerName}.",true
+"Partyyyy",dare,"{playerName},  spiele mit {targetPlayerName} Stein-Schere-Papier um ein Stück Schokolade.",true
+"Partyyyy",dare,"{playerName},  überzeuge {targetPlayerName}, dass es einen Geist im Raum gibt.",true
+"Partyyyy",truth,"{playerName}, was ist das lustigste was dir passiert ist?",false
+"Partyyyy",truth,"{playerName}, was ist dein größter Traum?",false
+"Partyyyy",truth,"{playerName}, was ist dein größtes Geheimnis?",false
+"Tiefgründig",truth,"{playerName}, glaubst du an einen höheren Sinn des Lebens?",false
+"Tiefgründig",truth,"{playerName}, was ist für dich das größte Glück?",false
+"Tiefgründig",truth,"{playerName}, worüber hast du dich in letzter Zeit am meisten geärgert?",false
+"Tiefgründig",truth,"{playerName}, welche Eigenschaft schätzt du an dir selbst am meisten?",false
+"Tiefgründig",truth,"{playerName}, was ist deine größte Angst?",false
+"Tiefgründig",truth,"{playerName}, wenn du dein Leben nochmal leben könntest, was würdest du anders machen?",false
+"Tiefgründig",truth,"{playerName}, woran glaubst du fest, selbst wenn es irrational erscheint?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Definition von Erfolg?",false
+"Tiefgründig",truth,"{playerName}, was bereust du im Leben?",false
+"Tiefgründig",truth,"{playerName}, welche moralische Regel ist dir am wichtigsten?",false
+"Tiefgründig",truth,"{playerName}, was ist deine größte Stärke?",false
+"Tiefgründig",truth,"{playerName}, was ist deine größte Schwäche?",false
+"Tiefgründig",truth,"{playerName}, was macht dich wirklich glücklich?",false
+"Tiefgründig",truth,"{playerName}, was ist dein größter Traum?",false
+"Tiefgründig",truth,"{playerName}, was würdest du tun, wenn du für einen Tag unsichtbar wärst?",false
+"Tiefgründig",truth,"{playerName}, was ist dein Lieblingszitat und warum?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet Freundschaft für dich?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Meinung über den freien Willen?",false
+"Tiefgründig",truth,"{playerName}, wie definierst du Liebe?",false
+"Tiefgründig",truth,"{playerName}, was ist dein größter persönlicher Konflikt?",false
+"Tiefgründig",truth,"{playerName}, was würdest du auf eine einsame Insel mitnehmen?",false
+"Tiefgründig",truth,"{playerName}, an welche deiner Entscheidungen denkst du oft zurück?",false
+"Tiefgründig",truth,"{playerName}, was ist dein Verständnis von Gerechtigkeit?",false
+"Tiefgründig",truth,"{playerName}, glaubst du an die Macht der Gedanken?",false
+"Tiefgründig",truth,"{playerName}, was denkst du über {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName}, was würdest du an {targetPlayerName} verbessern, wenn du könntest?",true
+"Tiefgründig",truth,"{playerName}, was schätzt du an {targetPlayerName} am meisten?",true
+"Tiefgründig",truth,"{playerName}, was ist deine ehrliche Meinung über die Lebenseinstellung von {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName}, was verbindet dich mit {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName}, was würdest du {targetPlayerName} raten, wenn er/sie um Rat fragen würde?",true
+"Tiefgründig",truth,"{playerName}, was denkst du, ist {targetPlayerName}'s größter Traum?",true
+"Tiefgründig",truth,"{playerName}, wie würdest du die Beziehung zu {targetPlayerName} beschreiben?",true
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach {targetPlayerName}'s größte Stärke?",true
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach {targetPlayerName}'s größte Schwäche?",true
+"Tiefgründig",truth,"{playerName}, was denkst du, ist die größte Lebensherausforderung für {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName}, was findest du an {targetPlayerName} faszinierend?",true
+"Tiefgründig",truth,"{playerName}, was würdest du mit {targetPlayerName} unternehmen, wenn ihr einen Tag zusammen hättet?",true
+"Tiefgründig",truth,"{playerName}, was denkst du, ist die größte Angst von {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName},  was verbindet dich am meisten mit {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName}, was würdest du {targetPlayerName} gerne noch fragen?",true
+"Tiefgründig",truth,"{playerName}, was denkst du,  treibt {targetPlayerName} im Leben an?",true
+"Tiefgründig",truth,"{playerName}, was findest du an der Persönlichkeit von {targetPlayerName} bemerkenswert?",true
+"Tiefgründig",truth,"{playerName}, wie würdest du die Art und Weise beschreiben, wie {targetPlayerName} mit Herausforderungen umgeht?",true
+"Tiefgründig",truth,"{playerName},  was beeindruckt dich an {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName}, was denkst du, ist die wichtigste Lektion, die {targetPlayerName} im Leben gelernt hat?",true
+"Tiefgründig",truth,"{playerName},  was glaubst du, ist die Definition von Glück für {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName}, was denkst du,  ist die größte Lebenserfahrung von {targetPlayerName}?",true
+"Tiefgründig",truth,"{playerName}, was ist dein persönliches Verständnis von der Bedeutung des Lebens?",false
+"Tiefgründig",truth,"{playerName},  was bedeutet Freiheit für dich?",false
+"Tiefgründig",truth,"{playerName},  was ist deine Meinung über den Tod?",false
+"Tiefgründig",truth,"{playerName},  was denkst du über die Rolle der Technologie in unserer Gesellschaft?",false
+"Tiefgründig",truth,"{playerName},  was ist dein Verständnis von Verantwortung?",false
+"Tiefgründig",truth,"{playerName},  wie gehst du mit deinen Fehlern um?",false
+"Tiefgründig",truth,"{playerName},  was würdest du tun, um die Welt zu verbessern?",false
+"Tiefgründig",truth,"{playerName},  was ist dein persönlicher Beitrag zur Gesellschaft?",false
+"Tiefgründig",truth,"{playerName},  wie wichtig ist dir Familie?",false
+"Tiefgründig",truth,"{playerName},  welche Rolle spielt Glaube in deinem Leben?",false
+"Tiefgründig",truth,"{playerName},  was ist deine Vision für die Zukunft?",false
+"Tiefgründig",truth,"{playerName},  wie wichtig ist dir persönliche Entwicklung?",false
+"Tiefgründig",truth,"{playerName},  was bedeutet es für dich, ein gutes Leben zu führen?",false
+"Tiefgründig",truth,"{playerName},  was ist deine Meinung zu künstlicher Intelligenz?",false
+"Tiefgründig",truth,"{playerName},  was ist deine Meinung über den Klimawandel?",false
+"Tiefgründig",truth,"{playerName},  was bedeutet für dich Achtsamkeit?",false
+"Tiefgründig",truth,"{playerName},  was ist deine größte Sehnsucht?",false
+"Alk/Kiffen",truth,"{playerName}, welches war dein wildestes Erlebnis auf einer Party?",false
+"Alk/Kiffen",truth,"{playerName}, wie viele Drinks hast du schon heute Abend getrunken?",false
+"Alk/Kiffen",truth,"{playerName}, was ist dein schlimmster Kater-Moment?",false
+"Alk/Kiffen",truth,"{playerName}, hast du schon einmal etwas getan, wofür du dich später sehr geschämt hast?",false
+"Alk/Kiffen",truth,"{playerName},  wann warst du das letzte Mal richtig betrunken?",false
+"Alk/Kiffen",truth,"{playerName}, welches ist dein Lieblings-Party-Getränk?",false
+"Alk/Kiffen",truth,"{playerName},  was ist das Verrückteste, das du schon mal unter Alkoholeinfluss getan hast?",false
+"Alk/Kiffen",truth,"{playerName}, was war dein peinlichster Moment auf einer Party?",false
+"Alk/Kiffen",truth,"{playerName}, wie viele Leute hast du schon auf einer Party geküsst?",false
+"Alk/Kiffen",truth,"{playerName}, hast du schon mal jemanden auf einer Party betrogen?",false
+"Alk/Kiffen",truth,"{playerName}, was ist dein Lieblingssong zum Abtanzen?",false
+"Alk/Kiffen",truth,"{playerName}, hast du schon mal heimlich Alkohol oder Drogen konsumiert?",false
+"Alk/Kiffen",truth,"{playerName}, was war dein lustigstes Erlebnis mit Freunden auf einer Party?",false
+"Alk/Kiffen",truth,"{playerName},  welche Party war die beste deines Lebens?",false
+"Alk/Kiffen",truth,"{playerName}, wie würdest du deine Toleranz gegenüber Alkohol beschreiben?",false
+"Alk/Kiffen",truth,"{playerName},  hast du schon mal etwas gestohlen, als du betrunken warst?",false
+"Alk/Kiffen",truth,"{playerName},  welche Droge hast du schon einmal probiert (wenn überhaupt)?",false
+"Alk/Kiffen",truth,"{playerName},  hast du schon mal jemanden auf einer Party kennengelernt, mit dem du eine Beziehung hattest?",false
+"Alk/Kiffen",truth,"{playerName},  was ist deine Lieblingsbeschäftigung auf einer Party?",false
+"Alk/Kiffen",truth,"{playerName},  wie viel Geld hast du schon für Alkohol ausgegeben?",false
+"Alk/Kiffen",truth,"{playerName},  was war dein außergewöhnlichstes Party-Outfit?",false
+"Alk/Kiffen",truth,"{playerName},  hast du schon mal eine Party komplett verpasst?",false
+"Alk/Kiffen",truth,"{playerName},  was war deine beste und schlechteste Erfahrung mit Kiffen?",false
+"Alk/Kiffen",truth,"{playerName},  hast du schon mal auf einer Party übernachtet?",false
+"Alk/Kiffen",truth,"{playerName},  was ist dir schon mal peinliches auf einer Party passiert?",false
+"Alk/Kiffen",truth,"{playerName}, was denkst du über {targetPlayerName}?",true
+"Alk/Kiffen",truth,"{playerName},  wie gut kennst du {targetPlayerName}?",true
+"Alk/Kiffen",truth,"{playerName}, was ist dir an {targetPlayerName} besonders aufgefallen?",true
+"Alk/Kiffen",truth,"{playerName}, würdest du mit {targetPlayerName} noch mal eine Party feiern?",true
+"Alk/Kiffen",truth,"{playerName}, was war das lustigste, das du mit {targetPlayerName} erlebt hast?",true
+"Alk/Kiffen",truth,"{playerName},  hast du schon mal mit {targetPlayerName} Alkohol getrunken?",true
+"Alk/Kiffen",truth,"{playerName},  was findest du an {targetPlayerName} besonders attraktiv?",true
+"Alk/Kiffen",truth,"{playerName}, was würdest du mit {targetPlayerName} auf einer einsamen Insel machen?",true
+"Alk/Kiffen",truth,"{playerName},  was ist dein Lieblings-Partyspiel mit {targetPlayerName}?",true
+"Alk/Kiffen",truth,"{playerName},  was würdest du {targetPlayerName} gerne beibringen?",true
+"Alk/Kiffen",truth,"{playerName},  was ist das Verrückteste, was du mit {targetPlayerName} erlebt hast?",true
+"Alk/Kiffen",truth,"{playerName},  welche Gemeinsamkeiten hast du mit {targetPlayerName}?",true
+"Alk/Kiffen",truth,"{playerName},  was gefällt dir an {targetPlayerName} nicht so gut?",true
+"Alk/Kiffen",truth,"{playerName},  wie würdest du {targetPlayerName} in drei Wörtern beschreiben?",true
+"Alk/Kiffen",truth,"{playerName},  was würdest du mit {targetPlayerName} unternehmen, wenn ihr beide betrunken wärt?",true
+"Alk/Kiffen",dare,"{playerName},  mache einen Trinkspruch auf {targetPlayerName}.",true
+"Alk/Kiffen",dare,"{playerName},  gib {targetPlayerName} ein Kompliment.",true
+"Alk/Kiffen",dare,"{playerName},  stelle {targetPlayerName} eine peinliche Frage.",true
+"Alk/Kiffen",dare,"{playerName},  tanze mit {targetPlayerName}.",true
+"Alk/Kiffen",dare,"{playerName},  mache einen Schluck aus dem Getränk von {targetPlayerName}.",true
+"Alk/Kiffen",dare,"{playerName},  male {targetPlayerName} ein Bild.",true
+"Alk/Kiffen",dare,"{playerName},  führe ein kurzes Gespräch mit {targetPlayerName} in einem anderen Dialekt.",true
+"Alk/Kiffen",dare,"{playerName},  singe {targetPlayerName} ein Lied.",true
+"Alk/Kiffen",dare,"{playerName},  nenne drei Dinge, die du an {targetPlayerName} bewunderst.",true
+"Alk/Kiffen",dare,"{playerName},  erfinde eine Geschichte über {targetPlayerName}.",true
+"Alk/Kiffen",dare,"{playerName},  mache ein Foto mit {targetPlayerName}.",true
+"Alk/Kiffen",dare,"{playerName},  imitiere {targetPlayerName}.",true
+"Alk/Kiffen",dare,"{playerName},  tanze für 30 Sekunden.",false
+"Alk/Kiffen",dare,"{playerName},  mache einen Schluck von deinem Getränk.",false
+"Alk/Kiffen",dare,"{playerName},  erzähle einen Witz.",false
+"Alk/Kiffen",dare,"{playerName},  singe ein Lied.",false
+"Alk/Kiffen",dare,"{playerName},  mache drei Liegestütze.",false
+"Alk/Kiffen",dare,"{playerName},  zeige deinen lustigsten Tanzmove.",false
+"Alk/Kiffen",dare,"{playerName},  mache ein Selfie mit einem albernen Gesichtsausdruck.",false
+"Alk/Kiffen",dare,"{playerName},  nenne drei Dinge, die du heute Abend tun willst.",false
+"Alk/Kiffen",dare,"{playerName},  erfinde einen Trinkspruch.",false
+"Alk/Kiffen",dare,"{playerName},  nenne drei Dinge, auf die du stolz bist.",false
+"Alk/Kiffen",dare,"{playerName},  zeige deine beste Imitation einer berühmten Person.",false
+"35. BST: Verbundenheit",truth,"{playerName}, was bedeutet für dich wirkliche Verbundenheit?",false
+"35. BST: Verbundenheit",truth,"{playerName}, welcher Moment in der 35. BST hat dich besonders mit anderen verbunden?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie wichtig ist dir das Gemeinschaftsgefühl in unserer Waldorf-Klasse?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wem vertraust du in unserer Klasse am meisten und warum?",false
+"35. BST: Verbundenheit",truth,"{playerName}, beschreibe eine Situation, in der du dich von jemandem in unserer Klasse stark unterstützt gefühlt hast.",false
+"35. BST: Verbundenheit",truth,"{playerName}, was verbindet dich am meisten mit unseren Waldorflehrern?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was hast du während unserer Epochen gelernt, das dein Verständnis von Verbundenheit erweitert hat?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie beeinflusst die Anthroposophie deine Sichtweise auf menschliche Beziehungen?",false
+"35. BST: Verbundenheit",truth,"{playerName},  welche Rolle spielt Eurythmie in deinem Empfinden von Gemeinschaft?",false
+"35. BST: Verbundenheit",truth,"{playerName},  wie zeigst du deine Wertschätzung für deine Mitschüler?",false
+"35. BST: Verbundenheit",truth,"{playerName},  wann hast du dich zuletzt wirklich gesehen gefühlt?",false
+"35. BST: Verbundenheit",truth,"{playerName},  was bedeutet dir Freundschaft?",false
+"35. BST: Verbundenheit",truth,"{playerName},  an wen denkst du, wenn du an Zuhause denkst?",false
+"35. BST: Verbundenheit",truth,"{playerName},  was ist deine Lieblingserinnerung aus der 35. BST?",false
+"35. BST: Verbundenheit",truth,"{playerName},  worauf bist du in Bezug auf unsere Klassengemeinschaft besonders stolz?",false
+"35. BST: Verbundenheit",truth,"{playerName},  was würdest du an unserer Klassengemeinschaft verbessern?",false
+"35. BST: Verbundenheit",truth,"{playerName},  wie gehst du mit Konflikten in unserer Klasse um?",false
+"35. BST: Verbundenheit",truth,"{playerName},  was empfindest du, wenn du an unsere gemeinsamen Projekte denkst?",false
+"35. BST: Verbundenheit",truth,"{playerName},  was schätzt du an {targetPlayerName} besonders?",true
+"35. BST: Verbundenheit",truth,"{playerName},  was verbindet dich mit {targetPlayerName}?",true
+"35. BST: Verbundenheit",truth,"{playerName},  was würdest du {targetPlayerName} gerne sagen?",true
+"35. BST: Verbundenheit",truth,"{playerName},  was bewunderst du an {targetPlayerName}?",true
+"35. BST: Verbundenheit",truth,"{playerName},  wie würdest du die Beziehung zu {targetPlayerName} beschreiben?",true
+"35. BST: Verbundenheit",truth,"{playerName},  was denkst du, könnte {targetPlayerName} besser machen?",true
+"35. BST: Verbundenheit",truth,"{playerName},  welche gemeinsame Erinnerung hast du mit {targetPlayerName}?",true
+"35. BST: Verbundenheit",truth,"{playerName},  was gefällt dir an der Art und Weise, wie {targetPlayerName} mit anderen umgeht?",true
+"35. BST: Verbundenheit",truth,"{playerName},  wie unterstützt du {targetPlayerName}?",true
+"35. BST: Verbundenheit",truth,"{playerName},  was hast du von {targetPlayerName} gelernt?",true
+"35. BST: Verbundenheit",dare,"{playerName}, umarme {targetPlayerName} für 10 Sekunden.",true
+"35. BST: Verbundenheit",dare,"{playerName}, gib {targetPlayerName} ein aufrichtiges Kompliment.",true
+"35. BST: Verbundenheit",dare,"{playerName}, erzähle {targetPlayerName} etwas, was du an ihm/ihr schätzt.",true
+"35. BST: Verbundenheit",dare,"{playerName}, male {targetPlayerName} ein kleines Bild.",true
+"35. BST: Verbundenheit",dare,"{playerName}, schreibe {targetPlayerName} eine kurze, positive Nachricht.",true
+"35. BST: Verbundenheit",dare,"{playerName}, singe {targetPlayerName} ein Lied.",true
+"35. BST: Verbundenheit",dare,"{playerName},  spiele ein kurzes Eurythmie-Stück vor.",false
+"35. BST: Verbundenheit",dare,"{playerName},  erzähle eine Geschichte über Verbundenheit.",false
+"35. BST: Verbundenheit",dare,"{playerName},  zeige eine Geste der Dankbarkeit.",false
+"35. BST: Verbundenheit",dare,"{playerName},  meditiere für 1 Minute in Stille.",false
+"35. BST: Verbundenheit",dare,"{playerName},  teile eine positive Erfahrung mit der Klasse.",false
+"35. BST: Verbundenheit",dare,"{playerName},  beschreibe dein ideales Gemeinschaftsgefühl.",false
+"35. BST: Verbundenheit",dare,"{playerName},  schreibe einen kurzen Dankesbrief an einen Menschen, der dir wichtig ist.",false

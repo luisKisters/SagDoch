@@ -4,7 +4,8 @@ import React, { useState, useEffect, Suspense } from "react";
 import Layout from "@/components/Layout";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { getPlayerById, getRandomQuestion } from "@/lib/db";
+import { getPlayerById, getRandomQuestion, getAllPlayers } from "@/lib/db";
+import { getRandomTargetPlayer } from "@/lib/targeting";
 
 type TaskType = "truth" | "dare";
 
@@ -52,19 +53,78 @@ function TaskScreenContent() {
           return;
         }
 
-        // Get random question
-        const question = await getRandomQuestion("Default Pack", type);
+        // Get all players for targeting
+        const allPlayers = await getAllPlayers();
+
+        // Get selected pack name from sessionStorage, fallback to "Default Pack"
+        const selectedPackName =
+          sessionStorage.getItem("selectedPackName") || "Default Pack";
+
+        // Get random question - try up to 5 times to find a suitable question
+        let question = null;
+        let attempts = 0;
+        const maxAttempts = 5;
+
+        while (!question && attempts < maxAttempts) {
+          const candidateQuestion = await getRandomQuestion(
+            selectedPackName,
+            type
+          );
+
+          if (!candidateQuestion) {
+            console.error("No questions found for this type");
+            router.push("/play");
+            return;
+          }
+
+          // Check if question requires targeting
+          if (candidateQuestion.requires_target) {
+            // Get target player
+            const targetPlayer = getRandomTargetPlayer(player, allPlayers);
+
+            if (targetPlayer) {
+              // We found a valid target, use this question
+              question = candidateQuestion;
+            } else {
+              // No valid targets, try to find another question
+              attempts++;
+              console.log(
+                `No valid targets for player ${player.name}, attempt ${attempts}/${maxAttempts}`
+              );
+            }
+          } else {
+            // Question doesn't require targeting, we can use it
+            question = candidateQuestion;
+          }
+        }
+
         if (!question) {
-          console.error("No questions found for this type");
+          console.error(
+            "Could not find a suitable question after multiple attempts"
+          );
           router.push("/play");
           return;
         }
 
-        // Replace placeholder with player name (make it bold)
-        const processedText = question.text_template.replace(
+        // Process the question text
+        let processedText = question.text_template;
+
+        // Replace player name placeholder (make it bold)
+        processedText = processedText.replace(
           "{playerName}",
           `<strong style="font-size: 1.1em;">${player.name}</strong>`
         );
+
+        // Replace target player name if needed
+        if (question.requires_target) {
+          const targetPlayer = getRandomTargetPlayer(player, allPlayers);
+          if (targetPlayer) {
+            processedText = processedText.replace(
+              "{targetPlayerName}",
+              `<strong style="font-size: 1.1em;">${targetPlayer.name}</strong>`
+            );
+          }
+        }
 
         setTaskType(type);
         setTaskText(processedText);

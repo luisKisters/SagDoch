@@ -37,6 +37,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 # TODO
 
+- [ ] MAKE SURE PLAYERS CAN QUIT/STOP/RESUME GAMES!
+- [ ] add lang to packs/questions.
+
 ## PWA
 
 - [ ] Add install instructions and get PWA status using https://www.google.com/search?q=how+to+know+wether+app+is+installed+as+pwa+or+in+browser&sourceid=chrome&ie=UTF-8

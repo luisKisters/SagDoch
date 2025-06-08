@@ -1,0 +1,8 @@
+id,name,description,is_18_plus,type,is_locked,is_hidden,cost_in_ads
+entspannt,Entspannt,Klassische entspannte Fragen für gemütliche Runden mit Freunden,false,truth_and_dare,false,false,0
+bisschen-spicy,Bisschen Spicy,Etwas würzigere Fragen für mutige Spieler - aber noch harmlos,false,truth_and_dare,true,false,3
+spicy-18,Spicy (18+),Nur für Erwachsene - pikante Fragen und gewagte Aufgaben,true,truth_and_dare,true,false,8
+tiefgruendig,Tiefgründig,Philosophische und tiefgehende Fragen für bedeutungsvolle Gespräche,false,only_truth,true,false,4
+alk-kiffen,Alk/Kiffen,Wahrheit oder Pflicht Aufgaben für wenn man high/suff ist:),true,truth_and_dare,true,false,6
+partyyyy,Partyyyy,Mega wilde Fragen und Aufgaben für die krassesten Partys!,false,truth_and_dare,true,false,5
+bst-verbundenheit,35. BST: Verbundenheit,Spezielle Fragen zum Thema Verbundenheit für die 35. BST,false,truth_and_dare,true,true,0 

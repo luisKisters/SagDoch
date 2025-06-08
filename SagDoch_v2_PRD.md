@@ -13,7 +13,7 @@ This phase focuses on upgrading the core game logic and database schema to suppo
 ### 3.1. IndexedDB Schema Upgrade
 
 - **Objective:** Evolve the database to support packs, unlocks, and more detailed player/question data, including groundwork for an ad-based unlock system.
-- **Action:** Create a new DB version. Implement an upgrade path that preserves existing `players` data.
+- **Action:** Create a new DB version (increment from current version 1 to version 2). Implement an upgrade path that preserves existing `players` data.
 
 1.  **New `packs` Object Store:**
 
@@ -34,15 +34,15 @@ This phase focuses on upgrading the core game logic and database schema to suppo
 
 2.  **Updated `questions` Object Store:**
 
-    - **Purpose:** Link questions directly to a pack.
-    - **Structure:**
+    - **Purpose:** Continue using current pack_name field but add targeting support.
+    - **Structure:** (Keep existing structure but add requires_target field)
       ```typescript
       {
-        id: number; // autoIncrement
-        pack_id: string; // Foreign key referencing packs.id
-        type: "truth" | "dare";
+        id: number; // autoIncrement (existing)
+        pack_name: string; // Keep existing field (e.g., "Default Pack")
+        type: "truth" | "dare"; // existing
         text_template: string; // e.g., "{playerName}, ...", "{targetPlayerName}, ..."
-        requires_target: boolean; // 'true' if the text_template uses {targetPlayerName}.
+        requires_target: boolean; // NEW FIELD: 'true' if the text_template uses {targetPlayerName}.
       }
       ```
 
@@ -54,9 +54,9 @@ This phase focuses on upgrading the core game logic and database schema to suppo
       {
         id: "local_user_profile";
         promo_code_activated: boolean; // Default 'false'.
-        unlocked_pack_ids: string[]; // List of pack IDs unlocked.
+        unlocked_pack_names: string[]; // List of pack names unlocked (using pack_name to match existing questions).
         // For V3:
-        // ad_watch_progress: { [packId: string]: number }; // Tracks ads watched per pack.
+        // ad_watch_progress: { [packName: string]: number }; // Tracks ads watched per pack.
       }
       ```
 
@@ -64,9 +64,9 @@ This phase focuses on upgrading the core game logic and database schema to suppo
 
 - **Objective:** Make gameplay more personal by targeting questions based on player attractions.
 
-1.  **Expand Sexuality Options:**
+1.  **Update Sexuality Options:**
 
-    - Update the selectable sexuality list to include: "Heterosexuell", "Homosexuell", "Bisexuell", "Pansexuell", "Asexuell".
+    - Update the existing sexuality options from ["Hetero", "Homosexuell", "Bisexuell", "Andere"] to: ["Heterosexuell", "Homosexuell", "Bisexuell", "Pansexuell", "Asexuell"].
     - **Developer Note:** Use consistent string literals for reliable logic.
 
 2.  **Implement Targeting Logic (`lib/targeting.ts`):**
@@ -78,13 +78,13 @@ This phase focuses on upgrading the core game logic and database schema to suppo
       - **Bisexuell / Pansexuell:** Attracted to all genders.
       - **Asexuell:** Attracted to no one (returns empty array).
 
-3.  **Update Game Logic (`pages/game/task.tsx`):**
-    - When fetching a question, check if `question.requires_target`.
+3.  **Update Game Logic (`app/game/task/page.tsx`):**
+    - When fetching a question using `getRandomQuestion()`, check if `question.requires_target`.
     - **If `true`:**
       1. Call `getTargetPlayers()` to get valid targets.
       2. **If targets exist:** Pick one randomly and replace both `{playerName}` and `{targetPlayerName}` placeholders.
       3. **If NO targets exist:** Discard the question and fetch a new one with `requires_target: false` to prevent dead ends.
-    - **If `false`:** Proceed as in V1, replacing only `{playerName}`.
+    - **If `false`:** Proceed as current implementation, replacing only `{playerName}`.
 
 ---
 
@@ -109,25 +109,33 @@ This phase focuses on upgrading the core game logic and database schema to suppo
 
 ## **Phase 5: UI/UX for Packs & Unlocks**
 
-### 5.1. New Screen: Pack Selection (`pages/setup/packs.tsx`)
+### 5.1. New Screen: Pack Selection (`app/setup/packs/page.tsx`)
 
 - **Objective:** Allow users to view and select which question pack to play with.
 - **Visual Reference:** Access Figma design at `https://www.figma.com/design/kVMqBjFmCYm7mhf83rwndx/SagDoch-Design?node-id=41-801&t=TOcH5n3VXZpGAGxZ-4` via Framelink Figma MCP.
-- **Navigation:** `Start -> Pack Select -> Player Select -> Play`.
+- **Navigation:** `Start -> Pack Select -> Player Select -> Play` (update from current `Start -> Player Select -> Play`).
 
 - **UI Elements & Functionality:**
   1.  **Header:** Title "Wähle ein Pack".
   2.  **Promo Code Button:** A `Gift` or `Ticket` Lucide Icon in the top corner. Clicking it opens the promo code modal.
   3.  **Pack List/Grid:**
-      - Fetch packs from `packs` and the user profile from `user_profile`.
+      - Create initial packs in the `packs` object store and fetch them along with the user profile from `user_profile`.
       - Render a card for each pack containing its `name`, `description`, and "18+" label.
-      - Display a `Lock` or `Unlock` Lucide Icon. **A pack is unlocked if `!pack.is_locked` OR `user_profile.promo_code_activated` is true OR `user_profile.unlocked_pack_ids.includes(pack.id)`.**
+      - Display a `Lock` or `Unlock` Lucide Icon. **A pack is unlocked if `!pack.is_locked` OR `user_profile.promo_code_activated` is true OR `user_profile.unlocked_pack_names.includes(pack.name)`.**
   4.  **Interaction:**
-      - Tapping an unlocked pack highlights it and sets the `selectedPackId`.
+      - Tapping an unlocked pack highlights it and sets the `selectedPackName` (using pack.name to match the questions pack_name field).
       - Tapping a locked pack triggers a "Wiggle" animation (Framer Motion). In V3, this will open the ad-watch modal.
   5.  **"Weiter" Button:** Enabled only after an unlocked pack is selected. Navigates to `/setup/players`.
 
-### 5.2. Promotional Code Unlock Modal
+### 5.2. Update Player Setup Navigation
+
+- **Objective:** Modify the existing player setup to support pack selection flow.
+- **Action:** Update `app/setup/players/page.tsx` to handle the new navigation flow.
+- **Changes:**
+  - The "Play" button should now navigate to `/play` with the selected pack information stored in sessionStorage or passed as URL parameter.
+  - Update `getRandomQuestion()` calls to use the selected pack name instead of hardcoded "Default Pack".
+
+### 5.3. Promotional Code Unlock Modal
 
 - **Objective:** Implement the timed promotional code feature.
 
@@ -155,6 +163,6 @@ This section outlines features planned for after V2. The V2 data structures are 
   3.  A "Watch Ad" button is displayed.
   4.  **On successful ad completion:**
       - Integrate a mobile ad SDK (e.g., AdMob).
-      - The `ad_watch_progress` object in the `user_profile` store needs to be created/updated. For example: `ad_watch_progress[pack.id]++`.
-      - When `ad_watch_progress[pack.id]` equals `pack.cost_in_ads`, add the `pack.id` to the `unlocked_pack_ids` array and update the profile in IndexedDB.
+      - The `ad_watch_progress` object in the `user_profile` store needs to be created/updated. For example: `ad_watch_progress[pack.name]++`.
+      - When `ad_watch_progress[pack.name]` equals `pack.cost_in_ads`, add the `pack.name` to the `unlocked_pack_names` array and update the profile in IndexedDB.
       - The pack will now appear as unlocked.

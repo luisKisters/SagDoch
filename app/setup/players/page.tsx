@@ -19,7 +19,13 @@ type CurrentStep = "name" | "gender" | "sexuality";
 
 // Gender and sexuality options
 const GENDER_OPTIONS = ["Männlich", "Weiblich", "Divers"];
-const SEXUALITY_OPTIONS = ["Hetero", "Homosexuell", "Bisexuell", "Andere"];
+const SEXUALITY_OPTIONS = [
+  "Heterosexuell",
+  "Homosexuell",
+  "Bisexuell",
+  "Pansexuell",
+  "Asexuell",
+];
 
 // Styles based on Figma data - resized for mobile
 const titleStyle =
@@ -194,6 +200,12 @@ export default function PlayerSetupScreen() {
             }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              // Ensure selected pack is in sessionStorage, fallback to Default Pack
+              if (!sessionStorage.getItem("selectedPackName")) {
+                sessionStorage.setItem("selectedPackName", "Default Pack");
+              }
+            }}
           >
             <Play size={24} color="#0F0F1B" />
           </motion.button>
