@@ -15,7 +15,13 @@ import {
   ChevronRight,
   X,
 } from "lucide-react";
-import { getAllPlayers, addPlayer, Player, deleteAllPlayers } from "@/lib/db";
+import {
+  getAllPlayers,
+  addPlayer,
+  Player,
+  deleteAllPlayers,
+  debugDatabaseHealth,
+} from "@/lib/db";
 import { useRouter } from "next/navigation";
 
 type CurrentStep = "name" | "gender" | "sexuality";
@@ -61,6 +67,9 @@ export default function PlayerSetupScreen() {
 
     async function loadPlayers() {
       try {
+        // Debug database health
+        await debugDatabaseHealth();
+
         const players = await getAllPlayers();
         setPlayersList(players);
 

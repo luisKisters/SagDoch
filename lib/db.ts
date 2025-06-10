@@ -152,157 +152,205 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
     throw new Error("IndexedDB is not available on the server side");
   }
 
-  const db = await openDB<TruthOrDareDBSchema>(DB_NAME, DB_VERSION, {
-    upgrade(db, oldVersion, newVersion, transaction) {
-      console.log(
-        `Upgrading database from version ${oldVersion} to ${newVersion}`
-      );
-
-      if (oldVersion < 1) {
-        // Create initial v1 stores
-        const playerStore = db.createObjectStore("players", {
-          keyPath: "id",
-          autoIncrement: true,
-        });
-        playerStore.createIndex("name", "name", { unique: false });
-
-        const questionStore = db.createObjectStore("questions", {
-          keyPath: "id",
-          autoIncrement: true,
-        });
-        questionStore.createIndex("pack_name", "pack_name", { unique: false });
-        questionStore.createIndex("type", "type", { unique: false });
-        // Composite index for pack_name and type for efficient querying for getRandomQuestion
-        questionStore.createIndex("pack_type", ["pack_name", "type"], {
-          unique: false,
-        });
-      }
-
-      if (oldVersion < 2) {
-        // Create new v2 stores
-        const packStore = db.createObjectStore("packs", {
-          keyPath: "id",
-        });
-
-        const userProfileStore = db.createObjectStore("user_profile", {
-          keyPath: "id",
-        });
-
-        // Add default user profile
-        const userStore = transaction.objectStore("user_profile");
-        userStore.add(defaultUserProfile);
-        console.log("Default user profile populated for v2.");
-      }
-
-      if (oldVersion < 3) {
-        // V3: Clear existing data to refresh with CSV data
-        console.log("Upgrading to v3: Clearing data for CSV refresh...");
-
-        const packStore = transaction.objectStore("packs");
-        const questionStore = transaction.objectStore("questions");
-
-        packStore.clear();
-        questionStore.clear();
-
-        console.log("V3 upgrade completed: Data cleared for CSV loading.");
-      }
-
-      if (oldVersion < 4) {
-        // V4: Clear data again to ensure fresh CSV data
-        console.log("Upgrading to v4: Clearing data for fresh CSV loading...");
-
-        const packStore = transaction.objectStore("packs");
-        const questionStore = transaction.objectStore("questions");
-        const userProfileStore = transaction.objectStore("user_profile");
-
-        packStore.clear();
-        questionStore.clear();
-        userProfileStore.clear();
-
-        // Add updated user profile
-        userProfileStore.add(defaultUserProfile);
-
-        console.log("V4 upgrade completed: Data cleared for CSV loading.");
-      }
-
-      if (oldVersion < 5) {
-        // V5: Clear cached pack and question data to refresh with latest CSV data
+  try {
+    const db = await openDB<TruthOrDareDBSchema>(DB_NAME, DB_VERSION, {
+      upgrade(db, oldVersion, newVersion, transaction) {
         console.log(
-          "Upgrading to v5: Clearing pack and question cache for fresh data..."
+          `Upgrading database from version ${oldVersion} to ${newVersion}`
         );
 
-        const packStore = transaction.objectStore("packs");
-        const questionStore = transaction.objectStore("questions");
+        try {
+          if (oldVersion < 1) {
+            // Create initial v1 stores
+            console.log("Creating v1 object stores...");
+            const playerStore = db.createObjectStore("players", {
+              keyPath: "id",
+              autoIncrement: true,
+            });
+            playerStore.createIndex("name", "name", { unique: false });
 
-        packStore.clear();
-        questionStore.clear();
+            const questionStore = db.createObjectStore("questions", {
+              keyPath: "id",
+              autoIncrement: true,
+            });
+            questionStore.createIndex("pack_name", "pack_name", {
+              unique: false,
+            });
+            questionStore.createIndex("type", "type", { unique: false });
+            // Composite index for pack_name and type for efficient querying for getRandomQuestion
+            questionStore.createIndex("pack_type", ["pack_name", "type"], {
+              unique: false,
+            });
+            console.log("V1 object stores created successfully.");
+          }
 
-        console.log(
-          "V5 upgrade completed: Pack and question cache cleared for fresh CSV loading."
-        );
-      }
-    },
-  });
+          if (oldVersion < 2) {
+            // Create new v2 stores
+            console.log("Creating v2 object stores...");
+            const packStore = db.createObjectStore("packs", {
+              keyPath: "id",
+            });
 
-  // Load data from CSV files and populate database if empty
-  const questionCount = await db.count("questions");
-  if (questionCount === 0) {
-    console.log("No questions found, loading from CSV...");
-    try {
-      const questions = await loadQuestionsFromCSV();
-      if (questions.length > 0) {
-        const tx = db.transaction("questions", "readwrite");
-        const store = tx.objectStore("questions");
-        for (const question of questions) {
-          await store.add(question as Question);
+            const userProfileStore = db.createObjectStore("user_profile", {
+              keyPath: "id",
+            });
+
+            // Add default user profile
+            const userStore = transaction.objectStore("user_profile");
+            userStore.add(defaultUserProfile);
+            console.log("Default user profile populated for v2.");
+          }
+
+          if (oldVersion < 3) {
+            // V3: Clear existing data to refresh with CSV data
+            console.log("Upgrading to v3: Clearing data for CSV refresh...");
+
+            const packStore = transaction.objectStore("packs");
+            const questionStore = transaction.objectStore("questions");
+
+            packStore.clear();
+            questionStore.clear();
+
+            console.log("V3 upgrade completed: Data cleared for CSV loading.");
+          }
+
+          if (oldVersion < 4) {
+            // V4: Clear data again to ensure fresh CSV data
+            console.log(
+              "Upgrading to v4: Clearing data for fresh CSV loading..."
+            );
+
+            const packStore = transaction.objectStore("packs");
+            const questionStore = transaction.objectStore("questions");
+            const userProfileStore = transaction.objectStore("user_profile");
+
+            packStore.clear();
+            questionStore.clear();
+            userProfileStore.clear();
+
+            // Add updated user profile
+            userProfileStore.add(defaultUserProfile);
+
+            console.log("V4 upgrade completed: Data cleared for CSV loading.");
+          }
+
+          if (oldVersion < 5) {
+            // V5: Clear cached pack and question data to refresh with latest CSV data
+            console.log(
+              "Upgrading to v5: Clearing pack and question cache for fresh data..."
+            );
+
+            const packStore = transaction.objectStore("packs");
+            const questionStore = transaction.objectStore("questions");
+
+            packStore.clear();
+            questionStore.clear();
+
+            console.log(
+              "V5 upgrade completed: Pack and question cache cleared for fresh CSV loading."
+            );
+          }
+        } catch (upgradeError) {
+          console.error("Error during database upgrade:", upgradeError);
+          throw upgradeError;
         }
-        await tx.done;
-        console.log(`Loaded ${questions.length} questions from CSV.`);
-      } else {
-        console.warn("No questions loaded from CSV file.");
-      }
-    } catch (error) {
-      console.error("Error loading questions from CSV:", error);
-    }
-  }
+      },
+      blocked() {
+        console.warn("Database upgrade blocked by another connection");
+      },
+      blocking() {
+        console.warn("Database connection is blocking another upgrade");
+      },
+    });
 
-  const packCount = await db.count("packs");
-  if (packCount === 0) {
-    console.log("No packs found, loading from CSV...");
-    try {
-      const packs = await loadPacksFromCSV();
-      if (packs.length > 0) {
-        const tx = db.transaction("packs", "readwrite");
-        const store = tx.objectStore("packs");
-        for (const pack of packs) {
-          await store.add(pack);
+    console.log("Database initialized successfully");
+    return db;
+  } catch (error) {
+    console.error("Failed to initialize database:", error);
+    throw error;
+  }
+}
+
+// Post-initialization data loading
+async function loadInitialData(
+  db: IDBPDatabase<TruthOrDareDBSchema>
+): Promise<void> {
+  try {
+    // Load data from CSV files and populate database if empty
+    const questionCount = await db.count("questions");
+    if (questionCount === 0) {
+      console.log("No questions found, loading from CSV...");
+      try {
+        const questions = await loadQuestionsFromCSV();
+        if (questions.length > 0) {
+          const tx = db.transaction("questions", "readwrite");
+          const store = tx.objectStore("questions");
+          for (const question of questions) {
+            await store.add(question as Question);
+          }
+          await tx.done;
+          console.log(`Loaded ${questions.length} questions from CSV.`);
+        } else {
+          console.warn("No questions loaded from CSV file.");
         }
-        await tx.done;
-        console.log(`Loaded ${packs.length} packs from CSV.`);
-      } else {
-        console.warn("No packs loaded from CSV file.");
+      } catch (error) {
+        console.error("Error loading questions from CSV:", error);
       }
-    } catch (error) {
-      console.error("Error loading packs from CSV:", error);
     }
-  }
 
-  const profileCount = await db.count("user_profile");
-  if (profileCount === 0) {
-    console.log("No user profile found, creating default profile...");
-    const tx = db.transaction("user_profile", "readwrite");
-    const store = tx.objectStore("user_profile");
-    await store.add(defaultUserProfile);
-    await tx.done;
-    console.log("Default user profile created.");
-  }
+    const packCount = await db.count("packs");
+    if (packCount === 0) {
+      console.log("No packs found, loading from CSV...");
+      try {
+        const packs = await loadPacksFromCSV();
+        if (packs.length > 0) {
+          const tx = db.transaction("packs", "readwrite");
+          const store = tx.objectStore("packs");
+          for (const pack of packs) {
+            await store.add(pack);
+          }
+          await tx.done;
+          console.log(`Loaded ${packs.length} packs from CSV.`);
+        } else {
+          console.warn("No packs loaded from CSV file.");
+        }
+      } catch (error) {
+        console.error("Error loading packs from CSV:", error);
+      }
+    }
 
-  return db;
+    const profileCount = await db.count("user_profile");
+    if (profileCount === 0) {
+      console.log("No user profile found, creating default profile...");
+      const tx = db.transaction("user_profile", "readwrite");
+      const store = tx.objectStore("user_profile");
+      await store.add(defaultUserProfile);
+      await tx.done;
+      console.log("Default user profile created.");
+    }
+  } catch (error) {
+    console.error("Error during initial data loading:", error);
+    throw error;
+  }
+}
+
+// Combined initialization function
+async function initializeDatabase(): Promise<
+  IDBPDatabase<TruthOrDareDBSchema>
+> {
+  try {
+    const db = await initDB();
+    await loadInitialData(db);
+    return db;
+  } catch (error) {
+    console.error("Database initialization failed:", error);
+    throw error;
+  }
 }
 
 // Export a promise that resolves to the database instance
 // This ensures the DB is initialized only once
-const dbPromise = initDB();
+const dbPromise = initializeDatabase();
 
 export const getDB = async () => {
   return dbPromise;
@@ -318,17 +366,30 @@ export const getDB = async () => {
 export async function addPlayer(
   player: Omit<Player, "id" | "timestamp_added">
 ): Promise<number> {
-  const db = await getDB();
-  const tx = db.transaction("players", "readwrite");
-  const store = tx.objectStore("players");
-  const newPlayer: Player = {
-    ...player,
-    timestamp_added: new Date(),
-  };
-  const id = await store.add(newPlayer);
-  await tx.done;
-  console.log(`Player added with ID: ${id}`, newPlayer);
-  return id;
+  try {
+    console.log("Attempting to add player:", player);
+    const db = await getDB();
+    console.log("Database connection obtained");
+
+    const tx = db.transaction("players", "readwrite");
+    const store = tx.objectStore("players");
+
+    const newPlayer: Player = {
+      ...player,
+      timestamp_added: new Date(),
+    };
+
+    console.log("Adding player to store:", newPlayer);
+    const id = await store.add(newPlayer);
+    await tx.done;
+
+    console.log(`Player added successfully with ID: ${id}`, newPlayer);
+    return id;
+  } catch (error) {
+    console.error("Error adding player:", error);
+    console.error("Player data:", player);
+    throw error;
+  }
 }
 
 /**
@@ -498,4 +559,42 @@ export async function updateUserProfile(profile: UserProfile): Promise<void> {
   await tx.objectStore("user_profile").put(profile);
   await tx.done;
   console.log("User profile updated:", profile);
+}
+
+/**
+ * Debug function to check database health and provide troubleshooting info
+ */
+export async function debugDatabaseHealth(): Promise<void> {
+  try {
+    console.log("=== Database Health Check ===");
+    const db = await getDB();
+
+    // Check object stores
+    console.log("Available object stores:", Array.from(db.objectStoreNames));
+
+    // Count records in each store
+    const playerCount = await db.count("players");
+    const questionCount = await db.count("questions");
+    const packCount = await db.count("packs");
+    const profileCount = await db.count("user_profile");
+
+    console.log("Record counts:", {
+      players: playerCount,
+      questions: questionCount,
+      packs: packCount,
+      profiles: profileCount,
+    });
+
+    // Test player store specifically
+    const tx = db.transaction("players", "readonly");
+    const store = tx.objectStore("players");
+    console.log("Player store keyPath:", store.keyPath);
+    console.log("Player store autoIncrement:", store.autoIncrement);
+    console.log("Player store indexes:", Array.from(store.indexNames));
+
+    await tx.done;
+    console.log("=== Database Health Check Complete ===");
+  } catch (error) {
+    console.error("Database health check failed:", error);
+  }
 }
