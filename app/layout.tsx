@@ -58,7 +58,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" dir="ltr" suppressHydrationWarning={true}>
-      <head />
+      <head>
+        <meta
+          name="google-site-verification"
+          content="pwT4xGmw1yQ0vLmlGRXKJVgSY8YKM3zfdN1sSofkZ8g"
+        />
+      </head>
       <body className={`${orbitron.variable} font-sans antialiased`}>
         {children}
       </body>
