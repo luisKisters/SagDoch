@@ -2,7 +2,7 @@ import { openDB, DBSchema, IDBPDatabase } from "idb";
 import Papa from "papaparse";
 
 const DB_NAME = "truthOrDareDB";
-const DB_VERSION = 4;
+const DB_VERSION = 5;
 
 export interface Player {
   id?: number; // Auto-incremented or UUID string if we change strategy
@@ -223,6 +223,23 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
         userProfileStore.add(defaultUserProfile);
 
         console.log("V4 upgrade completed: Data cleared for CSV loading.");
+      }
+
+      if (oldVersion < 5) {
+        // V5: Clear cached pack and question data to refresh with latest CSV data
+        console.log(
+          "Upgrading to v5: Clearing pack and question cache for fresh data..."
+        );
+
+        const packStore = transaction.objectStore("packs");
+        const questionStore = transaction.objectStore("questions");
+
+        packStore.clear();
+        questionStore.clear();
+
+        console.log(
+          "V5 upgrade completed: Pack and question cache cleared for fresh CSV loading."
+        );
       }
     },
   });
