@@ -1,0 +1,672 @@
+pack_name,type,text_template,requires_target
+"Entspannt",truth,"{playerName}, was ist das letzte Buch, das du gelesen hast und wie fandest du es?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Snack, wenn du einen Film schaust?",false
+"Entspannt",truth,"{playerName}, hast du ein verstecktes Talent? Wenn ja, welches?",false
+"Entspannt",truth,"{playerName}, was ist dein Traum-Reiseziel?",false
+"Entspannt",truth,"{playerName}, was war das netteste, das jemand diese Woche für dich getan hat?",false
+"Entspannt",truth,"{playerName}, welche Art von Musik hörst du am liebsten zum Entspannen?",false
+"Entspannt",truth,"{playerName}, was ist deine Lieblings-Jahreszeit und warum?",false
+"Entspannt",truth,"{playerName}, was ist das erste, was du morgens nach dem Aufwachen machst?",false
+"Entspannt",truth,"{playerName}, sammelst du irgendetwas?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Brettspiel oder Kartenspiel?",false
+"Entspannt",truth,"{playerName}, was ist ein kleines Ding, das dich glücklich macht?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Zitat?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Tier und warum?",false
+"Entspannt",truth,"{playerName}, was war dein Traumberuf als Kind?",false
+"Entspannt",truth,"{playerName}, was ist eine Fähigkeit, die du gerne lernen würdest?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Wochentag?",false
+"Entspannt",truth,"{playerName}, was ist deine Lieblings-Kindheitserinnerung?",false
+"Entspannt",truth,"{playerName}, kochst du gerne? Was ist dein Spezialgericht?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Geruch?",false
+"Entspannt",truth,"{playerName}, was ist das spontanste, das du jemals gemacht hast?",false
+"Entspannt",truth,"{playerName}, was ist deine Morgenroutine?",false
+"Entspannt",truth,"{playerName}, bist du ein Morgenmensch oder eine Nachteule?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Dessert?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblingsort in deiner Stadt/deinem Dorf?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Feiertag?",false
+"Entspannt",truth,"{playerName}, was war das letzte Konzert, das du besucht hast?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Sport (zum Zuschauen oder Mitmachen)?",false
+"Entspannt",truth,"{playerName}, was ist das lustigste Video, das du kürzlich gesehen hast?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Café oder Restaurant?",false
+"Entspannt",truth,"{playerName}, was ist das schönste Kompliment, das du je bekommen hast?",false
+"Entspannt",truth,"{playerName}, was ist eine Sache auf deiner Bucket List?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Wetter?",false
+"Entspannt",truth,"{playerName}, was war das letzte Geschenk, das du jemandem gemacht hast?",false
+"Entspannt",truth,"{playerName}, was ist dein Lieblings-Museum oder deine Lieblings-Kunstgalerie?",false
+"Entspannt",truth,"{playerName}, was ist eine Sache, die du an dir magst?",false
+"Entspannt",truth,"{playerName}, was ist deine Meinung zu {targetPlayerName}s Musikgeschmack?",true
+"Entspannt",truth,"{playerName}, was ist das erste Wort, das dir einfällt, wenn du an {targetPlayerName} denkst?",true
+"Entspannt",truth,"{playerName}, welche lustige Geschichte über {targetPlayerName} kennst du?",true
+"Entspannt",truth,"{playerName}, was ist deiner Meinung nach die beste Eigenschaft von {targetPlayerName}?",true
+"Entspannt",truth,"{playerName}, was würdest du {targetPlayerName} zum Geburtstag schenken?",true
+"Entspannt",truth,"{playerName}, welchen Film würdest du {targetPlayerName} empfehlen?",true
+"Entspannt",truth,"{playerName}, was ist eine Sache, die du schon immer mal {targetPlayerName} fragen wolltest?",true
+"Entspannt",truth,"{playerName}, was schätzt du an deiner Freundschaft mit {targetPlayerName} am meisten?",true
+"Entspannt",truth,"{playerName}, was ist eine gemeinsame Erinnerung, die du mit {targetPlayerName} teilst?",true
+"Entspannt",truth,"{playerName}, welche Superkraft würde deiner Meinung nach am besten zu {targetPlayerName} passen?",true
+"Entspannt",truth,"{playerName}, was ist {targetPlayerName}s heimliches Talent, von dem du weißt?",true
+"Entspannt",truth,"{playerName}, wenn du einen Tag mit {targetPlayerName} tauschen könntest, was würdest du tun?",true
+"Entspannt",truth,"{playerName}, was ist ein Insider-Witz zwischen dir und {targetPlayerName}?",true
+"Entspannt",truth,"{playerName}, was ist das Mutigste, das {targetPlayerName} deiner Meinung nach getan hat?",true
+"Entspannt",truth,"{playerName}, was ist {targetPlayerName}s Lieblingsessen, soweit du weißt?",true
+"Entspannt",dare,"{playerName}, erzähle einen Witz. Wenn niemand lacht, musst du eine Runde lang wie ein Huhn gackern.",false
+"Entspannt",dare,"{playerName}, sprich für die nächsten 5 Minuten mit einem französischen Akzent.",false
+"Entspannt",dare,"{playerName}, versuche, deine Schnürsenkel nur mit einer Hand zu binden.",false
+"Entspannt",dare,"{playerName}, mache eine lustige Tierimitation.",false
+"Entspannt",dare,"{playerName}, balanciere einen Löffel auf deiner Nase für 10 Sekunden.",false
+"Entspannt",dare,"{playerName}, singe das Alphabet rückwärts.",false
+"Entspannt",dare,"{playerName}, gehe einmal um den Raum herum und tue so, als wärst du ein Roboter.",false
+"Entspannt",dare,"{playerName}, mache 5 Hampelmänner.",false
+"Entspannt",dare,"{playerName}, versuche, deinen Ellbogen mit deiner Zunge zu berühren.",false
+"Entspannt",dare,"{playerName}, erzähle von deinem Tag, aber singe es.",false
+"Entspannt",dare,"{playerName}, trage deine Socken für die nächsten 10 Minuten auf deinen Händen.",false
+"Entspannt",dare,"{playerName}, mache eine Pantomime deiner Lieblings-Sportart.",false
+"Entspannt",dare,"{playerName}, sage 'Hallo' in fünf verschiedenen Sprachen.",false
+"Entspannt",dare,"{playerName}, versuche, ein Glas Wasser auf deinem Kopf zu balancieren, während du 10 Schritte gehst (mit Hilfe!).",false
+"Entspannt",dare,"{playerName}, tue so, als wärst du ein Nachrichtensprecher und berichte über das aktuelle Spiel.",false
+"Entspannt",dare,"{playerName}, baue den höchsten Turm aus Kissen, den du kannst.",false
+"Entspannt",dare,"{playerName}, versuche, einen Zungenbrecher dreimal schnell hintereinander fehlerfrei aufzusagen.",false
+"Entspannt",dare,"{playerName}, mache eine lustige Grimasse und halte sie für 10 Sekunden.",false
+"Entspannt",dare,"{playerName}, nenne 5 Dinge, die blau sind, in 10 Sekunden.",false
+"Entspannt",dare,"{playerName}, tue so, als ob du auf einem unsichtbaren Stuhl sitzt, bis du wieder dran bist.",false
+"Entspannt",dare,"{playerName}, ahme deinen Lieblings-Superhelden nach.",false
+"Entspannt",dare,"{playerName}, versuche, mit geschlossenen Augen eine gerade Linie auf ein Blatt Papier zu malen.",false
+"Entspannt",dare,"{playerName}, erzähle der Gruppe einen kurzen, erfundenen Fakt über dich selbst.",false
+"Entspannt",dare,"{playerName}, tanze für 30 Sekunden zu einem Lied, das nur du in deinem Kopf hörst.",false
+"Entspannt",dare,"{playerName}, flüstere der Person rechts von dir ein Geheimnis zu (es darf auch erfunden sein).",false
+"Entspannt",dare,"{playerName}, benutze deine Füße, um einen Stift aufzuheben.",false
+"Entspannt",dare,"{playerName}, mache eine Yoga-Pose für 30 Sekunden.",false
+"Entspannt",dare,"{playerName}, tue so, als wärst du ein Model auf dem Laufsteg.",false
+"Entspannt",dare,"{playerName}, mache ein High-Five mit jedem im Raum.",false
+"Entspannt",dare,"{playerName}, erzähle einen kurzen Witz mit ernstem Gesicht.",false
+"Entspannt",dare,"{playerName}, gib {targetPlayerName} ein High-Five mit dem Fuß.",true
+"Entspannt",dare,"{playerName}, mache {targetPlayerName} ein Kompliment über seine/ihre Frisur.",true
+"Entspannt",dare,"{playerName}, zeichne ein schnelles Porträt von {targetPlayerName} in 30 Sekunden.",true
+"Entspannt",dare,"{playerName}, singe 'Happy Birthday' für {targetPlayerName}, auch wenn er/sie keinen Geburtstag hat.",true
+"Entspannt",dare,"{playerName}, tausche für eine Runde die Plätze mit {targetPlayerName}.",true
+"Entspannt",dare,"{playerName}, erzähle {targetPlayerName} deinen Lieblingswitz.",true
+"Entspannt",dare,"{playerName}, ahme {targetPlayerName}s typische Geste oder Redewendung nach (liebevoll!).",true
+"Entspannt",dare,"{playerName}, frage {targetPlayerName} nach einem Autogramm.",true
+"Entspannt",dare,"{playerName}, massiere {targetPlayerName}s Schultern für 30 Sekunden.",true
+"Entspannt",dare,"{playerName}, finde drei Gemeinsamkeiten zwischen dir und {targetPlayerName}.",true
+"Entspannt",dare,"{playerName}, erfinde einen Spitznamen für {targetPlayerName} und benutze ihn für den Rest des Spiels.",true
+"Entspannt",dare,"{playerName}, sprich eine Runde lang nur {targetPlayerName} direkt an, ignoriere alle anderen.",true
+"Entspannt",dare,"{playerName}, schenke {targetPlayerName} eine imaginäre Blume mit einer passenden Beschreibung.",true
+"Entspannt",dare,"{playerName}, halte eine kurze Rede darüber, warum {targetPlayerName} ein toller Mensch ist.",true
+"Entspannt",dare,"{playerName}, mache mit {targetPlayerName} einen geheimen Handschlag aus.",true
+"Bisschen Spicy",truth,"{playerName}, was ist das Peinlichste, das dir während eines Dates passiert ist?",false
+"Bisschen Spicy",truth,"{playerName}, hast du jemals jemanden gestalkt (online oder offline)?",false
+"Bisschen Spicy",truth,"{playerName}, was ist dein heimlicher Celebrity Crush?",false
+"Bisschen Spicy",truth,"{playerName}, würdest du lieber sehr reich oder sehr berühmt sein?",false
+"Bisschen Spicy",truth,"{playerName}, was ist das Verrückteste, das du aus Liebe getan hast?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon einmal einen Liebesbrief geschrieben oder bekommen?",false
+"Bisschen Spicy",truth,"{playerName}, was war dein erster Gedanke, als du die Person rechts von dir heute gesehen hast?",false
+"Bisschen Spicy",truth,"{playerName}, wen in dieser Runde findest du am attraktivsten?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon einmal von jemandem in dieser Runde geträumt?",false
+"Bisschen Spicy",truth,"{playerName}, was ist dein 'Typ' bei einer romantischen Beziehung?",false
+"Bisschen Spicy",truth,"{playerName}, was ist die größte Lüge, die du jemals erzählt hast, um jemanden zu beeindrucken?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon mal eine Dating-App benutzt? Welche?",false
+"Bisschen Spicy",truth,"{playerName}, was ist das Mutigste, das du jemals in Bezug auf Romantik getan hast?",false
+"Bisschen Spicy",truth,"{playerName}, was ist dein Lieblings-Anmachspruch (egal ob gut oder schlecht)?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon mal jemanden eifersüchtig machen wollen? Hat es geklappt?",false
+"Bisschen Spicy",truth,"{playerName}, was ist deine peinlichste Social Media Story?",false
+"Bisschen Spicy",truth,"{playerName}, glaubst du an Liebe auf den ersten Blick?",false
+"Bisschen Spicy",truth,"{playerName}, wie lange hat deine längste Beziehung gedauert?",false
+"Bisschen Spicy",truth,"{playerName}, was ist ein absolutes No-Go bei einem ersten Date für dich?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon einmal jemanden geküsst, nur um jemanden anderen eifersüchtig zu machen?",false
+"Bisschen Spicy",truth,"{playerName}, was ist deine seltsamste Angewohnheit, von der nur wenige Leute wissen?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon einmal einen Korb bekommen? Wie war das?",false
+"Bisschen Spicy",truth,"{playerName}, was ist das Unanständigste, das du je in der Öffentlichkeit getan hast (aber noch harmlos)?",false
+"Bisschen Spicy",truth,"{playerName}, wie viele Selfies machst du im Durchschnitt pro Tag?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon einmal etwas Verbotenes getan und wurdest nicht erwischt?",false
+"Bisschen Spicy",truth,"{playerName}, was ist das schlimmste Geschenk, das du je bekommen hast?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon mal so getan, als ob du jemanden nicht kennst?",false
+"Bisschen Spicy",truth,"{playerName}, was ist dein Guilty Pleasure Song?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon mal bei einer Prüfung geschummelt?",false
+"Bisschen Spicy",truth,"{playerName}, was ist das Peinlichste, das deine Eltern über dich wissen?",false
+"Bisschen Spicy",truth,"{playerName}, was ist das Wildeste, das du jemals auf einer Übernachtungsparty gemacht hast?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon mal ein Geheimnis weitererzählt, das du nicht solltest?",false
+"Bisschen Spicy",truth,"{playerName}, was ist eine Sache, für die du dich bei jemandem in dieser Runde entschuldigen müsstest?",false
+"Bisschen Spicy",truth,"{playerName}, hast du schon mal online jemanden anderes dargestellt?",false
+"Bisschen Spicy",truth,"{playerName}, was war dein schlimmster Mode-Fauxpas?",false
+"Bisschen Spicy",truth,"{playerName}, was ist das Erste, das dir an {targetPlayerName} aufgefallen ist, als du ihn/sie das erste Mal gesehen hast?",true
+"Bisschen Spicy",truth,"{playerName}, würdest du {targetPlayerName} daten, wenn er/sie dich fragen würde?",true
+"Bisschen Spicy",truth,"{playerName}, was ist das süßeste/charmanteste an {targetPlayerName}?",true
+"Bisschen Spicy",truth,"{playerName}, hast du {targetPlayerName} schon mal heimlich auf Social Media gestalkt?",true
+"Bisschen Spicy",truth,"{playerName}, was für ein Kompliment würdest du {targetPlayerName} machen, wenn du mutiger wärst?",true
+"Bisschen Spicy",truth,"{playerName}, was denkst du, ist {targetPlayerName}s größtes Geheimnis?",true
+"Bisschen Spicy",truth,"{playerName}, wenn du {targetPlayerName} einen Kuss geben müsstest (Wange, Stirn, etc.), wohin wäre er?",true
+"Bisschen Spicy",truth,"{playerName}, was ist eine Sache, die du gerne mit {targetPlayerName} unternehmen würdest?",true
+"Bisschen Spicy",truth,"{playerName}, beschreibe {targetPlayerName} in drei schmeichelhaften Worten.",true
+"Bisschen Spicy",truth,"{playerName}, was ist deine ehrliche Meinung zum Kleidungsstil von {targetPlayerName}?",true
+"Bisschen Spicy",truth,"{playerName}, hast du schon mal darüber nachgedacht, wie es wäre, mit {targetPlayerName} zusammen zu sein?",true
+"Bisschen Spicy",truth,"{playerName}, was ist das Lustigste, das du je mit {targetPlayerName} erlebt hast?",true
+"Bisschen Spicy",truth,"{playerName}, wenn {targetPlayerName} ein Tier wäre, welches wäre er/sie und warum?",true
+"Bisschen Spicy",truth,"{playerName}, was ist ein Gerücht, das du über {targetPlayerName} gehört hast (wahr oder falsch)?",true
+"Bisschen Spicy",truth,"{playerName}, wer von euch beiden ist der bessere Lügner, du oder {targetPlayerName}?",true
+"Bisschen Spicy",dare,"{playerName}, gib der Person links von dir einen Kuss auf die Wange.",false
+"Bisschen Spicy",dare,"{playerName}, flüstere der Person rechts von dir deinen peinlichsten Anmachspruch ins Ohr.",false
+"Bisschen Spicy",dare,"{playerName}, tanze für 30 Sekunden so verführerisch wie du kannst.",false
+"Bisschen Spicy",dare,"{playerName}, wähle jemanden aus der Runde und starre ihm/ihr 30 Sekunden lang tief in die Augen, ohne zu lachen.",false
+"Bisschen Spicy",dare,"{playerName}, sende eine Nachricht an deinen heimlichen Schwarm (oder Ex) mit nur Emojis.",false
+"Bisschen Spicy",dare,"{playerName}, rufe eine zufällige Nummer in deinen Kontakten an und singe ihr 'Twinkle Twinkle Little Star'.",false
+"Bisschen Spicy",dare,"{playerName}, trage für die nächsten drei Runden Lippenstift (auch Männer).",false
+"Bisschen Spicy",dare,"{playerName}, mache jemandem in der Runde ein Kompliment, das leicht zweideutig ist.",false
+"Bisschen Spicy",dare,"{playerName}, poste ein peinliches Foto von dir in deine Social Media Story (für 10 Minuten).",false
+"Bisschen Spicy",dare,"{playerName}, sprich für den Rest der Runde mit einer übertrieben sexy Stimme.",false
+"Bisschen Spicy",dare,"{playerName}, zeige deinen Chatverlauf mit der letzten Person, mit der du geschrieben hast (nur die letzten 5 Nachrichten).",false
+"Bisschen Spicy",dare,"{playerName}, lasse jemanden in der Runde dir eine Nachricht auf die Stirn schreiben (mit abwaschbarem Stift).",false
+"Bisschen Spicy",dare,"{playerName}, erzähle der Gruppe von deinem peinlichsten Kuss-Erlebnis.",false
+"Bisschen Spicy",dare,"{playerName}, mache 10 verführerische Liegestütze.",false
+"Bisschen Spicy",dare,"{playerName}, tue so, als wärst du in die Person dir gegenüber verliebt, bis du wieder dran bist.",false
+"Bisschen Spicy",dare,"{playerName}, lecke dir den Ellbogen. Wenn du es nicht schaffst, musst du jemandem die Zehen massieren.",false
+"Bisschen Spicy",dare,"{playerName}, verbinde jemandem die Augen und füttere ihn/sie mit etwas Essbarem.",false
+"Bisschen Spicy",dare,"{playerName}, ziehe ein Kleidungsstück aus (bis zu einem jugendfreien Minimum).",false
+"Bisschen Spicy",dare,"{playerName}, imitiere den Orgasmus eines Tieres deiner Wahl.",false
+"Bisschen Spicy",dare,"{playerName}, setze dich für eine Runde auf den Schoß der Person rechts von dir.",false
+"Bisschen Spicy",dare,"{playerName}, gib jemandem einen Kussmund aus der Ferne, aber sehr dramatisch.",false
+"Bisschen Spicy",dare,"{playerName}, benutze einen Gegenstand im Raum als Mikrofon und singe ein Liebeslied.",false
+"Bisschen Spicy",dare,"{playerName}, versuche, die Telefonnummer der Person links von dir zu erraten. Für jede falsche Ziffer ein Strafpunkt.",false
+"Bisschen Spicy",dare,"{playerName}, erzähle einen schmutzigen Witz (aber noch im Rahmen).",false
+"Bisschen Spicy",dare,"{playerName}, mache eine Pole-Dance-Imitation mit einem Besenstiel oder ähnlichem.",false
+"Bisschen Spicy",dare,"{playerName}, zwinkere der attraktivsten Person im Raum verführerisch zu.",false
+"Bisschen Spicy",dare,"{playerName}, lasse jemanden deine Haare für 2 Minuten stylen, wie er/sie möchte.",false
+"Bisschen Spicy",dare,"{playerName}, rufe deine Eltern an und sage ihnen, dass du sie liebst, ohne Kontext.",false
+"Bisschen Spicy",dare,"{playerName}, mache eine überzeugende Imitation davon, wie du jemanden anflirtest.",false
+"Bisschen Spicy",dare,"{playerName}, gib jedem in der Runde eine ehrliche, aber harmlose Bewertung auf einer Skala von 1-10 (Aussehen).",false
+"Bisschen Spicy",dare,"{playerName}, gib {targetPlayerName} eine sinnliche Nackenmassage für 1 Minute.",true
+"Bisschen Spicy",dare,"{playerName}, halte Händchen mit {targetPlayerName} bis zur nächsten Runde.",true
+"Bisschen Spicy",dare,"{playerName}, flüstere {targetPlayerName} ein Geheimnis ins Ohr, das niemand sonst hören darf.",true
+"Bisschen Spicy",dare,"{playerName}, schaue {targetPlayerName} tief in die Augen und sage 'Ich begehre dich' mit ernster Miene.",true
+"Bisschen Spicy",dare,"{playerName}, tanze einen langsamen Tanz mit {targetPlayerName} für 30 Sekunden (auch ohne Musik).",true
+"Bisschen Spicy",dare,"{playerName}, gib {targetPlayerName} einen Kuss auf die Hand.",true
+"Bisschen Spicy",dare,"{playerName}, schreibe {targetPlayerName} einen kurzen, geheimnisvollen Zettel und gib ihn ihm/ihr.",true
+"Bisschen Spicy",dare,"{playerName}, mache {targetPlayerName} ein Kompliment über seine/ihre Augen.",true
+"Bisschen Spicy",dare,"{playerName}, teile einen Schluck deines Getränks mit {targetPlayerName} auf eine 'süße' Art.",true
+"Bisschen Spicy",dare,"{playerName}, tue so, als wärst du {targetPlayerName}s größter Fan und bitte um ein Autogramm auf einem ungewöhnlichen Körperteil.",true
+"Bisschen Spicy",dare,"{playerName}, füttere {targetPlayerName} mit einem kleinen Snack (z.B. einer Traube).",true
+"Bisschen Spicy",dare,"{playerName}, setze dich sehr nah neben {targetPlayerName} und lehne deinen Kopf für 10 Sekunden an seine/ihre Schulter.",true
+"Bisschen Spicy",dare,"{playerName}, beschreibe {targetPlayerName}s Lächeln.",true
+"Bisschen Spicy",dare,"{playerName}, singe ein kurzes Ständchen für {targetPlayerName}.",true
+"Bisschen Spicy",dare,"{playerName}, bitte {targetPlayerName} um eine Umarmung, die mindestens 7 Sekunden dauert.",true
+"Spicy (18+)",truth,"{playerName}, was ist deine Lieblings-Sexstellung?",false
+"Spicy (18+)",truth,"{playerName}, wie viele Sexpartner hattest du bisher?",false
+"Spicy (18+)",truth,"{playerName}, was ist das Verrückteste, das du jemals im Bett gemacht hast?",false
+"Spicy (18+)",truth,"{playerName}, hattest du schon mal einen Dreier oder wärst du offen dafür?",false
+"Spicy (18+)",truth,"{playerName}, was ist dein größter sexueller Fetisch oder Kink?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal Sexspielzeug benutzt? Wenn ja, welches?",false
+"Spicy (18+)",truth,"{playerName}, was ist der peinlichste Ort, an dem du Sex hattest?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal für Sex bezahlt oder wurdest dafür bezahlt?",false
+"Spicy (18+)",truth,"{playerName}, was ist deine Meinung zu One-Night-Stands?",false
+"Spicy (18+)",truth,"{playerName}, wie oft masturbierst du?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal Sexfilme geschaut? Welche Art?",false
+"Spicy (18+)",truth,"{playerName}, was ist deine wildeste sexuelle Fantasie?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal beim Sex erwischt worden?",false
+"Spicy (18+)",truth,"{playerName}, was ist das längste, das du ohne Sex ausgehalten hast (freiwillig oder unfreiwillig)?",false
+"Spicy (18+)",truth,"{playerName}, würdest du Sex mit jemandem haben, den du gerade erst kennengelernt hast?",false
+"Spicy (18+)",truth,"{playerName}, was ist deine Definition von gutem Sex?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal Dirty Talk benutzt oder magst du es?",false
+"Spicy (18+)",truth,"{playerName}, was ist das Unanständigste, das du jemandem ins Ohr geflüstert hast?",false
+"Spicy (18+)",truth,"{playerName}, bevorzugst du Sex am Morgen, am Abend oder tagsüber?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal einen Orgasmus vorgetäuscht? Warum?",false
+"Spicy (18+)",truth,"{playerName}, was ist deine Lieblings-Körperstelle bei dir selbst (sexuell betrachtet)?",false
+"Spicy (18+)",truth,"{playerName}, was ist deine Lieblings-Körperstelle bei einem potenziellen Partner (sexuell betrachtet)?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal Sex an einem öffentlichen Ort gehabt, wo du fast erwischt wurdest?",false
+"Spicy (18+)",truth,"{playerName}, was ist das Seltsamste, was dich antörnt?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal Nacktfotos von dir verschickt?",false
+"Spicy (18+)",truth,"{playerName}, was ist das Peinlichste, das dir während des Sex passiert ist?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal Sex mit mehr als einer Person gleichzeitig gehabt?",false
+"Spicy (18+)",truth,"{playerName}, welche Rolle spielt Vorspiel für dich?",false
+"Spicy (18+)",truth,"{playerName}, würdest du BDSM ausprobieren oder hast es schon getan?",false
+"Spicy (18+)",truth,"{playerName}, was ist das Intimste, das du jemals mit jemandem geteilt hast (nicht unbedingt sexuell)?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal eine sexuell übertragbare Krankheit gehabt?",false
+"Spicy (18+)",truth,"{playerName}, was ist dein 'Safe Word' oder welches würdest du wählen?",false
+"Spicy (18+)",truth,"{playerName}, wie wichtig ist dir die sexuelle Zufriedenheit deines Partners?",false
+"Spicy (18+)",truth,"{playerName}, hast du schon mal Sex geträumt und es hat sich real angefühlt?",false
+"Spicy (18+)",truth,"{playerName}, was ist das Tabu-Thema, über das du gerne offener sprechen würdest?",false
+"Spicy (18+)",truth,"{playerName}, mit wem in dieser Runde würdest du am ehesten eine Nacht verbringen und warum?",true
+"Spicy (18+)",truth,"{playerName}, was findest du an {targetPlayerName} sexuell am anziehendsten?",true
+"Spicy (18+)",truth,"{playerName}, beschreibe deine sexuelle Fantasie mit {targetPlayerName}.",true
+"Spicy (18+)",truth,"{playerName}, auf einer Skala von 1-10, wie gut schätzt du {targetPlayerName} im Bett ein? Begründe.",true
+"Spicy (18+)",truth,"{playerName}, was ist das Erste, was du tun würdest, wenn du mit {targetPlayerName} alleine wärst und die Stimmung passt?",true
+"Spicy (18+)",truth,"{playerName}, welche Art von Unterwäsche würdest du gerne an {targetPlayerName} sehen?",true
+"Spicy (18+)",truth,"{playerName}, hast du schon mal darüber nachgedacht, {targetPlayerName} zu küssen? Wie stellst du es dir vor?",true
+"Spicy (18+)",truth,"{playerName}, was ist das Schmutzigste, das du {targetPlayerName} sagen möchtest?",true
+"Spicy (18+)",truth,"{playerName}, würdest du {targetPlayerName} erlauben, dich zu fesseln?",true
+"Spicy (18+)",truth,"{playerName}, was ist deine ehrliche Meinung zu {targetPlayerName}s sexueller Ausstrahlung?",true
+"Spicy (18+)",truth,"{playerName}, wenn du {targetPlayerName} eine erotische Massage geben müsstest, wo würdest du anfangen?",true
+"Spicy (18+)",truth,"{playerName}, welche Sexstellung würdest du gerne mit {targetPlayerName} ausprobieren?",true
+"Spicy (18+)",truth,"{playerName}, was denkst du, ist {targetPlayerName}s geheimster sexueller Wunsch?",true
+"Spicy (18+)",truth,"{playerName}, würdest du mit {targetPlayerName} einen Strip-Poker spielen?",true
+"Spicy (18+)",truth,"{playerName}, was ist ein Geräusch, das du gerne von {targetPlayerName} im Bett hören würdest?",true
+"Spicy (18+)",dare,"{playerName}, ziehe ein Kleidungsstück deiner Wahl aus.",false
+"Spicy (18+)",dare,"{playerName}, gib der Person links von dir einen sinnlichen Kuss auf den Hals.",false
+"Spicy (18+)",dare,"{playerName}, beschreibe deinen idealen Orgasmus detailliert.",false
+"Spicy (18+)",dare,"{playerName}, tanze einen erotischen Lapdance für die Person deiner Wahl (1 Minute).",false
+"Spicy (18+)",dare,"{playerName}, flüstere jedem in der Runde etwas eindeutig Zweideutiges ins Ohr.",false
+"Spicy (18+)",dare,"{playerName}, zeige der Gruppe deine 'O'-Face-Imitation.",false
+"Spicy (18+)",dare,"{playerName}, lecke Sahne oder etwas Ähnliches von einem Körperteil der Person rechts von dir ab.",false
+"Spicy (18+)",dare,"{playerName}, massiere die Füße einer Person deiner Wahl für 2 Minuten auf eine sinnliche Weise.",false
+"Spicy (18+)",dare,"{playerName}, erzähle eine erotische Kurzgeschichte, in der die Spieler dieser Runde vorkommen.",false
+"Spicy (18+)",dare,"{playerName}, rufe jemanden an und versuche, ihn/sie mit Dirty Talk zu erregen (Nummer darf verdeckt werden).",false
+"Spicy (18+)",dare,"{playerName}, trinke einen Shot von einem Körperteil einer anderen Person (z.B. Bauchnabel).",false
+"Spicy (18+)",dare,"{playerName}, simuliere Sex mit einem Kissen oder einem anderen Gegenstand für 30 Sekunden.",false
+"Spicy (18+)",dare,"{playerName}, lasse jemanden dir Eiswürfel über den Rücken gleiten.",false
+"Spicy (18+)",dare,"{playerName}, schreibe mit Lippenstift eine erotische Nachricht auf den Bauch oder Rücken einer anderen Person.",false
+"Spicy (18+)",dare,"{playerName}, verbinde jemandem die Augen und lasse ihn/sie erraten, welchen Körperteil du ihn/sie berühren lässt.",false
+"Spicy (18+)",dare,"{playerName}, zeige deine beste Striptease-Bewegung.",false
+"Spicy (18+)",dare,"{playerName}, beiße sanft in das Ohrläppchen der Person links von dir.",false
+"Spicy (18+)",dare,"{playerName}, setze dich auf den Schoß einer Person deiner Wahl und flirte hemmungslos für 1 Minute.",false
+"Spicy (18+)",dare,"{playerName}, iss eine Banane oder Gurke auf eine sehr suggestive Weise.",false
+"Spicy (18+)",dare,"{playerName}, wähle zwei Personen aus, die sich für 30 Sekunden küssen müssen (Wange ist ok, wenn es zu viel ist).",false
+"Spicy (18+)",dare,"{playerName}, ziehe so viele Kleidungsstücke aus, wie du Würfelaugen hast (mindestens 1).",false
+"Spicy (18+)",dare,"{playerName}, mache jemandem ein Kompliment über einen normalerweise nicht beachteten Körperteil.",false
+"Spicy (18+)",dare,"{playerName}, flüstere deine wildeste sexuelle Fantasie einer Person deiner Wahl ins Ohr.",false
+"Spicy (18+)",dare,"{playerName}, gib jemandem einen Body Shot (z.B. Tequila von der Brust lecken).",false
+"Spicy (18+)",dare,"{playerName}, spiele 'Wahrheit oder Pflicht' nur mit sexuellen Fragen/Aufgaben für die nächste Runde.",false
+"Spicy (18+)",dare,"{playerName}, lasse jemanden dir Handschellen anlegen (symbolisch, z.B. mit einem Schal) für 5 Minuten.",false
+"Spicy (18+)",dare,"{playerName}, stöhne bei jeder Antwort, die du gibst, bis du wieder an der Reihe bist.",false
+"Spicy (18+)",dare,"{playerName}, sende eine anzügliche SMS an den letzten Kontakt in deinem Telefon.",false
+"Spicy (18+)",dare,"{playerName}, führe einen Zungenkuss mit einer Banane oder einem anderen länglichen Objekt vor.",false
+"Spicy (18+)",dare,"{playerName}, ziehe dein Oberteil aus und spiele so für die nächsten zwei Runden (BH/Top darunter ist ok).",false
+"Spicy (18+)",dare,"{playerName}, küsse {targetPlayerName} leidenschaftlich für mindestens 15 Sekunden.",true
+"Spicy (18+)",dare,"{playerName}, gib {targetPlayerName} einen Knutschfleck an einer Stelle deiner Wahl (mit Erlaubnis).",true
+"Spicy (18+)",dare,"{playerName}, untersuche {targetPlayerName}s Hand und 'lese' seine/ihre sexuelle Zukunft daraus vor.",true
+"Spicy (18+)",dare,"{playerName}, flüstere {targetPlayerName} an, was du mit ihm/ihr machen würdest, wenn ihr alleine wärt.",true
+"Spicy (18+)",dare,"{playerName}, {targetPlayerName} darf dir ein Kleidungsstück ausziehen.",true
+"Spicy (18+)",dare,"{playerName}, lasse {targetPlayerName} dir einen Kuss auf eine beliebige Stelle unterhalb des Halses geben.",true
+"Spicy (18+)",dare,"{playerName}, spiele mit {targetPlayerName} 'Stein, Schere, Papier'. Der Verlierer muss dem Gewinner einen Wunsch sexueller Natur erfüllen (im Rahmen).",true
+"Spicy (18+)",dare,"{playerName}, tausche ein Kleidungsstück mit {targetPlayerName} für die nächsten drei Runden.",true
+"Spicy (18+)",dare,"{playerName}, füttere {targetPlayerName} auf eine sehr sinnliche Art und Weise mit einem Stück Obst.",true
+"Spicy (18+)",dare,"{playerName}, setze dich rittlings auf {targetPlayerName}s Schoß für 1 Minute.",true
+"Spicy (18+)",dare,"{playerName}, gib {targetPlayerName} eine erotische Massage an einer Stelle seiner/ihrer Wahl (z.B. Nacken, Schultern, Hände) für 2 Minuten.",true
+"Spicy (18+)",dare,"{playerName}, verbinde {targetPlayerName} die Augen und küsse ihn/sie sanft an drei verschiedenen Stellen im Gesicht/Hals.",true
+"Spicy (18+)",dare,"{playerName}, {targetPlayerName} darf entscheiden, welche Frage aus diesem Pack du als nächstes beantworten musst.",true
+"Spicy (18+)",dare,"{playerName}, tanze eng mit {targetPlayerName} zu einem langsamen Lied (auch imaginär).",true
+"Spicy (18+)",dare,"{playerName}, teile einen intensiven Augenkontakt mit {targetPlayerName} für eine Minute, dann küsse ihn/sie (Wange ist ok).",true
+"Tiefgründig",truth,"{playerName}, was ist deine früheste philosophische Frage gewesen, an die du dich erinnerst?",false
+"Tiefgründig",truth,"{playerName}, glaubst du an Schicksal oder freien Willen? Warum?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet 'Glück' für dich persönlich?",false
+"Tiefgründig",truth,"{playerName}, wenn du eine Sache an der Menschheit ändern könntest, was wäre das?",false
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach der Sinn des Leidens?",false
+"Tiefgründig",truth,"{playerName}, was ist die wichtigste Lektion, die du bisher im Leben gelernt hast?",false
+"Tiefgründig",truth,"{playerName}, wie definierst du 'Erfolg' abseits von Geld und Karriere?",false
+"Tiefgründig",truth,"{playerName}, was ist deine größte Angst und wie gehst du damit um?",false
+"Tiefgründig",truth,"{playerName}, glaubst du an ein Leben nach dem Tod? Wie stellst du es dir vor?",false
+"Tiefgründig",truth,"{playerName}, was ist wichtiger: Wissen oder Weisheit?",false
+"Tiefgründig",truth,"{playerName}, welche Rolle spielt Spiritualität in deinem Leben?",false
+"Tiefgründig",truth,"{playerName}, was macht einen Menschen 'gut' oder 'schlecht'?",false
+"Tiefgründig",truth,"{playerName}, wenn du unsterblich wärst, was würdest du mit deiner Zeit anfangen?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Meinung zur Natur des Bewusstseins?",false
+"Tiefgründig",truth,"{playerName}, was ist das größte Opfer, das du jemals für jemanden gebracht hast oder bringen würdest?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet 'Liebe' in ihrer tiefsten Form für dich?",false
+"Tiefgründig",truth,"{playerName}, wie hat sich deine Weltanschauung im Laufe der Jahre verändert?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Definition von 'Schönheit'?",false
+"Tiefgründig",truth,"{playerName}, was ist das Wertvollste, das kein Geld kaufen kann?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Haltung gegenüber dem Konzept der Gerechtigkeit?",false
+"Tiefgründig",truth,"{playerName}, was ist deine größte Hoffnung für die Zukunft der Welt?",false
+"Tiefgründig",truth,"{playerName}, was ist eine philosophische Idee, die dich besonders fasziniert?",false
+"Tiefgründig",truth,"{playerName}, wie findest du einen Sinn in Momenten der Verzweiflung?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet es, ein 'authentisches' Leben zu führen?",false
+"Tiefgründig",truth,"{playerName}, welche Verantwortung haben wir gegenüber zukünftigen Generationen?",false
+"Tiefgründig",truth,"{playerName}, was ist der Unterschied zwischen Alleinsein und Einsamkeit für dich?",false
+"Tiefgründig",truth,"{playerName}, was ist die Rolle der Kunst in der Gesellschaft?",false
+"Tiefgründig",truth,"{playerName}, was ist eine Überzeugung, die du hast, die viele andere nicht teilen?",false
+"Tiefgründig",truth,"{playerName}, wie gehst du mit moralischen Dilemmata um?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet Vergebung für dich und fällt sie dir leicht?",false
+"Tiefgründig",truth,"{playerName}, was ist das Fundament einer starken Freundschaft?",false
+"Tiefgründig",truth,"{playerName}, wie beeinflusst die Technologie unser Verständnis von Menschlichkeit?",false
+"Tiefgründig",truth,"{playerName}, was ist das Erbe, das du hinterlassen möchtest?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Meinung zur Todesstrafe?",false
+"Tiefgründig",truth,"{playerName}, was ist die größte Herausforderung für deine Generation?",false
+"Tiefgründig",truth,"{playerName}, wie wichtig ist dir Wahrheit, auch wenn sie schmerzhaft ist?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet es, 'weise' zu sein?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Meinung zu künstlicher Intelligenz und ihrer Zukunft?",false
+"Tiefgründig",truth,"{playerName}, welche Rolle spielt Empathie in einer funktionierenden Gesellschaft?",false
+"Tiefgründig",truth,"{playerName}, was ist der Unterschied zwischen Macht und Autorität?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Definition von 'Zuhause'?",false
+"Tiefgründig",truth,"{playerName}, wie hat dich ein großer Verlust oder eine Enttäuschung geprägt?",false
+"Tiefgründig",truth,"{playerName}, was ist das Mutigste, was ein Mensch tun kann?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet dir 'Freiheit'?",false
+"Tiefgründig",truth,"{playerName}, welche Bücher oder Denker haben deine Sichtweise maßgeblich beeinflusst?",false
+"Tiefgründig",truth,"{playerName}, wie wichtig ist es, im Einklang mit der Natur zu leben?",false
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach das größte Missverständnis über das menschliche Dasein?",false
+"Tiefgründig",truth,"{playerName}, was würdest du deinem jüngeren Ich raten?",false
+"Tiefgründig",truth,"{playerName}, was ist die Essenz von wahrer Kommunikation?",false
+"Tiefgründig",truth,"{playerName}, was ist der Wert von Traditionen in der modernen Welt?",false
+"Tiefgründig",truth,"{playerName}, wie können wir als Individuen zu einer besseren Welt beitragen?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet es, Verantwortung für das eigene Leben zu übernehmen?",false
+"Tiefgründig",truth,"{playerName}, was ist deine größte Quelle der Inspiration?",false
+"Tiefgründig",truth,"{playerName}, wie gehst du mit der Endlichkeit des Lebens um?",false
+"Tiefgründig",truth,"{playerName}, was ist der Unterschied zwischen Glauben und Wissen?",false
+"Tiefgründig",truth,"{playerName}, was ist das Wichtigste, das du über dich selbst gelernt hast?",false
+"Tiefgründig",truth,"{playerName}, was bedeutet es, ein erfülltes Leben zu führen?",false
+"Tiefgründig",truth,"{playerName}, was ist deine Meinung zu sozialen Ungerechtigkeiten und wie können wir sie bekämpfen?",false
+"Tiefgründig",truth,"{playerName}, was ist die Rolle von Humor in schwierigen Zeiten?",false
+"Tiefgründig",truth,"{playerName}, was ist das größte Rätsel des Universums für dich?",false
+"Tiefgründig",truth,"{playerName}, wie wichtig ist Selbstreflexion für persönliches Wachstum?",false
+"Tiefgründig",truth,"{playerName}, was ist die Bedeutung von Ritualen in deinem Leben?",false
+"Tiefgründig",truth,"{playerName}, was ist deine tiefste Überzeugung über die menschliche Natur?",false
+"Tiefgründig",truth,"{playerName}, wie definierst du den Begriff 'Seele'?",false
+"Tiefgründig",truth,"{playerName}, was ist eine Frage, auf die du gerne eine Antwort hättest, bevor du stirbst?",false
+"Tiefgründig",truth,"{playerName}, was ist der Unterschied zwischen Genuss und Glück?",false
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach die größte Errungenschaft der Menschheit?",false
+"Tiefgründig",truth,"{playerName}, wie wichtig ist es, Träume zu haben und sie zu verfolgen?",false
+"Tiefgründig",truth,"{playerName}, was ist der Wert der Stille in unserer lauten Welt?",false
+"Tiefgründig",truth,"{playerName}, was ist eine Sache, die du an der Welt bewunderst?",false
+"Tiefgründig",truth,"{playerName}, wie können wir lernen, mit Unsicherheit besser umzugehen?",false
+"Tiefgründig",truth,"{playerName}, welche philosophische Frage würdest du gerne mit {targetPlayerName} diskutieren?",true
+"Tiefgründig",truth,"{playerName}, was glaubst du, ist die größte Lebensweisheit, die {targetPlayerName} besitzt?",true
+"Tiefgründig",truth,"{playerName}, wie hat {targetPlayerName} deine Sicht auf bestimmte Dinge verändert?",true
+"Tiefgründig",truth,"{playerName}, was ist eine tiefgründige Eigenschaft, die du an {targetPlayerName} bewunderst?",true
+"Tiefgründig",truth,"{playerName}, was denkst du, ist {targetPlayerName}s größte Stärke im Umgang mit schwierigen Lebensphasen?",true
+"Tiefgründig",truth,"{playerName}, welche Frage über den Sinn des Lebens würdest du {targetPlayerName} stellen?",true
+"Tiefgründig",truth,"{playerName}, was ist eine Lektion, die du von {targetPlayerName} gelernt hast?",true
+"Tiefgründig",truth,"{playerName}, was denkst du, ist {targetPlayerName}s Definition von einem guten Leben?",true
+"Tiefgründig",truth,"{playerName}, wie würdest du die Weltanschauung von {targetPlayerName} beschreiben?",true
+"Tiefgründig",truth,"{playerName}, was ist eine Sache, die dich und {targetPlayerName} auf einer tieferen Ebene verbindet?",true
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach {targetPlayerName}s größter innerer Kampf?",true
+"Tiefgründig",truth,"{playerName}, was ist ein Rat, den du {targetPlayerName} für seine/ihre Zukunft geben würdest?",true
+"Tiefgründig",truth,"{playerName}, welche Eigenschaft von {targetPlayerName} inspiriert dich am meisten?",true
+"Tiefgründig",truth,"{playerName}, was glaubst du, ist das größte Geschenk, das {targetPlayerName} der Welt zu bieten hat?",true
+"Tiefgründig",truth,"{playerName}, wenn {targetPlayerName} ein Buch schreiben würde, welches Thema würde es behandeln?",true
+"Tiefgründig",truth,"{playerName}, was ist eine Wahrheit, die du gerne mit {targetPlayerName} teilen würdest?",true
+"Tiefgründig",truth,"{playerName}, wie hat die Beziehung zu {targetPlayerName} dein Verständnis von Freundschaft oder Liebe geprägt?",true
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach die größte Angst von {targetPlayerName} und wie könnte man ihm/ihr helfen?",true
+"Tiefgründig",truth,"{playerName}, was ist ein Traum oder Ziel von {targetPlayerName}, von dem du weißt und das du bewundernswert findest?",true
+"Tiefgründig",truth,"{playerName}, was ist eine philosophische Erkenntnis, die du {targetPlayerName} verdankst?",true
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach {targetPlayerName}s verborgene Superkraft im Alltag?",true
+"Tiefgründig",truth,"{playerName}, welche drei Worte beschreiben die Seele von {targetPlayerName} am besten?",true
+"Tiefgründig",truth,"{playerName}, was denkst du, ist die wichtigste Botschaft, die {targetPlayerName} der Welt geben möchte?",true
+"Tiefgründig",truth,"{playerName}, was ist ein Moment, in dem du {targetPlayerName} tief respektiert hast?",true
+"Tiefgründig",truth,"{playerName}, welche Frage würdest du stellen, um {targetPlayerName} wirklich kennenzulernen?",true
+"Tiefgründig",truth,"{playerName}, was ist eine gemeinsame Erfahrung, die dich und {targetPlayerName} tief geprägt hat?",true
+"Tiefgründig",truth,"{playerName}, was schätzt du an {targetPlayerName}s Art zu denken?",true
+"Tiefgründig",truth,"{playerName}, was ist ein spiritueller oder philosophischer Wert, den du mit {targetPlayerName} teilst?",true
+"Tiefgründig",truth,"{playerName}, was ist deiner Meinung nach der größte Beitrag von {targetPlayerName} zu dieser Gruppe?",true
+"Tiefgründig",truth,"{playerName}, was würdest du {targetPlayerName} sagen, wenn du wüsstest, dass es das Letzte ist, was du ihm/ihr sagen kannst?",true
+"Alk/Kiffen",truth,"{playerName}, was war das Dümmste, das du jemals im Rausch gekauft hast?",false
+"Alk/Kiffen",truth,"{playerName}, beschreibe deinen schlimmsten Filmriss.",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch eine peinliche Nachricht verschickt? An wen und was stand drin?",false
+"Alk/Kiffen",truth,"{playerName}, was ist dein Lieblings-Snack, wenn du bekifft/betrunken bist?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals versucht, im Rausch zu kochen? Wie ist es ausgegangen?",false
+"Alk/Kiffen",truth,"{playerName}, was ist das Absurdeste, worüber du im Rausch gelacht hast, bis dir die Tränen kamen?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch mit einem Fremden tiefgründige Gespräche geführt?",false
+"Alk/Kiffen",truth,"{playerName}, was ist dein 'Go-To'-Getränk, um schnell betrunken zu werden?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch etwas Verbotenes getan und wurdest erwischt?",false
+"Alk/Kiffen",truth,"{playerName}, was ist das Ekligste, das du jemals im Rausch gegessen oder getrunken hast?",false
+"Alk/Kiffen",truth,"{playerName}, wie oft hattest du schon einen Kater, bei dem du dachtest, du stirbst?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch eine wichtige Verabredung oder Verpflichtung vergessen?",false
+"Alk/Kiffen",truth,"{playerName}, was ist der seltsamste Ort, an dem du nach einer Partynacht aufgewacht bist?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals versucht, high oder betrunken Sport zu machen? Wie lief's?",false
+"Alk/Kiffen",truth,"{playerName}, was ist deine peinlichste Suff-Tanz-Story?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch geweint? Warum?",false
+"Alk/Kiffen",truth,"{playerName}, was ist das Mutigste, das du im Rausch getan hast, aber nüchtern niemals tun würdest?",false
+"Alk/Kiffen",truth,"{playerName}, welche Art von Musik hörst du am liebsten, wenn du high/betrunken bist?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch eine Wette abgeschlossen, die du bereut hast?",false
+"Alk/Kiffen",truth,"{playerName}, was ist deine bevorzugte Methode, um einen Kater zu bekämpfen?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch eine Tätowierung oder ein Piercing bekommen?",false
+"Alk/Kiffen",truth,"{playerName}, was ist der dümmste Streit, den du jemals im Rausch hattest?",false
+"Alk/Kiffen",truth,"{playerName}, wie hat sich dein Verhalten im Rausch im Laufe der Jahre verändert?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch mit der Polizei zu tun gehabt?",false
+"Alk/Kiffen",truth,"{playerName}, was ist das Verrückteste, das du unter dem Einfluss von Cannabis erlebt hast?",false
+"Alk/Kiffen",truth,"{playerName}, bevorzugst du es, alleine oder in Gesellschaft zu trinken/kiffen?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch eine 'geniale' Idee gehabt, die sich nüchtern als totaler Quatsch herausstellte?",false
+"Alk/Kiffen",truth,"{playerName}, was ist das Peinlichste, das deine Freunde dich im Rausch haben tun sehen?",false
+"Alk/Kiffen",truth,"{playerName}, wie viel Geld gibst du durchschnittlich an einem Partywochenende für Alkohol/Drogen aus?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals versucht, im Rausch ein ernstes Gespräch zu führen? Wie erfolgreich war das?",false
+"Alk/Kiffen",truth,"{playerName}, was ist dein Limit, bevor du sagst 'Jetzt reicht's'?",false
+"Alk/Kiffen",truth,"{playerName}, hast du jemals im Rausch etwas kaputt gemacht?",false
+"Alk/Kiffen",truth,"{playerName}, was ist die seltsamste Heißhungerattacke, die du je hattest?",false
+"Alk/Kiffen",truth,"{playerName}, hast du schon mal einen kompletten Abend vergessen, obwohl du dabei warst?",false
+"Alk/Kiffen",truth,"{playerName}, was ist das Peinlichste, was du zu den Eltern eines Freundes gesagt hast, als du betrunken warst?",false
+"Alk/Kiffen",truth,"{playerName}, wer in dieser Runde ist deiner Meinung nach der lustigste Trinker/Kiffer und warum ist das {targetPlayerName}?",true
+"Alk/Kiffen",truth,"{playerName}, mit wem hier würdest du am liebsten mal so richtig einen draufmachen, nämlich mit {targetPlayerName}?",true
+"Alk/Kiffen",truth,"{playerName}, was ist die peinlichste Suff-Geschichte, die du über {targetPlayerName} kennst?",true
+"Alk/Kiffen",truth,"{playerName}, wer von euch beiden, du oder {targetPlayerName}, verträgt mehr Alkohol/Gras?",true
+"Alk/Kiffen",truth,"{playerName}, was ist das Dümmste, was du und {targetPlayerName} jemals zusammen im Rausch angestellt habt?",true
+"Alk/Kiffen",truth,"{playerName}, wenn du und {targetPlayerName} high wärt, welches Essen würdet ihr als Erstes bestellen?",true
+"Alk/Kiffen",truth,"{playerName}, was ist ein Insider-Witz zwischen dir und {targetPlayerName}, der nur im Rausch entstanden sein kann?",true
+"Alk/Kiffen",truth,"{playerName}, würdest du {targetPlayerName} zutrauen, dich sicher nach Hause zu bringen, wenn ihr beide total dicht seid?",true
+"Alk/Kiffen",truth,"{playerName}, was ist das Peinlichste, das du {targetPlayerName} im Rausch gestanden hast?",true
+"Alk/Kiffen",truth,"{playerName}, wer von euch ist der bessere Beer-Pong-Partner, du oder {targetPlayerName}?",true
+"Alk/Kiffen",truth,"{playerName}, was ist das Verrückteste, was du {targetPlayerName} im Rausch tun sehen hast?",true
+"Alk/Kiffen",truth,"{playerName}, wenn ihr beide einen Filmriss hättet, wer würde sich wahrscheinlicher an mehr peinliche Details von {targetPlayerName} erinnern?",true
+"Alk/Kiffen",truth,"{playerName}, welchen Song würdest du mit {targetPlayerName} im Duett grölen, wenn ihr betrunken wärt?",true
+"Alk/Kiffen",truth,"{playerName}, was ist das absurdeste Gesprächsthema, das du jemals mit {targetPlayerName} im Rausch hattest?",true
+"Alk/Kiffen",truth,"{playerName}, wer kümmert sich besser um den anderen, wenn einer von euch zu viel hatte, du oder {targetPlayerName}?",true
+"Alk/Kiffen",dare,"{playerName}, trinke einen Shot ohne die Hände zu benutzen.",false
+"Alk/Kiffen",dare,"{playerName}, versuche, mit geschlossenen Augen einen geraden Strich auf ein Blatt Papier zu malen. Die anderen bewerten.",false
+"Alk/Kiffen",dare,"{playerName}, rufe eine Pizzeria an und bestelle etwas total Absurdes.",false
+"Alk/Kiffen",dare,"{playerName}, mache einen Handstand (oder versuche es zumindest) und trinke dabei einen Schluck Wasser.",false
+"Alk/Kiffen",dare,"{playerName}, sprich für die nächsten 10 Minuten nur in Liedtexten.",false
+"Alk/Kiffen",dare,"{playerName}, schicke eine Sprachnachricht an deinen fünften Kontakt, in der du lallst und von Aliens erzählst.",false
+"Alk/Kiffen",dare,"{playerName}, versuche, einen Turm aus mindestens 5 leeren Flaschen/Dosen zu bauen.",false
+"Alk/Kiffen",dare,"{playerName}, tanze für eine Minute wie ein Gummibärchen auf Ecstasy.",false
+"Alk/Kiffen",dare,"{playerName}, iss einen Löffel Senf oder eine andere eklige Zutat, die da ist.",false
+"Alk/Kiffen",dare,"{playerName}, erzähle einen Witz. Wenn niemand lacht, ex einen Kurzen.",false
+"Alk/Kiffen",dare,"{playerName}, trage für den Rest des Spiels einen Topf oder Eimer als Hut.",false
+"Alk/Kiffen",dare,"{playerName}, versuche, einer anderen Person die Schuhe zu binden, während du selbst auf einem Bein stehst.",false
+"Alk/Kiffen",dare,"{playerName}, male dir mit einem Stift einen Schnurrbart und lasse ihn bis zum Ende des Spiels dran.",false
+"Alk/Kiffen",dare,"{playerName}, rufe deine Eltern an und frage sie, ob sie dir Geld für 'Forschungsmaterial' leihen können.",false
+"Alk/Kiffen",dare,"{playerName}, versuche, ohne zu blinzeln jemanden für eine Minute anzustarren. Der Verlierer trinkt.",false
+"Alk/Kiffen",dare,"{playerName}, mache 10 Kniebeugen und rufe bei jeder 'Ich bin ein Partytier!'.",false
+"Alk/Kiffen",dare,"{playerName}, iss einen Cracker, der mit Zahnpasta bestrichen ist.",false
+"Alk/Kiffen",dare,"{playerName}, komponiere einen kurzen Rap über das Getränk, das du gerade trinkst.",false
+"Alk/Kiffen",dare,"{playerName}, versuche, eine Minute lang auf allen Vieren zu gehen und dabei zu miauen.",false
+"Alk/Kiffen",dare,"{playerName}, lasse die Gruppe dir eine temporäre (abwaschbare) Tätowierung auf die Stirn malen.",false
+"Alk/Kiffen",dare,"{playerName}, gurgel ein Lied für 30 Sekunden.",false
+"Alk/Kiffen",dare,"{playerName}, trinke einen Schluck von jedem offenen Getränk auf dem Tisch (Mischung).",false
+"Alk/Kiffen",dare,"{playerName}, sprich für 5 Minuten nur rückwärts.",false
+"Alk/Kiffen",dare,"{playerName}, versuche, mit verbundenen Augen Lippenstift aufzutragen.",false
+"Alk/Kiffen",dare,"{playerName}, poste 'Ich glaube, ich bin noch betrunken vom letzten Wochenende' auf deiner Social Media Seite.",false
+"Alk/Kiffen",dare,"{playerName}, iss eine Chilischote (oder etwas sehr Scharfes) ohne Wasser danach.",false
+"Alk/Kiffen",dare,"{playerName}, jongliere mit drei beliebigen Gegenständen für 30 Sekunden (Versuch zählt).",false
+"Alk/Kiffen",dare,"{playerName}, verhalte dich für die nächsten 5 Minuten wie dein Lieblingstier im Rausch.",false
+"Alk/Kiffen",dare,"{playerName}, lasse jemanden dir die Haare mit Ketchup oder Mayo 'stylen'.",false
+"Alk/Kiffen",dare,"{playerName}, trinke einen Shot aus dem Schuh einer anderen Person (Schuh muss sauber sein!).",false
+"Alk/Kiffen",dare,"{playerName}, gib {targetPlayerName} einen Shot aus oder teile dein Getränk mit ihm/ihr auf ex.",true
+"Alk/Kiffen",dare,"{playerName}, male {targetPlayerName} mit Lippenstift ein Herz auf die Wange.",true
+"Alk/Kiffen",dare,"{playerName}, versuche, {targetPlayerName} huckepack zu tragen einmal um den Tisch.",true
+"Alk/Kiffen",dare,"{playerName}, flüstere {targetPlayerName} dein peinlichstes Suff-Geheimnis ins Ohr.",true
+"Alk/Kiffen",dare,"{playerName}, stoße mit {targetPlayerName} an und trinkt beide einen Schluck, während ihr euch tief in die Augen schaut.",true
+"Alk/Kiffen",dare,"{playerName}, du und {targetPlayerName} müsst zusammen einen peinlichen Tanz aufführen.",true
+"Alk/Kiffen",dare,"{playerName}, {targetPlayerName} darf dir einen Drink mixen, den du austrinken musst (keine gefährlichen Zutaten).",true
+"Alk/Kiffen",dare,"{playerName}, füttere {targetPlayerName} mit verbundenen Augen mit einem Snack.",true
+"Alk/Kiffen",dare,"{playerName}, tausche für 5 Minuten ein Kleidungsstück mit {targetPlayerName}.",true
+"Alk/Kiffen",dare,"{playerName}, mache {targetPlayerName} ein Kompliment, das nur im Rausch Sinn ergibt.",true
+"Alk/Kiffen",dare,"{playerName}, singe ein Duett mit {targetPlayerName} – je schiefer, desto besser.",true
+"Alk/Kiffen",dare,"{playerName}, {targetPlayerName} muss dir für eine Minute die Haare kämmen oder stylen.",true
+"Alk/Kiffen",dare,"{playerName}, spiele mit {targetPlayerName} eine Runde 'Ich hab noch nie' – der Verlierer trinkt.",true
+"Alk/Kiffen",dare,"{playerName}, gib {targetPlayerName} eine sehr unbeholfene, aber enthusiastische Umarmung.",true
+"Alk/Kiffen",dare,"{playerName}, du und {targetPlayerName} müsst euch gegenseitig für eine Minute lang mit Essen füttern (z.B. Chips).",true
+"Partyyyy",truth,"{playerName}, was ist das Wildeste, das du jemals auf einer Party getan hast und fast erwischt wurdest?",false
+"Partyyyy",truth,"{playerName}, hast du jemals eine Party gecrasht? Wie war's?",false
+"Partyyyy",truth,"{playerName}, was ist der peinlichste Song, zu dem du total abgegangen bist?",false
+"Partyyyy",truth,"{playerName}, hast du dich jemals auf einer Party übergeben und es heimlich beseitigt?",false
+"Partyyyy",truth,"{playerName}, was ist die längste Zeit, die du ununterbrochen auf einer Party getanzt hast?",false
+"Partyyyy",truth,"{playerName}, hast du jemals auf einer Party jemanden geküsst, dessen Namen du nicht kanntest?",false
+"Partyyyy",truth,"{playerName}, was ist dein absoluter Lieblings-Party-Snack?",false
+"Partyyyy",truth,"{playerName}, hast du jemals eine Mottoparty veranstaltet? Was war das Motto?",false
+"Partyyyy",truth,"{playerName}, was ist das verrückteste Outfit, das du jemals auf einer Party getragen hast?",false
+"Partyyyy",truth,"{playerName}, hast du jemals einen DJ-Wunsch gehabt, der total abgelehnt wurde?",false
+"Partyyyy",truth,"{playerName}, was ist das Lustigste, das du jemals auf einer Tanzfläche gesehen hast?",false
+"Partyyyy",truth,"{playerName}, hast du jemals bei einem Trinkspiel so richtig verloren und musstest etwas Peinliches tun?",false
+"Partyyyy",truth,"{playerName}, was ist dein bester Trick, um auf einer Party cool auszusehen?",false
+"Partyyyy",truth,"{playerName}, hast du schon mal eine Party vorzeitig verlassen, weil sie langweilig war?",false
+"Partyyyy",truth,"{playerName}, was ist deine beste 'Ich war so betrunken, dass...'-Geschichte?",false
+"Partyyyy",truth,"{playerName}, hast du jemals auf einer Party etwas kaputt gemacht?",false
+"Partyyyy",truth,"{playerName}, was ist der beste Anmachspruch, den du auf einer Party gehört oder benutzt hast?",false
+"Partyyyy",truth,"{playerName}, hast du jemals auf einer Party geschlafen und bist woanders aufgewacht?",false
+"Partyyyy",truth,"{playerName}, was ist dein Lieblings-Partyspiel?",false
+"Partyyyy",truth,"{playerName}, was ist das Peinlichste, das dir deine Freunde auf einer Party angetan haben?",false
+"Partyyyy",truth,"{playerName}, hast du jemals eine geheime Zutat in einen Party-Drink gemischt?",false
+"Partyyyy",truth,"{playerName}, was ist dein Signature Dance Move?",false
+"Partyyyy",truth,"{playerName}, hast du jemals versucht, dich auf einer Party als jemand anderes auszugeben?",false
+"Partyyyy",truth,"{playerName}, was ist das Teuerste, das du auf einer Party verloren oder kaputt gemacht hast?",false
+"Partyyyy",truth,"{playerName}, hast du jemals eine Playlist für eine Party erstellt, die total gefloppt ist?",false
+"Partyyyy",truth,"{playerName}, was ist das Unverschämteste, das du jemals von einem Partygast erlebt hast?",false
+"Partyyyy",truth,"{playerName}, was ist dein Katerfrühstück der Champions?",false
+"Partyyyy",truth,"{playerName}, hast du jemals für eine Party Essen mitgebracht, das niemand gegessen hat?",false
+"Partyyyy",truth,"{playerName}, was ist die beste Ausrede, um eine Party frühzeitig zu verlassen?",false
+"Partyyyy",truth,"{playerName}, hast du dich schon mal auf einer Party mit jemandem gestritten? Worüber?",false
+"Partyyyy",truth,"{playerName}, was war dein legendärster Party-Fail?",false
+"Partyyyy",truth,"{playerName}, wer in der Runde schmeißt die besten Partys?",false
+"Partyyyy",truth,"{playerName}, was ist das Verrückteste, was du getan hast, um auf eine Gästeliste zu kommen?",false
+"Partyyyy",truth,"{playerName}, hast du jemals einen ganzen Kuchen alleine auf einer Party gegessen?",false
+"Partyyyy",truth,"{playerName}, was ist der seltsamste Ort, an dem du eine Party gefeiert hast?",false
+"Partyyyy",truth,"{playerName}, wer von den Anwesenden ist deiner Meinung nach das größte Partytier und warum ist es {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, wenn du eine Motto-Party für {targetPlayerName} schmeißen müsstest, welches Motto hätte sie?",true
+"Partyyyy",truth,"{playerName}, was ist das peinlichste Tanzvideo, das von {targetPlayerName} existiert (von dem du weißt)?",true
+"Partyyyy",truth,"{playerName}, wer würde eher auf einer Party einschlafen, du oder {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was ist das lustigste Party-Outfit, das du an {targetPlayerName} gesehen hast?",true
+"Partyyyy",truth,"{playerName}, welchen Song musst du unbedingt hören, wenn du mit {targetPlayerName} auf einer Party bist?",true
+"Partyyyy",truth,"{playerName}, was ist das Wildeste, das du {targetPlayerName} auf einer Party hast tun sehen?",true
+"Partyyyy",truth,"{playerName}, wer von euch beiden, du oder {targetPlayerName}, ist der bessere Flirter auf Partys?",true
+"Partyyyy",truth,"{playerName}, was ist ein Party-Geheimnis, das du mit {targetPlayerName} teilst?",true
+"Partyyyy",truth,"{playerName}, wer würde eher einen peinlichen Trinkspiel-Einsatz für {targetPlayerName} übernehmen?",true
+"Partyyyy",truth,"{playerName}, was ist das Mutigste, was du mit {targetPlayerName} zusammen auf einer Party gemacht hast?",true
+"Partyyyy",truth,"{playerName}, wer hat den seltsameren Musikgeschmack für Partys, du oder {targetPlayerName}?",true
+"Partyyyy",truth,"{playerName}, was ist die beste Partyerinnerung, die du mit {targetPlayerName} hast?",true
+"Partyyyy",truth,"{playerName}, wer von euch ist wahrscheinlicher, nach einer Party bei {targetPlayerName} auf der Couch zu landen?",true
+"Partyyyy",truth,"{playerName}, was ist das verrückteste Gerücht, das du über dich und {targetPlayerName} nach einer Party gehört hast?",true
+"Partyyyy",dare,"{playerName}, starte eine Polonaise durch den Raum.",false
+"Partyyyy",dare,"{playerName}, mache einen improvisierten Toast auf die beste Party aller Zeiten.",false
+"Partyyyy",dare,"{playerName}, tanze für eine Minute den Macarena oder einen anderen viralen Tanz.",false
+"Partyyyy",dare,"{playerName}, versuche, die Person rechts von dir nur durch Grimassen zum Lachen zu bringen.",false
+"Partyyyy",dare,"{playerName}, baue aus Snacks einen möglichst hohen Turm.",false
+"Partyyyy",dare,"{playerName}, singe deinen Lieblings-Karaoke-Song so laut du kannst (auch ohne Musik).",false
+"Partyyyy",dare,"{playerName}, mache eine Modenschau mit den verrücktesten Kleidungsstücken, die du finden kannst.",false
+"Partyyyy",dare,"{playerName}, starte ein Luftgitarren-Solo zu einem imaginären Rocksong.",false
+"Partyyyy",dare,"{playerName}, erzähle einen Witz. Wenn niemand lacht, musst du eine Runde lang wie ein Affe hüpfen.",false
+"Partyyyy",dare,"{playerName}, versuche, von jedem in der Runde ein High-Five zu bekommen, ohne zu sprechen.",false
+"Partyyyy",dare,"{playerName}, spiele eine Runde 'Der Boden ist Lava'.",false
+"Partyyyy",dare,"{playerName}, imitiere einen berühmten DJ bei der Arbeit.",false
+"Partyyyy",dare,"{playerName}, trage für die nächsten 10 Minuten deine Hose verkehrt herum.",false
+"Partyyyy",dare,"{playerName}, versuche, eine Flasche Wasser auf deinem Kopf zu balancieren, während du tanzt.",false
+"Partyyyy",dare,"{playerName}, erstelle eine menschliche Pyramide mit mindestens zwei anderen Personen.",false
+"Partyyyy",dare,"{playerName}, rufe 'PARTY ALARM!' und tanze wild für 15 Sekunden.",false
+"Partyyyy",dare,"{playerName}, gib jedem in der Runde einen Party-Spitznamen.",false
+"Partyyyy",dare,"{playerName}, versuche, einen Becher nur mit deinen Ellbogen vom Tisch aufzuheben.",false
+"Partyyyy",dare,"{playerName}, sprich für die nächsten 5 Minuten nur in Filmtiteln.",false
+"Partyyyy",dare,"{playerName}, organisiere ein spontanes Wettrennen um den Tisch.",false
+"Partyyyy",dare,"{playerName}, benutze zwei Löffel als Trommelstöcke und gib ein Solo auf einem Topf.",false
+"Partyyyy",dare,"{playerName}, mache eine Conga-Line mit allen Anwesenden.",false
+"Partyyyy",dare,"{playerName}, versuche, einen Breakdance-Move vorzuführen (auch wenn du es nicht kannst).",false
+"Partyyyy",dare,"{playerName}, trage eine Sonnenbrille drinnen für die nächsten 15 Minuten und tu so, als wärst du ein VIP.",false
+"Partyyyy",dare,"{playerName}, erzähle eine übertriebene Geschichte über deine letzte Partynacht.",false
+"Partyyyy",dare,"{playerName}, veranstalte einen Limbo-Wettbewerb mit einem Besenstiel.",false
+"Partyyyy",dare,"{playerName}, lass die Gruppe dir eine Party-Kriegsbemalung aufs Gesicht malen.",false
+"Partyyyy",dare,"{playerName}, mache eine La-Ola-Welle mit allen zusammen.",false
+"Partyyyy",dare,"{playerName}, versuche, mit verbundenen Augen verschiedene Party-Snacks zu erraten.",false
+"Partyyyy",dare,"{playerName}, gib eine dramatische Dankesrede, als hättest du gerade einen Oscar für die 'Beste Partystimmung' gewonnen.",false
+"Partyyyy",dare,"{playerName}, fordere {targetPlayerName} zu einem Dance-Battle heraus. Die anderen entscheiden, wer gewinnt.",true
+"Partyyyy",dare,"{playerName}, gib {targetPlayerName} eine kurze, aber enthusiastische Huckepack-Fahrt.",true
+"Partyyyy",dare,"{playerName}, singe ein Duett mit {targetPlayerName} – den peinlichsten Song, den ihr beide kennt.",true
+"Partyyyy",dare,"{playerName}, mache mit {targetPlayerName} einen geheimen Party-Handschlag.",true
+"Partyyyy",dare,"{playerName}, {targetPlayerName} darf dir einen Party-Hut aus Alufolie basteln, den du für 3 Runden tragen musst.",true
+"Partyyyy",dare,"{playerName}, halte eine Rede darüber, warum {targetPlayerName} der/die beste Party-Buddy ist.",true
+"Partyyyy",dare,"{playerName}, tausche ein lustiges Accessoire (Hut, Brille etc.) mit {targetPlayerName} für den Rest des Spiels.",true
+"Partyyyy",dare,"{playerName}, mache ein möglichst albernes Selfie mit {targetPlayerName} und poste es (optional).",true
+"Partyyyy",dare,"{playerName}, spiele mit {targetPlayerName} eine Runde Schere-Stein-Papier. Der Verlierer muss dem Gewinner einen Drink holen.",true
+"Partyyyy",dare,"{playerName}, versuche, {targetPlayerName} zum Lachen zu bringen, indem du nur Tiergeräusche machst.",true
+"Partyyyy",dare,"{playerName}, {targetPlayerName} darf dir einen (harmlosen) Streich spielen.",true
+"Partyyyy",dare,"{playerName}, erstelle mit {targetPlayerName} eine Choreographie zu einem bekannten Lied und führt sie vor.",true
+"Partyyyy",dare,"{playerName}, erzähle {targetPlayerName} einen Party-Klatsch, den du gehört hast (darf erfunden sein).",true
+"Partyyyy",dare,"{playerName}, gib {targetPlayerName} eine Nackenmassage mit Party-Musik im Hintergrund.",true
+"Partyyyy",dare,"{playerName}, ihr beide ({playerName} und {targetPlayerName}) müsst euch gegenseitig mit verbundenen Augen mit Chips füttern.",true
+"35. BST: Verbundenheit",truth,"{playerName}, in welchem Moment während dieser BST hast du dich am meisten verstanden gefühlt, ohne viele Worte sagen zu müssen?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was bedeutet für dich 'echtes Engagement' im Kontext unserer Gemeinschaft hier?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie hat ein Gespräch oder eine Begegnung auf dieser Tagung deine Sicht auf Verbundenheit verändert?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein kleiner Akt der Fürsorge, den du hier beobachtet oder erlebt hast, der dich berührt hat?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist für dich der Unterschied zwischen oberflächlicher Freundlichkeit und tiefer Verbundenheit?",false
+"35. BST: Verbundenheit",truth,"{playerName}, erinnerst du dich an einen Moment, in dem du dich hier besonders 'gesehen' gefühlt hast?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie können wir das Gefühl der Verbundenheit von dieser Tagung mit in unseren Alltag nehmen?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was bedeutet das Zitat 'It's a long hard fight, to learn to care for each other, to trust in one another' für dich persönlich?",false
+"35. BST: Verbundenheit",truth,"{playerName}, welche Rolle spielt Zuhören für dich beim Aufbau von Verbundenheit?",false
+"35. BST: Verbundenheit",truth,"{playerName}, hast du hier jemanden neu kennengelernt, bei dem es sich sofort 'richtig' angefühlt hat? Wer und warum?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Eigenschaft, die du an Waldorfschülern im Allgemeinen schätzt, wenn es um Gemeinschaft geht?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie hilft dir Eurythmie oder Epochenunterricht, dich mit anderen verbundener zu fühlen?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was war dein schönster 'Aha-Moment' bezüglich Verbundenheit auf dieser Tagung?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du von dieser Tagung über dich selbst und deine Beziehungen gelernt hast?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie zeigst du jemandem, dass du dich ihm/ihr verbunden fühlst, ohne es direkt zu sagen?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Herausforderung beim Aufbau von echter Verbundenheit in einer Gruppe?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist dein Lieblingsort auf diesem Tagungsgelände, um dich verbunden zu fühlen?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie können wir sicherstellen, dass sich auch ruhigere oder schüchterne Menschen in unserer Gemeinschaft verbunden fühlen?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Geste der Verbundenheit, die für dich eine große Bedeutung hat?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein gemeinsames Erlebnis dieser BST, das du nicht vergessen wirst?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was bedeutet Vertrauen für dich im Kontext von Verbundenheit?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie wichtig ist es dir, dass sich jeder in unserer Gruppe wohl und akzeptiert fühlt?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du tun kannst, um die Verbundenheit in dieser Gruppe aktiv zu stärken?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Lied oder ein Kunstwerk, das für dich das Gefühl von Verbundenheit ausdrückt?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie unterscheidet sich die Verbundenheit hier von der in anderen sozialen Kreisen?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du dich besonders dankbar für die Gemeinschaft hier gefühlt hast?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Aspekt der Waldorf-Pädagogik, der deiner Meinung nach Verbundenheit besonders fördert?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist deine Vision für eine ideale, verbundene Gemeinschaft?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist das Wichtigste, das du jemandem mitgeben würdest, der sich nach mehr Verbundenheit sehnt?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie können wir Konflikte so lösen, dass die Verbundenheit gestärkt wird?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Tradition oder ein Ritual, das für dich Verbundenheit symbolisiert?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie beeinflusst Empathie deine Fähigkeit, dich mit anderen zu verbinden?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du die 'besondere Verbundenheit' der Waldorf-Gemeinschaft gespürt hast?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Sache, die jeder tun kann, um ein Gefühl der Verbundenheit zu fördern?",false
+"35. BST: Verbundenheit",truth,"{playerName}, wie können wir sicherstellen, dass niemand bei Begriffen wie 'Eurythmie' verwirrt ist und sich dadurch weniger verbunden fühlt?",false
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Eigenschaft von {targetPlayerName}, die deiner Meinung nach zur Verbundenheit in der Gruppe beiträgt?",true
+"35. BST: Verbundenheit",truth,"{playerName}, in welchem Moment während dieser BST hast du dich mit {targetPlayerName} besonders verbunden gefühlt?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was schätzt du an der Art und Weise, wie {targetPlayerName} mit anderen umgeht, um Verbundenheit zu schaffen?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du gerne mit {targetPlayerName} teilen würdest, um eure Verbundenheit zu vertiefen?",true
+"35. BST: Verbundenheit",truth,"{playerName}, wie hat {targetPlayerName} dir geholfen, dich hier willkommener oder verbundener zu fühlen?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein gemeinsames Interesse oder eine Erfahrung, die dich mit {targetPlayerName} verbindet?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Rat, den du {targetPlayerName} geben würdest, um sich noch verbundener mit der Gruppe zu fühlen?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Geste der Wertschätzung, die du {targetPlayerName} zeigen möchtest?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist das Erste, was dir in den Sinn kommt, wenn du an deine Verbindung zu {targetPlayerName} denkst?",true
+"35. BST: Verbundenheit",truth,"{playerName}, wie könntest du {targetPlayerName} unterstützen, wenn er/sie sich einmal nicht verbunden fühlt?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Lektion über Verbundenheit, die du von {targetPlayerName} gelernt hast?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Aspekt von {targetPlayerName}s Persönlichkeit, den du für den Aufbau von Gemeinschaft besonders wertvoll findest?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Wunsch, den du für die zukünftige Verbindung zwischen dir und {targetPlayerName} hast?",true
+"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du dankbar warst, {targetPlayerName} in dieser Gruppe zu haben?",true
+"35. BST: Verbundenheit",truth,"{playerName}, wie würdest du {targetPlayerName} mit drei Worten beschreiben, die Verbundenheit ausdrücken?",true
+"35. BST: Verbundenheit",dare,"{playerName}, schreibe eine kurze anonyme Nachricht der Wertschätzung und gib sie an jemanden in der Runde weiter.",false
+"35. BST: Verbundenheit",dare,"{playerName}, starte eine Runde 'Komplimente-Dusche': Jeder sagt der Person links von sich ein nettes Wort.",false
+"35. BST: Verbundenheit",dare,"{playerName}, teile eine persönliche Geschichte darüber, wann du dich besonders verbunden gefühlt hast (max. 1 Minute).",false
+"35. BST: Verbundenheit",dare,"{playerName}, schlage eine kleine Gruppenaktivität vor, die die Verbundenheit stärken könnte (z.B. gemeinsam ein Lied singen).",false
+"35. BST: Verbundenheit",dare,"{playerName}, mache drei Menschen in dieser Runde ein aufrichtiges Kompliment.",false
+"35. BST: Verbundenheit",dare,"{playerName}, zeige eine Geste des Dankes gegenüber der ganzen Gruppe.",false
+"35. BST: Verbundenheit",dare,"{playerName}, finde etwas, das dich mit jeder Person in dieser Runde verbindet (eine Gemeinsamkeit).",false
+"35. BST: Verbundenheit",dare,"{playerName}, umarme drei verschiedene Personen für mindestens 5 Sekunden.",false
+"35. BST: Verbundenheit",dare,"{playerName}, schaue einer Person deiner Wahl für 30 Sekunden in die Augen und lächle sie an (ohne zu reden).",false
+"35. BST: Verbundenheit",dare,"{playerName}, erzähle, was du an dieser BST bisher am meisten geschätzt hast.",false
+"35. BST: Verbundenheit",dare,"{playerName}, schreibe auf einen Zettel, was 'Verbundenheit' für dich bedeutet, und lies es vor.",false
+"35. BST: Verbundenheit",dare,"{playerName}, initiiere einen gemeinsamen Augenblick der Stille für 30 Sekunden, um die Atmosphäre zu spüren.",false
+"35. BST: Verbundenheit",dare,"{playerName}, bedanke dich bei einer Person, die dir während dieser Tagung geholfen oder dich inspiriert hat.",false
+"35. BST: Verbundenheit",dare,"{playerName}, teile eine Hoffnung oder einen Wunsch für die Gemeinschaft dieser Gruppe.",false
+"35. BST: Verbundenheit",dare,"{playerName}, male ein kleines Symbol, das für dich Verbundenheit darstellt, und zeige es.",false
+"35. BST: Verbundenheit",dare,"{playerName}, sage jedem in der Runde, was du an ihm/ihr als Teil dieser Gemeinschaft schätzt.",false
+"35. BST: Verbundenheit",dare,"{playerName}, beginne einen Satz mit 'Ich fühle mich verbunden, wenn...' und vervollständige ihn.",false
+"35. BST: Verbundenheit",dare,"{playerName}, gib der Person rechts von dir ein High-Five und sage etwas Positives über sie.",false
+"35. BST: Verbundenheit",dare,"{playerName}, mache eine kleine Eurythmie-Geste, die 'Zuhören' oder 'Verstehen' ausdrückt.",false
+"35. BST: Verbundenheit",dare,"{playerName}, erzähle von einer Situation, in der du dich von einer Gruppe ausgeschlossen gefühlt hast und was geholfen hätte.",false
+"35. BST: Verbundenheit",dare,"{playerName}, schlage eine kleine, gemeinsame Aktion vor, um jemandem außerhalb der Gruppe eine Freude zu machen.",false
+"35. BST: Verbundenheit",dare,"{playerName}, teile einen positiven Gedanken oder ein Gefühl, das du gerade hast, mit der Gruppe.",false
+"35. BST: Verbundenheit",dare,"{playerName}, lies einen kurzen Text oder ein Gedicht über Freundschaft oder Gemeinschaft vor.",false
+"35. BST: Verbundenheit",dare,"{playerName}, halte kurz die Hand der Person links und rechts von dir und sage 'Schön, dass du da bist'.",false
+"35. BST: Verbundenheit",dare,"{playerName}, zünde (symbolisch oder echt) eine Kerze an für die Verbundenheit in dieser Gruppe.",false
+"35. BST: Verbundenheit",dare,"{playerName}, erstelle einen kurzen 'Verbundenheits-Rap' oder ein Liedchen.",false
+"35. BST: Verbundenheit",dare,"{playerName}, gib jedem in der Runde einen 'Luft-High-Five' mit einem Lächeln.",false
+"35. BST: Verbundenheit",dare,"{playerName}, nenne eine Sache, die du von dieser BST mit nach Hause nehmen wirst, um Verbundenheit zu leben.",false
+"35. BST: Verbundenheit",dare,"{playerName}, schließe für einen Moment die Augen und denke an eine Person, mit der du dich sehr verbunden fühlst. Teile das Gefühl (nicht den Namen).",false
+"35. BST: Verbundenheit",dare,"{playerName}, organisiere eine kurze Runde 'Stille Post' mit einem positiven Wort zum Thema Verbundenheit.",false
+"35. BST: Verbundenheit",dare,"{playerName}, sage {targetPlayerName} aufrichtig, was du an eurer Verbindung schätzt.",true
+"35. BST: Verbundenheit",dare,"{playerName}, gib {targetPlayerName} eine Umarmung, die wirklich von Herzen kommt.",true
+"35. BST: Verbundenheit",dare,"{playerName}, schreibe {targetPlayerName} eine kleine Notiz mit einer positiven Botschaft und gib sie ihm/ihr.",true
+"35. BST: Verbundenheit",dare,"{playerName}, teile eine schöne Erinnerung, die du mit {targetPlayerName} auf dieser BST (oder allgemein) hast.",true
+"35. BST: Verbundenheit",dare,"{playerName}, frage {targetPlayerName}, was du tun kannst, um ihn/sie besser zu unterstützen.",true
+"35. BST: Verbundenheit",dare,"{playerName}, mache mit {targetPlayerName} einen Plan, wie ihr nach der BST in Kontakt bleiben könnt.",true
+"35. BST: Verbundenheit",dare,"{playerName}, erzähle {targetPlayerName}, welche positive Eigenschaft du an ihm/ihr besonders bewunderst.",true
+"35. BST: Verbundenheit",dare,"{playerName}, bedanke dich bei {targetPlayerName} für etwas Bestimmtes, das er/sie getan oder gesagt hat.",true
+"35. BST: Verbundenheit",dare,"{playerName}, schaut euch 15 Sekunden lang an und versucht, die Emotionen des anderen zu 'lesen', dann sprecht darüber.",true
+"35. BST: Verbundenheit",dare,"{playerName}, finde drei Dinge, die dich und {targetPlayerName} verbinden, und teile sie.",true
+"35. BST: Verbundenheit",dare,"{playerName}, male {targetPlayerName} ein kleines Bild, das eure Verbindung symbolisiert.",true
+"35. BST: Verbundenheit",dare,"{playerName}, schenke {targetPlayerName} einen kleinen Gegenstand (z.B. einen Stein, eine Feder) als Symbol eurer Verbundenheit.",true
+"35. BST: Verbundenheit",dare,"{playerName}, singt zusammen mit {targetPlayerName} ein kurzes, bekanntes Lied über Freundschaft.",true
+"35. BST: Verbundenheit",dare,"{playerName}, halte eine kurze Rede (30 Sek.) darüber, warum {targetPlayerName} ein wichtiger Teil dieser Gemeinschaft ist.",true
+"35. BST: Verbundenheit",dare,"{playerName}, erstelle mit {targetPlayerName} einen gemeinsamen 'Verbundenheits-Gruß' (wie einen speziellen Handschlag).",true

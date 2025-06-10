@@ -64,7 +64,7 @@ export default function GameModeSelectionScreen() {
   return (
     <Layout
       topSectionContent={
-        <Link href="/setup/packs" passHref legacyBehavior={false}>
+        <Link href="/setup/players" passHref legacyBehavior={false}>
           <motion.div
             {...interactiveWrapperMotionProps}
             className={interactiveWrapperClassName}
@@ -80,7 +80,7 @@ export default function GameModeSelectionScreen() {
       }
       mainClassName="p-0 flex items-center justify-center" // Ensure middle content is also centered
     >
-      <Link href="/setup/packs" passHref legacyBehavior={false}>
+      <Link href="/setup/players" passHref legacyBehavior={false}>
         <motion.div
           {...interactiveWrapperMotionProps}
           className={interactiveWrapperClassName}

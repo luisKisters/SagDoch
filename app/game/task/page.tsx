@@ -13,7 +13,7 @@ type TaskType = "truth" | "dare";
 const titleTextStyle =
   "text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)]";
 const taskTextStyle =
-  "text-white font-bold text-lg md:text-xl lg:text-2xl leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] text-left";
+  "text-white font-bold text-xl md:text-2xl lg:text-3xl leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] text-left";
 const weiterButtonStyle =
   "font-bold text-5xl md:text-6xl lg:text-7xl leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] text-center";
 
@@ -56,9 +56,9 @@ function TaskScreenContent() {
         // Get all players for targeting
         const allPlayers = await getAllPlayers();
 
-        // Get selected pack name from sessionStorage, fallback to "Default Pack"
+        // Get selected pack name from sessionStorage, fallback to "Entspannt"
         const selectedPackName =
-          sessionStorage.getItem("selectedPackName") || "Default Pack";
+          sessionStorage.getItem("selectedPackName") || "Entspannt";
 
         // Get random question - try up to 5 times to find a suitable question
         let question = null;

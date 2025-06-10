@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
+import BackButton from "@/components/BackButton";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { getAllPlayers, Player } from "@/lib/db";
@@ -42,14 +43,14 @@ export default function PlayScreen() {
         const players = await getAllPlayers();
         if (players.length < 2) {
           // Redirect to setup if insufficient players
-          router.push("/setup/players");
+          router.push("/setup/players?skip_continue=true");
           return;
         }
         setAllPlayers(players);
         startPlayerSelection(players);
       } catch (error) {
         console.error("Error loading players:", error);
-        router.push("/setup/players");
+        router.push("/setup/players?skip_continue=true");
       }
     }
     loadPlayers();
@@ -166,12 +167,15 @@ export default function PlayScreen() {
   );
 
   return (
-    <Layout
-      topSectionContent={topContent}
-      bottomSectionContent={bottomContent}
-      mainClassName="p-0 flex items-center justify-center"
-    >
-      <AnimatePresence mode="wait">{renderPlayerName()}</AnimatePresence>
-    </Layout>
+    <>
+      <BackButton href="/setup/players?skip_continue=true" icon="x" />
+      <Layout
+        topSectionContent={topContent}
+        bottomSectionContent={bottomContent}
+        mainClassName="p-0 flex items-center justify-center"
+      >
+        <AnimatePresence mode="wait">{renderPlayerName()}</AnimatePresence>
+      </Layout>
+    </>
   );
 }

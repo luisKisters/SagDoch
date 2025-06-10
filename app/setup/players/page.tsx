@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
+import BackButton from "@/components/BackButton";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -12,8 +13,10 @@ import {
   Trash2,
   ChevronLeft,
   ChevronRight,
+  X,
 } from "lucide-react";
-import { getAllPlayers, addPlayer, Player } from "@/lib/db";
+import { getAllPlayers, addPlayer, Player, deleteAllPlayers } from "@/lib/db";
+import { useRouter } from "next/navigation";
 
 type CurrentStep = "name" | "gender" | "sexuality";
 
@@ -38,6 +41,8 @@ const playerNameStyle = "text-[#FF005C] font-medium text-lg";
 const selectionTextStyle = "text-[#FF005C] font-medium text-3xl text-center";
 
 export default function PlayerSetupScreen() {
+  const router = useRouter();
+
   // State management
   const [playersList, setPlayersList] = useState<Player[]>([]);
   const [currentStep, setCurrentStep] = useState<CurrentStep>("name");
@@ -47,6 +52,7 @@ export default function PlayerSetupScreen() {
   const [selectedGenderIndex, setSelectedGenderIndex] = useState(0);
   const [selectedSexualityIndex, setSelectedSexualityIndex] = useState(0);
   const [showPlayerError, setShowPlayerError] = useState(false);
+  const [showContinueModal, setShowContinueModal] = useState(false);
 
   // Load players from IndexedDB on mount
   useEffect(() => {
@@ -57,12 +63,38 @@ export default function PlayerSetupScreen() {
       try {
         const players = await getAllPlayers();
         setPlayersList(players);
+
+        // Check if there are existing players (game session) and no skip param
+        const urlParams = new URLSearchParams(window.location.search);
+        const skipContinueModal = urlParams.get("skip_continue") === "true";
+
+        if (players.length >= 2 && !skipContinueModal) {
+          setShowContinueModal(true);
+        }
       } catch (error) {
         console.error("Error loading players:", error);
       }
     }
     loadPlayers();
   }, []);
+
+  // Handle continue session
+  const handleContinueSession = () => {
+    setShowContinueModal(false);
+    router.push("/play");
+  };
+
+  // Handle new session
+  const handleNewSession = async () => {
+    try {
+      await deleteAllPlayers();
+      setPlayersList([]);
+      setShowContinueModal(false);
+    } catch (error) {
+      console.error("Error clearing players:", error);
+      setShowContinueModal(false);
+    }
+  };
 
   // Handle name input next button
   const handleNameNext = () => {
@@ -130,8 +162,8 @@ export default function PlayerSetupScreen() {
     }
   };
 
-  // Handle play button click
-  const handlePlayClick = (e: React.MouseEvent) => {
+  // Handle weiter button click - now goes to pack selection
+  const handleWeiterClick = (e: React.MouseEvent) => {
     if (playersList.length < 2) {
       e.preventDefault();
       setShowPlayerError(true);
@@ -139,18 +171,22 @@ export default function PlayerSetupScreen() {
       return;
     }
 
-    // Ensure selected pack is in sessionStorage, fallback to Default Pack
+    // Ensure selected pack is in sessionStorage, fallback to Entspannt
     if (!sessionStorage.getItem("selectedPackName")) {
-      sessionStorage.setItem("selectedPackName", "Default Pack");
+      sessionStorage.setItem("selectedPackName", "Entspannt");
     }
   };
 
   // Render player cards in top section
   const renderPlayerCards = () => (
     <div className="w-full max-h-full overflow-y-auto px-2">
-      <motion.h1 className={`${titleStyle} mb-3 text-left`}>
-        Spieler:innen
-      </motion.h1>
+      <div className="flex items-center justify-between mb-3">
+        <BackButton href="/" inline />
+        <motion.h1 className={`${titleStyle} text-center flex-1`}>
+          Spieler:innen
+        </motion.h1>
+        <div className="w-12"></div> {/* Spacer to center the title */}
+      </div>
       <AnimatePresence>
         {playersList.map((player) => (
           <motion.div
@@ -217,9 +253,9 @@ export default function PlayerSetupScreen() {
           <ArrowRight size={24} color="#0F0F1B" />
         </motion.button>
       )}
-      {/* Show play button when not typing - gray if insufficient players */}
+      {/* Show weiter button when not typing - gray if insufficient players */}
       {!currentName.trim() && (
-        <Link href={playersList.length >= 2 ? "/play" : "#"}>
+        <Link href={playersList.length >= 2 ? "/setup/packs" : "#"}>
           <motion.button
             className={`w-12 h-12 rounded-xl flex items-center justify-center absolute top-1/2 transform -translate-y-1/2 right-2 ${
               playersList.length >= 2
@@ -234,9 +270,9 @@ export default function PlayerSetupScreen() {
             }}
             whileHover={playersList.length >= 2 ? { scale: 1.05 } : {}}
             whileTap={playersList.length >= 2 ? { scale: 0.95 } : {}}
-            onClick={handlePlayClick}
+            onClick={handleWeiterClick}
           >
-            <Play
+            <ArrowRight
               size={24}
               color={playersList.length >= 2 ? "#0F0F1B" : "#666"}
             />
@@ -389,11 +425,69 @@ export default function PlayerSetupScreen() {
   };
 
   return (
-    <Layout
-      topSectionContent={renderPlayerCards()}
-      mainClassName="p-0 flex items-center justify-center"
-    >
-      {renderMiddleContent()}
-    </Layout>
+    <>
+      <Layout
+        topSectionContent={renderPlayerCards()}
+        mainClassName="p-0 flex items-center justify-center"
+      >
+        {renderMiddleContent()}
+      </Layout>
+
+      {/* Continue Session Modal */}
+      <AnimatePresence>
+        {showContinueModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-sm"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-gray-900">
+                  Spiel fortsetzen?
+                </h2>
+                <button
+                  onClick={handleNewSession}
+                  className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100"
+                >
+                  <X size={20} color="#666" />
+                </button>
+              </div>
+
+              <p className="text-gray-600 mb-6">
+                Du hast bereits ein laufendes Spiel mit {playersList.length}{" "}
+                Spieler:innen. Möchtest du das Spiel fortsetzen oder neu
+                beginnen?
+              </p>
+
+              <div className="flex gap-3">
+                <motion.button
+                  onClick={handleNewSession}
+                  className="flex-1 bg-gray-200 text-gray-800 font-bold py-3 px-4 rounded-xl"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Neu beginnen
+                </motion.button>
+                <motion.button
+                  onClick={handleContinueSession}
+                  className="flex-1 bg-[#FF005C] text-white font-bold py-3 px-4 rounded-xl"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Fortsetzen
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

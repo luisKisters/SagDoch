@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
+import BackButton from "@/components/BackButton";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Gift, Lock, Unlock, X, Check, Eye } from "lucide-react";
@@ -272,7 +273,13 @@ export default function PackSelectionScreen() {
   // Top section content - pack list with unlocked first, then locked
   const topContent = (
     <div className="w-full max-h-full overflow-y-auto px-4">
-      <motion.h1 className={`${titleStyle} mb-6`}>Wähle ein Pack</motion.h1>
+      <div className="flex items-center justify-between mb-6">
+        <BackButton href="/setup/players" inline />
+        <motion.h1 className={`${titleStyle} text-center flex-1`}>
+          Wähle ein Pack
+        </motion.h1>
+        <div className="w-12"></div> {/* Spacer to center the title */}
+      </div>
 
       {/* Unlocked Packs */}
       <AnimatePresence>{unlockedPacks.map(renderPackCard)}</AnimatePresence>
@@ -343,7 +350,7 @@ export default function PackSelectionScreen() {
 
   // Middle section - Weiter button
   const weiterButton = (
-    <Link href={selectedPackName ? "/setup/players" : "#"}>
+    <Link href={selectedPackName ? "/play" : "#"}>
       <motion.button
         className={`${buttonStyle} text-2xl py-4 px-8`}
         disabled={!selectedPackName}

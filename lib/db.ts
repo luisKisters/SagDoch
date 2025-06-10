@@ -1,4 +1,5 @@
 import { openDB, DBSchema, IDBPDatabase } from "idb";
+import Papa from "papaparse";
 
 const DB_NAME = "truthOrDareDB";
 const DB_VERSION = 4;
@@ -64,375 +65,80 @@ interface TruthOrDareDBSchema extends DBSchema {
   };
 }
 
-const defaultQuestions: Omit<Question, "id">[] = [
-  // Entspannt Pack questions (expanded to ~30 questions)
-  {
-    pack_name: "Entspannt",
-    type: "truth",
-    text_template: "{playerName}, was war dein peinlichster Moment?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "truth",
-    text_template: "{playerName}, was ist dein größter geheimer Wunsch?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "truth",
-    text_template: "{playerName}, was machst du wenn du alleine zuhause bist?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "truth",
-    text_template: "{playerName}, was denkst du über {targetPlayerName}?",
-    requires_target: true,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "truth",
-    text_template: "{playerName}, was war dein schönstes Kindheitserlebnis?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "truth",
-    text_template:
-      "{playerName}, welche übernatürliche Fähigkeit hättest du gerne?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "truth",
-    text_template: "{playerName}, was ist dein Lieblings-Netflix-Serie?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "truth",
-    text_template:
-      "{playerName}, mit wem hier würdest du gerne befreundet sein?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "dare",
-    text_template: "{playerName}, mache 10 Liegestütze.",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "dare",
-    text_template: "{playerName}, singe dein Lieblingslied vor.",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "dare",
-    text_template: "{playerName}, erzähle einen Witz.",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "dare",
-    text_template: "{playerName}, tanze für 30 Sekunden.",
-    requires_target: false,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "dare",
-    text_template: "{playerName}, gib {targetPlayerName} ein Kompliment.",
-    requires_target: true,
-  },
-  {
-    pack_name: "Entspannt",
-    type: "dare",
-    text_template:
-      "{playerName}, sprich für 2 Runden mit einem lustigen Akzent.",
-    requires_target: false,
-  },
+// CSV Loading Functions
+async function loadQuestionsFromCSV(): Promise<Omit<Question, "id">[]> {
+  try {
+    const response = await fetch("/data/questions.csv");
+    const csvText = await response.text();
 
-  // Bisschen Spicy Pack questions
-  {
-    pack_name: "Bisschen Spicy",
-    type: "truth",
-    text_template: "{playerName}, hast du schon mal jemanden hier geküsst?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Bisschen Spicy",
-    type: "truth",
-    text_template: "{playerName}, wen hier würdest du daten?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Bisschen Spicy",
-    type: "truth",
-    text_template:
-      "{playerName}, was findest du an {targetPlayerName} attraktiv?",
-    requires_target: true,
-  },
-  {
-    pack_name: "Bisschen Spicy",
-    type: "dare",
-    text_template: "{playerName}, gib {targetPlayerName} eine Umarmung.",
-    requires_target: true,
-  },
-  {
-    pack_name: "Bisschen Spicy",
-    type: "dare",
-    text_template: "{playerName}, flirte 30 Sekunden mit {targetPlayerName}.",
-    requires_target: true,
-  },
+    return new Promise((resolve, reject) => {
+      Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          try {
+            const questions = results.data.map((row: any) => ({
+              pack_name: row.pack_name,
+              type: row.type as "truth" | "dare",
+              text_template: row.text_template,
+              requires_target: row.requires_target === "true",
+            }));
+            resolve(questions);
+          } catch (error) {
+            reject(error);
+          }
+        },
+        error: (error: any) => {
+          reject(error);
+        },
+      });
+    });
+  } catch (error) {
+    console.error("Error loading questions from CSV:", error);
+    // Return empty array as fallback
+    return [];
+  }
+}
 
-  // Partyyyy Pack questions
-  {
-    pack_name: "Partyyyy",
-    type: "truth",
-    text_template: "{playerName}, was war die wildeste Party deines Lebens?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Partyyyy",
-    type: "truth",
-    text_template:
-      "{playerName}, was ist das Verrückteste was du betrunken gemacht hast?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Partyyyy",
-    type: "dare",
-    text_template: "{playerName}, mache den verrücktesten Tanz für 1 Minute!",
-    requires_target: false,
-  },
-  {
-    pack_name: "Partyyyy",
-    type: "dare",
-    text_template:
-      "{playerName}, mache mit {targetPlayerName} ein TikTok Video!",
-    requires_target: true,
-  },
-  {
-    pack_name: "Partyyyy",
-    type: "dare",
-    text_template: "{playerName}, schreie aus dem Fenster 'ICH BIN GEIL!'",
-    requires_target: false,
-  },
+async function loadPacksFromCSV(): Promise<Pack[]> {
+  try {
+    const response = await fetch("/data/packs.csv");
+    const csvText = await response.text();
 
-  // Tiefgründig Pack questions
-  {
-    pack_name: "Tiefgründig",
-    type: "truth",
-    text_template: "{playerName}, was ist der Sinn des Lebens für dich?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Tiefgründig",
-    type: "truth",
-    text_template: "{playerName}, was bereust du am meisten?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Tiefgründig",
-    type: "truth",
-    text_template:
-      "{playerName}, was würdest du {targetPlayerName} gerne sagen?",
-    requires_target: true,
-  },
-  {
-    pack_name: "Tiefgründig",
-    type: "truth",
-    text_template: "{playerName}, wofür bist du am dankbarsten?",
-    requires_target: false,
-  },
+    return new Promise((resolve, reject) => {
+      Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          try {
+            const packs = results.data.map((row: any) => ({
+              id: row.id,
+              name: row.name,
+              description: row.description,
+              is_18_plus: row.is_18_plus === "true",
+              type: row.type as "truth_and_dare" | "only_truth" | "only_dare",
+              is_locked: row.is_locked === "true",
+              is_hidden: row.is_hidden === "true",
+              cost_in_ads: parseInt(row.cost_in_ads) || 0,
+            }));
+            resolve(packs);
+          } catch (error) {
+            reject(error);
+          }
+        },
+        error: (error: any) => {
+          reject(error);
+        },
+      });
+    });
+  } catch (error) {
+    console.error("Error loading packs from CSV:", error);
+    // Return empty array as fallback
+    return [];
+  }
+}
 
-  // Alk/Kiffen Pack questions
-  {
-    pack_name: "Alk/Kiffen",
-    type: "truth",
-    text_template:
-      "{playerName}, wann warst du das erste Mal richtig betrunken?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Alk/Kiffen",
-    type: "truth",
-    text_template: "{playerName}, hast du schon mal gekifft?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Alk/Kiffen",
-    type: "truth",
-    text_template: "{playerName}, mit wem hier würdest du gerne kiffen?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Alk/Kiffen",
-    type: "dare",
-    text_template: "{playerName}, trinke einen Shot!",
-    requires_target: false,
-  },
-  {
-    pack_name: "Alk/Kiffen",
-    type: "dare",
-    text_template: "{playerName}, erzähle deine peinlichste Sauf-Geschichte.",
-    requires_target: false,
-  },
-
-  // Spicy 18+ Pack questions
-  {
-    pack_name: "Spicy (18+)",
-    type: "truth",
-    text_template: "{playerName}, wann hattest du das letzte Mal Sex?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Spicy (18+)",
-    type: "truth",
-    text_template: "{playerName}, mit wem hier würdest du schlafen?",
-    requires_target: false,
-  },
-  {
-    pack_name: "Spicy (18+)",
-    type: "truth",
-    text_template: "{playerName}, findest du {targetPlayerName} sexy?",
-    requires_target: true,
-  },
-  {
-    pack_name: "Spicy (18+)",
-    type: "dare",
-    text_template: "{playerName}, küsse {targetPlayerName} für 10 Sekunden.",
-    requires_target: true,
-  },
-
-  // Verbundenheit Pack questions (BST special pack)
-  {
-    pack_name: "35. BST: Verbundenheit",
-    type: "truth",
-    text_template: "{playerName}, was bedeutet Verbundenheit für dich?",
-    requires_target: false,
-  },
-  {
-    pack_name: "35. BST: Verbundenheit",
-    type: "truth",
-    text_template:
-      "{playerName}, fühlst du dich als Waldorfschüler*in anders verbunden als andere?",
-    requires_target: false,
-  },
-  {
-    pack_name: "35. BST: Verbundenheit",
-    type: "truth",
-    text_template:
-      "{playerName}, was ist der Unterschied zwischen Mitleid und echter Verbundenheit?",
-    requires_target: false,
-  },
-  {
-    pack_name: "35. BST: Verbundenheit",
-    type: "truth",
-    text_template:
-      "{playerName}, wann hast du zuletzt echte Verbundenheit gespürt?",
-    requires_target: false,
-  },
-  {
-    pack_name: "35. BST: Verbundenheit",
-    type: "truth",
-    text_template: "{playerName}, was verbindet dich mit {targetPlayerName}?",
-    requires_target: true,
-  },
-  {
-    pack_name: "35. BST: Verbundenheit",
-    type: "dare",
-    text_template:
-      "{playerName}, teile eine persönliche Erfahrung, die dich geprägt hat.",
-    requires_target: false,
-  },
-  {
-    pack_name: "35. BST: Verbundenheit",
-    type: "dare",
-    text_template:
-      "{playerName}, höre {targetPlayerName} 2 Minuten lang ehrlich zu.",
-    requires_target: true,
-  },
-];
-
-const defaultPacks: Pack[] = [
-  {
-    id: "entspannt",
-    name: "Entspannt",
-    description:
-      "Klassische entspannte Fragen für gemütliche Runden mit Freunden",
-    is_18_plus: false,
-    type: "truth_and_dare",
-    is_locked: false, // Default pack is always unlocked
-    is_hidden: false,
-    cost_in_ads: 0,
-  },
-  {
-    id: "bisschen-spicy",
-    name: "Bisschen Spicy",
-    description:
-      "Etwas würzigere Fragen für mutige Spieler - aber noch harmlos",
-    is_18_plus: false,
-    type: "truth_and_dare",
-    is_locked: true,
-    is_hidden: false,
-    cost_in_ads: 3,
-  },
-  {
-    id: "spicy-18",
-    name: "Spicy (18+)",
-    description: "Nur für Erwachsene - pikante Fragen und gewagte Aufgaben",
-    is_18_plus: true,
-    type: "truth_and_dare",
-    is_locked: true,
-    is_hidden: false,
-    cost_in_ads: 8,
-  },
-  {
-    id: "tiefgruendig",
-    name: "Tiefgründig",
-    description:
-      "Philosophische und tiefgehende Fragen für bedeutungsvolle Gespräche",
-    is_18_plus: false,
-    type: "only_truth",
-    is_locked: true,
-    is_hidden: false,
-    cost_in_ads: 4,
-  },
-  {
-    id: "alk-kiffen",
-    name: "Alk/Kiffen",
-    description: "Wahrheit oder Pflicht Aufgaben für wenn man high/suff ist:)",
-    is_18_plus: true,
-    type: "truth_and_dare",
-    is_locked: true,
-    is_hidden: false,
-    cost_in_ads: 6,
-  },
-  {
-    id: "partyyyy",
-    name: "Partyyyy",
-    description: "Mega wilde Fragen und Aufgaben für die krassesten Partys!",
-    is_18_plus: false,
-    type: "truth_and_dare",
-    is_locked: true,
-    is_hidden: false,
-    cost_in_ads: 5,
-  },
-  {
-    id: "bst-verbundenheit",
-    name: "35. BST: Verbundenheit",
-    description: "Spezielle Fragen zum Thema Verbundenheit für die 35. BST",
-    is_18_plus: false,
-    type: "truth_and_dare",
-    is_locked: true,
-    is_hidden: true, // Hidden by default, unlocked with BST code
-    cost_in_ads: 0,
-  },
-];
-
+// Fallback data in case CSV loading fails
 const defaultUserProfile: UserProfile = {
   id: "local_user_profile",
   promo_code_activated: false,
@@ -470,13 +176,6 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
         questionStore.createIndex("pack_type", ["pack_name", "type"], {
           unique: false,
         });
-
-        // Populate default questions for v1
-        defaultQuestions.forEach((question) => {
-          const store = transaction.objectStore("questions");
-          store.add(question as Question);
-        });
-        console.log("Default questions populated for v1.");
       }
 
       if (oldVersion < 2) {
@@ -489,53 +188,29 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
           keyPath: "id",
         });
 
-        // Populate default packs
-        defaultPacks.forEach((pack) => {
-          const store = transaction.objectStore("packs");
-          store.add(pack);
-        });
-        console.log("Default packs populated for v2.");
-
-        // Populate default user profile
+        // Add default user profile
         const userStore = transaction.objectStore("user_profile");
         userStore.add(defaultUserProfile);
         console.log("Default user profile populated for v2.");
-
-        // Update existing questions to add requires_target field
-        // Note: We'll handle this in the verification section since we can't easily await in upgrade callback
       }
 
       if (oldVersion < 3) {
-        // V3: Update pack names and add new questions
-        console.log("Upgrading to v3: Updating pack structure...");
+        // V3: Clear existing data to refresh with CSV data
+        console.log("Upgrading to v3: Clearing data for CSV refresh...");
 
-        // Clear existing packs and questions to add new structure
         const packStore = transaction.objectStore("packs");
         const questionStore = transaction.objectStore("questions");
 
         packStore.clear();
         questionStore.clear();
 
-        // Add new packs
-        defaultPacks.forEach((pack) => {
-          packStore.add(pack);
-        });
-
-        // Add new questions
-        defaultQuestions.forEach((question) => {
-          questionStore.add(question as Question);
-        });
-
-        console.log("V3 upgrade completed: New pack structure applied.");
+        console.log("V3 upgrade completed: Data cleared for CSV loading.");
       }
 
       if (oldVersion < 4) {
-        // V4: Add is_hidden field to packs and bst_code_activated to user profile
-        console.log(
-          "Upgrading to v4: Adding hidden packs and BST code support..."
-        );
+        // V4: Clear data again to ensure fresh CSV data
+        console.log("Upgrading to v4: Clearing data for fresh CSV loading...");
 
-        // Clear and recreate packs with new structure
         const packStore = transaction.objectStore("packs");
         const questionStore = transaction.objectStore("questions");
         const userProfileStore = transaction.objectStore("user_profile");
@@ -544,49 +219,55 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
         questionStore.clear();
         userProfileStore.clear();
 
-        // Add updated packs with is_hidden field
-        defaultPacks.forEach((pack) => {
-          packStore.add(pack);
-        });
-
-        // Add updated questions including Verbundenheit
-        defaultQuestions.forEach((question) => {
-          questionStore.add(question as Question);
-        });
-
-        // Add updated user profile with bst_code_activated
+        // Add updated user profile
         userProfileStore.add(defaultUserProfile);
 
-        console.log(
-          "V4 upgrade completed: Hidden packs and BST code support added."
-        );
+        console.log("V4 upgrade completed: Data cleared for CSV loading.");
       }
     },
   });
 
-  // Verify population for new databases
+  // Load data from CSV files and populate database if empty
   const questionCount = await db.count("questions");
   if (questionCount === 0) {
-    console.log("No questions found, populating default questions...");
-    const tx = db.transaction("questions", "readwrite");
-    const store = tx.objectStore("questions");
-    for (const question of defaultQuestions) {
-      await store.add(question as Question);
+    console.log("No questions found, loading from CSV...");
+    try {
+      const questions = await loadQuestionsFromCSV();
+      if (questions.length > 0) {
+        const tx = db.transaction("questions", "readwrite");
+        const store = tx.objectStore("questions");
+        for (const question of questions) {
+          await store.add(question as Question);
+        }
+        await tx.done;
+        console.log(`Loaded ${questions.length} questions from CSV.`);
+      } else {
+        console.warn("No questions loaded from CSV file.");
+      }
+    } catch (error) {
+      console.error("Error loading questions from CSV:", error);
     }
-    await tx.done;
-    console.log("Default questions populated.");
   }
 
   const packCount = await db.count("packs");
   if (packCount === 0) {
-    console.log("No packs found, populating default packs...");
-    const tx = db.transaction("packs", "readwrite");
-    const store = tx.objectStore("packs");
-    for (const pack of defaultPacks) {
-      await store.add(pack);
+    console.log("No packs found, loading from CSV...");
+    try {
+      const packs = await loadPacksFromCSV();
+      if (packs.length > 0) {
+        const tx = db.transaction("packs", "readwrite");
+        const store = tx.objectStore("packs");
+        for (const pack of packs) {
+          await store.add(pack);
+        }
+        await tx.done;
+        console.log(`Loaded ${packs.length} packs from CSV.`);
+      } else {
+        console.warn("No packs loaded from CSV file.");
+      }
+    } catch (error) {
+      console.error("Error loading packs from CSV:", error);
     }
-    await tx.done;
-    console.log("Default packs populated.");
   }
 
   const profileCount = await db.count("user_profile");
@@ -597,23 +278,6 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
     await store.add(defaultUserProfile);
     await tx.done;
     console.log("Default user profile created.");
-  }
-
-  // Update existing questions to add requires_target field if needed
-  const allQuestions = await db.getAll("questions");
-  const questionsNeedingUpdate = allQuestions.filter(
-    (q) => q.requires_target === undefined
-  );
-  if (questionsNeedingUpdate.length > 0) {
-    console.log("Updating existing questions with requires_target field...");
-    const tx = db.transaction("questions", "readwrite");
-    const store = tx.objectStore("questions");
-    for (const question of questionsNeedingUpdate) {
-      question.requires_target = false; // Default to false for existing questions
-      await store.put(question);
-    }
-    await tx.done;
-    console.log("Updated existing questions with requires_target field.");
   }
 
   return db;
@@ -696,6 +360,18 @@ export async function deletePlayer(id: number): Promise<void> {
   await tx.objectStore("players").delete(id);
   await tx.done;
   console.log(`Player deleted with ID: ${id}`);
+}
+
+/**
+ * Deletes all players from the database.
+ * @returns A promise that resolves when all players are deleted.
+ */
+export async function deleteAllPlayers(): Promise<void> {
+  const db = await getDB();
+  const tx = db.transaction("players", "readwrite");
+  await tx.objectStore("players").clear();
+  await tx.done;
+  console.log("All players deleted");
 }
 
 /**
