@@ -12,7 +12,7 @@ import {
   clearOldDatabase,
 } from "@/lib/db";
 import DatabaseResetModal from "@/components/DatabaseResetModal";
-import { getRandomTargetPlayer } from "@/lib/targeting";
+import { getRandomTargetPlayer, debugTargetingLogic } from "@/lib/targeting";
 
 type TaskType = "truth" | "dare";
 
@@ -72,6 +72,9 @@ function TaskScreenContent() {
 
         // Get all players for targeting
         const allPlayers = await getAllPlayers();
+
+        // Debug targeting logic (remove this in production)
+        debugTargetingLogic(allPlayers);
 
         // Get selected pack name from sessionStorage, fallback to "Entspannt"
         const selectedPackName =
