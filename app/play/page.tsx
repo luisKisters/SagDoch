@@ -5,7 +5,13 @@ import Layout from "@/components/Layout";
 import BackButton from "@/components/BackButton";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { getAllPlayers, Player } from "@/lib/db";
+import {
+  getAllPlayers,
+  Player,
+  checkDatabaseCompatibility,
+  clearOldDatabase,
+} from "@/lib/db";
+import DatabaseResetModal from "@/components/DatabaseResetModal";
 
 type GameState = "rolling" | "choice_pending";
 
@@ -32,6 +38,7 @@ export default function PlayScreen() {
   const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
   const [gameState, setGameState] = useState<GameState>("rolling");
   const [rollingIndex, setRollingIndex] = useState(0);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   // Load players from IndexedDB on mount
   useEffect(() => {
@@ -40,6 +47,14 @@ export default function PlayScreen() {
 
     async function loadPlayers() {
       try {
+        // Check database compatibility first
+        const { compatible, needsReset } = await checkDatabaseCompatibility();
+        if (!compatible && needsReset) {
+          // Show reset modal instead of immediate redirect
+          setShowResetModal(true);
+          return;
+        }
+
         const players = await getAllPlayers();
         if (players.length < 2) {
           // Redirect to setup if insufficient players
@@ -60,9 +75,36 @@ export default function PlayScreen() {
   const startPlayerSelection = (players: Player[]) => {
     setGameState("rolling");
 
+    // Create an extended rolling sequence for better animation
+    const createRollingSequence = (players: Player[]) => {
+      const sequence = [];
+      const totalDuration = 2500;
+      const intervalDuration = 150;
+      const totalSteps = Math.floor(totalDuration / intervalDuration);
+
+      // Create a sequence that goes through all players multiple times
+      for (let i = 0; i < totalSteps; i++) {
+        // Add some randomness but still cycle through all players
+        if (players.length >= 3) {
+          sequence.push(i % players.length);
+        } else {
+          // For 2 players, add extra variation
+          const patterns = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1];
+          sequence.push(patterns[i % patterns.length]);
+        }
+      }
+      return sequence;
+    };
+
+    const rollingSequence = createRollingSequence(players);
+    let sequenceIndex = 0;
+
     // Rolling animation for 2.5 seconds
     const rollingInterval = setInterval(() => {
-      setRollingIndex((prev) => (prev + 1) % players.length);
+      if (sequenceIndex < rollingSequence.length) {
+        setRollingIndex(rollingSequence[sequenceIndex]);
+        sequenceIndex++;
+      }
     }, 150); // Change name every 150ms for rolling effect
 
     // Stop rolling and select final player
@@ -166,6 +208,19 @@ export default function PlayScreen() {
     </motion.div>
   );
 
+  // Handle reset modal confirmation
+  const handleResetConfirm = async () => {
+    try {
+      await clearOldDatabase();
+      setShowResetModal(false);
+      router.push("/setup/players?skip_continue=true");
+    } catch (error) {
+      console.error("Error clearing database:", error);
+      // Redirect anyway to avoid infinite loop
+      router.push("/setup/players?skip_continue=true");
+    }
+  };
+
   return (
     <>
       <BackButton href="/setup/players?skip_continue=true" icon="x" />
@@ -176,6 +231,10 @@ export default function PlayScreen() {
       >
         <AnimatePresence mode="wait">{renderPlayerName()}</AnimatePresence>
       </Layout>
+      <DatabaseResetModal
+        isOpen={showResetModal}
+        onConfirm={handleResetConfirm}
+      />
     </>
   );
 }

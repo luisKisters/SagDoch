@@ -6,12 +6,16 @@ import BackButton from "@/components/BackButton";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Gift, Lock, Unlock, X, Check, Eye } from "lucide-react";
+import { useRouter } from "next/navigation";
+import DatabaseResetModal from "@/components/DatabaseResetModal";
 import {
   getAllPacks,
   getUserProfile,
   updateUserProfile,
   Pack,
   UserProfile,
+  checkDatabaseCompatibility,
+  clearOldDatabase,
 } from "@/lib/db";
 
 // Styles based on Figma data
@@ -30,6 +34,8 @@ const BST_CODE = "BST";
 const PROMO_CUTOFF_DATE = new Date("2025-07-16T00:00:00Z");
 
 export default function PackSelectionScreen() {
+  const router = useRouter();
+
   // State management
   const [packs, setPacks] = useState<Pack[]>([]);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
@@ -41,6 +47,7 @@ export default function PackSelectionScreen() {
   const [promoError, setPromoError] = useState("");
   const [bstError, setBstError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   // Load packs and user profile
   useEffect(() => {
@@ -48,6 +55,15 @@ export default function PackSelectionScreen() {
 
     async function loadData() {
       try {
+        // Check database compatibility first
+        const { compatible, needsReset } = await checkDatabaseCompatibility();
+        if (!compatible && needsReset) {
+          // Show reset modal instead of immediate redirect
+          setShowResetModal(true);
+          setIsLoading(false);
+          return;
+        }
+
         const profileData = await getUserProfile();
         const includeHidden = profileData?.bst_code_activated || false;
         const [packsData] = await Promise.all([getAllPacks(includeHidden)]);
@@ -62,7 +78,20 @@ export default function PackSelectionScreen() {
     }
 
     loadData();
-  }, []);
+  }, [router]);
+
+  // Handle reset modal confirmation
+  const handleResetConfirm = async () => {
+    try {
+      await clearOldDatabase();
+      setShowResetModal(false);
+      router.push("/setup/players?skip_continue=true");
+    } catch (error) {
+      console.error("Error clearing database:", error);
+      // Redirect anyway to avoid infinite loop
+      router.push("/setup/players?skip_continue=true");
+    }
+  };
 
   // Check if a pack is unlocked
   const isPackUnlocked = (pack: Pack): boolean => {
@@ -418,7 +447,7 @@ export default function PackSelectionScreen() {
         whileTap={{ scale: 0.95 }}
       >
         <Gift size={20} />
-        Einfach freischalten
+        Alle Packs kostenlos freischalten
       </motion.button>
     </div>
   );
@@ -488,6 +517,12 @@ export default function PackSelectionScreen() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Database Reset Modal */}
+      <DatabaseResetModal
+        isOpen={showResetModal}
+        onConfirm={handleResetConfirm}
+      />
     </>
   );
 }

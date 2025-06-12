@@ -4,7 +4,14 @@ import React, { useState, useEffect, Suspense } from "react";
 import Layout from "@/components/Layout";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { getPlayerById, getRandomQuestion, getAllPlayers } from "@/lib/db";
+import {
+  getPlayerById,
+  getRandomQuestion,
+  getAllPlayers,
+  checkDatabaseCompatibility,
+  clearOldDatabase,
+} from "@/lib/db";
+import DatabaseResetModal from "@/components/DatabaseResetModal";
 import { getRandomTargetPlayer } from "@/lib/targeting";
 
 type TaskType = "truth" | "dare";
@@ -31,11 +38,21 @@ function TaskScreenContent() {
   const [taskText, setTaskText] = useState<string>("");
   const [taskType, setTaskType] = useState<TaskType>("truth");
   const [isLoading, setIsLoading] = useState(true);
+  const [showResetModal, setShowResetModal] = useState(false);
 
   // Load task data from URL parameters
   useEffect(() => {
     async function loadTaskData() {
       try {
+        // Check database compatibility first
+        const { compatible, needsReset } = await checkDatabaseCompatibility();
+        if (!compatible && needsReset) {
+          // Show reset modal instead of immediate redirect
+          setShowResetModal(true);
+          setIsLoading(false);
+          return;
+        }
+
         const playerId = searchParams.get("player");
         const type = searchParams.get("type") as TaskType;
 
@@ -143,6 +160,19 @@ function TaskScreenContent() {
     router.push("/play");
   };
 
+  // Handle reset modal confirmation
+  const handleResetConfirm = async () => {
+    try {
+      await clearOldDatabase();
+      setShowResetModal(false);
+      router.push("/setup/players?skip_continue=true");
+    } catch (error) {
+      console.error("Error clearing database:", error);
+      // Redirect anyway to avoid infinite loop
+      router.push("/setup/players?skip_continue=true");
+    }
+  };
+
   if (isLoading) {
     return (
       <Layout mainClassName="p-0 flex items-center justify-center">
@@ -234,13 +264,21 @@ function TaskScreenContent() {
   );
 
   return (
-    <Layout
-      topSectionContent={topContent}
-      bottomSectionContent={bottomContent}
-      mainClassName="p-0 flex items-center justify-center"
-    >
-      {weiterText}
-    </Layout>
+    <>
+      <Layout
+        topSectionContent={topContent}
+        bottomSectionContent={bottomContent}
+        mainClassName="p-0 flex items-center justify-center"
+      >
+        {weiterText}
+      </Layout>
+
+      {/* Database Reset Modal */}
+      <DatabaseResetModal
+        isOpen={showResetModal}
+        onConfirm={handleResetConfirm}
+      />
+    </>
   );
 }
 

@@ -4,6 +4,65 @@ import Papa from "papaparse";
 const DB_NAME = "truthOrDareDB";
 const DB_VERSION = 5;
 
+// Function to check if we need to redirect due to old DB version
+export async function checkDatabaseCompatibility(): Promise<{
+  compatible: boolean;
+  needsReset: boolean;
+}> {
+  if (typeof window === "undefined")
+    return { compatible: true, needsReset: false };
+
+  try {
+    // Try to open the existing database without upgrading
+    const existingDB = await new Promise<IDBDatabase | null>((resolve) => {
+      const request = indexedDB.open(DB_NAME);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => resolve(null);
+      request.onupgradeneeded = () => {
+        // Close the connection if upgrade is needed
+        request.result.close();
+        resolve(null);
+      };
+    });
+
+    if (existingDB) {
+      const currentVersion = existingDB.version;
+      existingDB.close();
+
+      // If version is less than 4, we need to show reset modal
+      if (currentVersion < 4) {
+        console.log(
+          `Old database version detected: ${currentVersion}. Reset needed.`
+        );
+        return { compatible: false, needsReset: true };
+      }
+    }
+
+    return { compatible: true, needsReset: false }; // Database is compatible or doesn't exist
+  } catch (error) {
+    console.error("Error checking database compatibility:", error);
+    return { compatible: true, needsReset: false }; // Proceed normally on error
+  }
+}
+
+// Function to actually clear the old database
+export async function clearOldDatabase(): Promise<void> {
+  if (typeof window === "undefined") return;
+
+  try {
+    console.log("Clearing old database...");
+    await new Promise<void>((resolve, reject) => {
+      const deleteRequest = indexedDB.deleteDatabase(DB_NAME);
+      deleteRequest.onsuccess = () => resolve();
+      deleteRequest.onerror = () => reject(deleteRequest.error);
+    });
+    console.log("Old database cleared successfully");
+  } catch (error) {
+    console.error("Error clearing old database:", error);
+    throw error;
+  }
+}
+
 export interface Player {
   id?: number; // Auto-incremented or UUID string if we change strategy
   name: string;

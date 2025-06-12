@@ -20,6 +20,7 @@ import {
   addPlayer,
   Player,
   deleteAllPlayers,
+  deletePlayer,
   debugDatabaseHealth,
 } from "@/lib/db";
 import { useRouter } from "next/navigation";
@@ -28,13 +29,7 @@ type CurrentStep = "name" | "gender" | "sexuality";
 
 // Gender and sexuality options
 const GENDER_OPTIONS = ["Männlich", "Weiblich", "Divers"];
-const SEXUALITY_OPTIONS = [
-  "Heterosexuell",
-  "Homosexuell",
-  "Bisexuell",
-  "Pansexuell",
-  "Asexuell",
-];
+const SEXUALITY_OPTIONS = ["Hetero", "Homo", "Bi", "Pan", "Ace"];
 
 // Styles based on Figma data - resized for mobile
 const titleStyle =
@@ -102,6 +97,16 @@ export default function PlayerSetupScreen() {
     } catch (error) {
       console.error("Error clearing players:", error);
       setShowContinueModal(false);
+    }
+  };
+
+  // Handle delete player
+  const handleDeletePlayer = async (playerId: number) => {
+    try {
+      await deletePlayer(playerId);
+      setPlayersList((prev) => prev.filter((player) => player.id !== playerId));
+    } catch (error) {
+      console.error("Error deleting player:", error);
     }
   };
 
@@ -207,10 +212,19 @@ export default function PlayerSetupScreen() {
           >
             <span className={playerNameStyle}>{player.name}</span>
             <div className="flex gap-2">
-              <button className="w-10 h-6 bg-[#FF005C] rounded-lg flex items-center justify-center">
+              <button
+                className="w-10 h-6 bg-[#FF005C] rounded-lg flex items-center justify-center"
+                onClick={() => {
+                  // TODO: Add edit functionality if needed
+                  console.log("Edit player:", player.name);
+                }}
+              >
                 <Settings size={16} color="white" />
               </button>
-              <button className="w-10 h-6 bg-[#FF005C] rounded-lg flex items-center justify-center">
+              <button
+                className="w-10 h-6 bg-[#FF005C] rounded-lg flex items-center justify-center"
+                onClick={() => handleDeletePlayer(player.id!)}
+              >
                 <Trash2 size={16} color="white" />
               </button>
             </div>
