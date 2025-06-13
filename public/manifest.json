@@ -1,22 +1,95 @@
 {
-  "name": "Wahrheit oder Pflicht App",
-  "short_name": "W/P App",
+  "name": "SagDoch - Partyspiele",
+  "short_name": "SagDoch",
+  "description": "Verschiedene Partyspiele wie Wahrheit oder Pflicht, Wer hat noch nie, und mehr für deine nächste Party",
   "icons": [
     {
-      "src": "/icons/android-chrome-192x192.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "maskable any"
     },
     {
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home-screen.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Hauptmenü - Spielauswahl"
+    },
+    {
+      "src": "/screenshots/setup-pack-selection.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Fragenpack auswählen"
+    },
+    {
+      "src": "/screenshots/setup-players.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Spieler hinzufügen"
+    },
+    {
+      "src": "/screenshots/player-selection.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Spieler wird ausgewählt"
+    },
+    {
+      "src": "/screenshots/task-mobile.png",
+      "sizes": "1170x2532",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Wahrheit oder Pflicht Aufgabe"
+    },
+    {
+      "src": "/screenshots/home-desktop.png",
+      "sizes": "2880x2219",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop Ansicht - Hauptmenü"
+    },
+    {
+      "src": "/screenshots/task-desktop.png",
+      "sizes": "2880x2219",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop Ansicht - Aufgabe"
+    }
+  ],
+  "categories": ["games", "entertainment", "social"],
   "theme_color": "#0F0F1B",
   "background_color": "#0F0F1B",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "id": "/"
 }

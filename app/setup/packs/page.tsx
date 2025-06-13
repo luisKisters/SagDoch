@@ -99,7 +99,7 @@ export default function PackSelectionScreen() {
     if (userProfile?.promo_code_activated) return true;
     if (userProfile?.unlocked_pack_names.includes(pack.name)) return true;
     if (
-      pack.name === "35. BST: Verbundenheit" &&
+      pack.name === "36. BST: Verbundenheit" &&
       userProfile?.bst_code_activated
     )
       return true;
@@ -203,7 +203,7 @@ export default function PackSelectionScreen() {
         bst_code_activated: true,
         unlocked_pack_names: [
           ...(userProfile?.unlocked_pack_names || ["Entspannt"]),
-          "35. BST: Verbundenheit",
+          "36. BST: Verbundenheit",
         ],
       };
 
@@ -264,7 +264,7 @@ export default function PackSelectionScreen() {
                   ? "Nur Wahrheit"
                   : "Nur Pflicht"}
               </span>
-              {pack.name === "35. BST: Verbundenheit" && (
+              {pack.name === "36. BST: Verbundenheit" && (
                 <span
                   className={`${packLabelStyle} bg-purple-100 text-purple-800`}
                 >

@@ -106,10 +106,10 @@ const packConfigs: PackConfig[] = [
     adult: true,
   },
   {
-    name: "35. BST: Verbundenheit",
+    name: "36. BST: Verbundenheit",
     theme:
-      "Tiefgreifende Fragen zum Thema Verbundenheit, speziell für Waldorfschüler und die 35. BST, über echte menschliche Bindungen, Vertrauen und das Gefühl zusammenzugehören",
-    description: "Spezielle Fragen zum Thema Verbundenheit für die 35. BST",
+      "Tiefgreifende Fragen zum Thema Verbundenheit, speziell für Waldorfschüler und die 36. BST, über echte menschliche Bindungen, Vertrauen und das Gefühl zusammenzugehören",
+    description: "Spezielle Fragen zum Thema Verbundenheit für die 36. BST",
     questionCount: 50,
     targetingPercentage: 45,
     special: true,

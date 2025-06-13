@@ -1,39 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SagDoch - Partyspiele PWA
+
+![Website Deploy](https://deploy-badge.vercel.app/?url=http%3A%2F%2Fsagdoch.luiskisters.com&name=SagDoch)
+
+SagDoch ist eine Progressive Web App (PWA) für verschiedene Partyspiele wie Wahrheit oder Pflicht, Wer hat noch nie, und mehr.
+
+## Aktuell implementiert
+
+- **Wahrheit oder Pflicht**: Das klassische Partyspiel mit verschiedenen Fragenpacks
+- **Spieler-Management**: Spieler hinzufügen mit Gender und Sexualität für gezielte Fragen
+- **Fragenpack-System**: Verschiedene Themenpacks mit Unlock-Mechanismus
+
+## Geplante Spiele
+
+- **Wer hat noch nie**: Das beliebte Kennenlernspiel
+- **Imposter**: Weitere Partyspiele folgen
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies and run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Orbitron](https://fonts.google.com/specimen/Orbitron) font.
 
 # TODO
 
@@ -42,10 +37,19 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## PWA
 
-- [ ] Add install instructions and get PWA status using https://www.google.com/search?q=how+to+know+wether+app+is+installed+as+pwa+or+in+browser&sourceid=chrome&ie=UTF-8
-- [ ] better pwa and website title
+- [x] Add install instructions and get PWA status
+- [x] better pwa and website title
+- [x] better pwa app preview images
 - [ ] better pwa icon
-- [ ] pwa app preview images
+
+## Features
+
+- [x] Player Select
+- [x] Pack Selection
+- [x] Game Logic
+- [ ] Wer hat noch nie Mode
+- [ ] Imposter Mode
+- [ ] Ad-based pack unlocks
 
 ## Screens
 

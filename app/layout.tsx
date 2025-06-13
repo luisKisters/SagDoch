@@ -8,10 +8,11 @@ const orbitron = Orbitron({
   subsets: ["latin"],
 });
 
-const APP_NAME = "Wahrheit oder Pflicht";
-const APP_DEFAULT_TITLE = "Wahrheit oder Pflicht Spiel";
-const APP_TITLE_TEMPLATE = "%s - W/P App";
-const APP_DESCRIPTION = "Spiele Wahrheit oder Pflicht mit deinen Freunden!";
+const APP_NAME = "SagDoch";
+const APP_DEFAULT_TITLE = "SagDoch - Partyspiele";
+const APP_TITLE_TEMPLATE = "%s - SagDoch";
+const APP_DESCRIPTION =
+  "Verschiedene Partyspiele wie Wahrheit oder Pflicht, Wer hat noch nie, und mehr für deine nächste Party";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -62,7 +63,7 @@ export default function RootLayout({
       <head>
         <meta
           name="google-site-verification"
-          content="pwT4xGmw1yQ0vLmlGRXKJVgSY8YKM3zfdN1sSofkZ8g"
+          content="pwT4xGmw1yQ0vLmlGRXKJVgSY8YKM3zydN1sSofkZ8g"
         />
       </head>
       <body className={`${orbitron.variable} font-sans antialiased`}>
