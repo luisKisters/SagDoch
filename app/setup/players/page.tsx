@@ -196,7 +196,7 @@ export default function PlayerSetupScreen() {
     <div className="w-full max-h-full overflow-y-auto px-2">
       <div className="flex items-center justify-between mb-3">
         <BackButton href="/" inline />
-        <motion.h1 className={`${titleStyle} text-center flex-1`}>
+        <motion.h1 className={`${titleStyle} pl-2 flex-1`}>
           Spieler:innen
         </motion.h1>
         <div className="w-12"></div> {/* Spacer to center the title */}
