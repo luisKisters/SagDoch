@@ -107,9 +107,20 @@ export function getTargetPlayers(
  */
 export function getRandomTargetPlayer(
   currentPlayer: Player,
-  allPlayers: Player[]
+  allPlayers: Player[],
+  recentTargetIds: number[] = []
 ): Player | undefined {
-  const validTargets = getTargetPlayers(currentPlayer, allPlayers);
+  let validTargets = getTargetPlayers(currentPlayer, allPlayers);
+
+  // Attempt to filter out recent targets, but only if there are other options
+  if (validTargets.length > 1) {
+    const nonRecentTargets = validTargets.filter(
+      (p) => !recentTargetIds.includes(p.id!)
+    );
+    if (nonRecentTargets.length > 0) {
+      validTargets = nonRecentTargets;
+    }
+  }
 
   if (validTargets.length === 0) {
     console.log(

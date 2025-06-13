@@ -515,23 +515,38 @@ export async function deleteAllPlayers(): Promise<void> {
  * Retrieves a random question of a specific type from a specific pack.
  * @param packName The name of the question pack (e.g., "Default Pack").
  * @param type The type of question ("truth" or "dare").
+ * @param recentQuestionIds An array of recently used question IDs to filter out
  * @returns A promise that resolves to a random question object or undefined if none found.
  */
 export async function getRandomQuestion(
   packName: string,
-  type: "truth" | "dare"
+  type: "truth" | "dare",
+  recentQuestionIds: number[] = []
 ): Promise<Question | undefined> {
   const db = await getDB();
   // Use the 'pack_type' index to get all questions for the given pack and type
-  const questions = await db.getAllFromIndex("questions", "pack_type", [
+  const allQuestions = await db.getAllFromIndex("questions", "pack_type", [
     packName,
     type,
   ]);
-  if (questions.length === 0) {
+  if (allQuestions.length === 0) {
     return undefined;
   }
-  const randomIndex = Math.floor(Math.random() * questions.length);
-  return questions[randomIndex];
+
+  let selectableQuestions = allQuestions;
+
+  // Attempt to filter out recent questions, but only if there are other options
+  if (allQuestions.length > 1) {
+    const nonRecentQuestions = allQuestions.filter(
+      (q) => !recentQuestionIds.includes(q.id!)
+    );
+    if (nonRecentQuestions.length > 0) {
+      selectableQuestions = nonRecentQuestions;
+    }
+  }
+
+  const randomIndex = Math.floor(Math.random() * selectableQuestions.length);
+  return selectableQuestions[randomIndex];
 }
 
 // CRUD Functions for Packs (new)

@@ -16,6 +16,20 @@ import { getRandomTargetPlayer, debugTargetingLogic } from "@/lib/targeting";
 
 type TaskType = "truth" | "dare";
 
+// Helper functions to manage recent IDs in sessionStorage
+const getRecentIds = (key: string): number[] => {
+  if (typeof window === "undefined") return [];
+  const stored = sessionStorage.getItem(key);
+  return stored ? JSON.parse(stored) : [];
+};
+
+const addRecentId = (key: string, id: number, limit: number = 5) => {
+  if (typeof window === "undefined") return;
+  const ids = getRecentIds(key);
+  const updatedIds = [id, ...ids.filter((i) => i !== id)].slice(0, limit);
+  sessionStorage.setItem(key, JSON.stringify(updatedIds));
+};
+
 // Styles based on Figma data
 const titleTextStyle =
   "text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)]";
@@ -74,21 +88,27 @@ function TaskScreenContent() {
         const allPlayers = await getAllPlayers();
 
         // Debug targeting logic (remove this in production)
-        debugTargetingLogic(allPlayers);
+        // debugTargetingLogic(allPlayers);
 
         // Get selected pack name from sessionStorage, fallback to "Entspannt"
         const selectedPackName =
           sessionStorage.getItem("selectedPackName") || "Entspannt";
 
+        // Get recent IDs from sessionStorage
+        const recentQuestionIds = getRecentIds("recentQuestionIds");
+        const recentTargetIds = getRecentIds("recentTargetIds");
+
         // Get random question - try up to 5 times to find a suitable question
         let question = null;
+        let targetPlayer = null; // Store the target player here
         let attempts = 0;
-        const maxAttempts = 5;
+        const maxAttempts = 10; // Increased attempts for better filtering
 
         while (!question && attempts < maxAttempts) {
           const candidateQuestion = await getRandomQuestion(
             selectedPackName,
-            type
+            type,
+            recentQuestionIds
           );
 
           if (!candidateQuestion) {
@@ -99,12 +119,17 @@ function TaskScreenContent() {
 
           // Check if question requires targeting
           if (candidateQuestion.requires_target) {
-            // Get target player
-            const targetPlayer = getRandomTargetPlayer(player, allPlayers);
+            // Get target player, excluding recent ones
+            const candidateTarget = getRandomTargetPlayer(
+              player,
+              allPlayers,
+              recentTargetIds
+            );
 
-            if (targetPlayer) {
-              // We found a valid target, use this question
+            if (candidateTarget) {
+              // We found a valid target, use this question and target
               question = candidateQuestion;
+              targetPlayer = candidateTarget;
             } else {
               // No valid targets, try to find another question
               attempts++;
@@ -120,11 +145,19 @@ function TaskScreenContent() {
 
         if (!question) {
           console.error(
-            "Could not find a suitable question after multiple attempts"
+            "Could not find a suitable question after multiple attempts. This could be due to too few questions or too restrictive targeting."
           );
-          router.push("/play");
-          return;
+          // As a fallback, try getting a question without the recents filter
+          question = await getRandomQuestion(selectedPackName, type);
+          if (!question) {
+            // If still no question, then there's a bigger issue
+            router.push("/play");
+            return;
+          }
         }
+
+        // Add the chosen question to the recent list
+        addRecentId("recentQuestionIds", question.id!);
 
         // Process the question text
         let processedText = question.text_template;
@@ -136,14 +169,25 @@ function TaskScreenContent() {
         );
 
         // Replace target player name if needed
-        if (question.requires_target) {
-          const targetPlayer = getRandomTargetPlayer(player, allPlayers);
-          if (targetPlayer) {
-            processedText = processedText.replace(
-              "{targetPlayerName}",
-              `<strong style="font-size: 1.1em;">${targetPlayer.name}</strong>`
-            );
-          }
+        if (question.requires_target && targetPlayer) {
+          // Add the chosen target to the recent list
+          addRecentId("recentTargetIds", targetPlayer.id!);
+
+          processedText = processedText.replace(
+            "{targetPlayerName}",
+            `<strong style="font-size: 1.1em;">${targetPlayer.name}</strong>`
+          );
+        } else if (question.requires_target) {
+          // This case handles where a question requires a target, but none could be found.
+          // We should either show a generic message or have fallback questions.
+          // For now, let's just indicate a target was needed.
+          processedText = processedText.replace(
+            "{targetPlayerName}",
+            "(niemand)"
+          );
+          console.warn(
+            "Question requires a target, but no valid target was found."
+          );
         }
 
         setTaskType(type);
