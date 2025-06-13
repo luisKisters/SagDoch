@@ -575,98 +575,98 @@ pack_name,type,text_template,requires_target
 "Partyyyy",dare,"{playerName}, erzähle {targetPlayerName} einen Party-Klatsch, den du gehört hast (darf erfunden sein).",true
 "Partyyyy",dare,"{playerName}, gib {targetPlayerName} eine Nackenmassage mit Party-Musik im Hintergrund.",true
 "Partyyyy",dare,"{playerName}, ihr beide ({playerName} und {targetPlayerName}) müsst euch gegenseitig mit verbundenen Augen mit Chips füttern.",true
-"35. BST: Verbundenheit",truth,"{playerName}, in welchem Moment während dieser BST hast du dich am meisten verstanden gefühlt, ohne viele Worte sagen zu müssen?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was bedeutet für dich 'echtes Engagement' im Kontext unserer Gemeinschaft hier?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie hat ein Gespräch oder eine Begegnung auf dieser Tagung deine Sicht auf Verbundenheit verändert?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein kleiner Akt der Fürsorge, den du hier beobachtet oder erlebt hast, der dich berührt hat?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist für dich der Unterschied zwischen oberflächlicher Freundlichkeit und tiefer Verbundenheit?",false
-"35. BST: Verbundenheit",truth,"{playerName}, erinnerst du dich an einen Moment, in dem du dich hier besonders 'gesehen' gefühlt hast?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie können wir das Gefühl der Verbundenheit von dieser Tagung mit in unseren Alltag nehmen?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was bedeutet das Zitat 'It's a long hard fight, to learn to care for each other, to trust in one another' für dich persönlich?",false
-"35. BST: Verbundenheit",truth,"{playerName}, welche Rolle spielt Zuhören für dich beim Aufbau von Verbundenheit?",false
-"35. BST: Verbundenheit",truth,"{playerName}, hast du hier jemanden neu kennengelernt, bei dem es sich sofort 'richtig' angefühlt hat? Wer und warum?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Eigenschaft, die du an Waldorfschülern im Allgemeinen schätzt, wenn es um Gemeinschaft geht?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie hilft dir Eurythmie oder Epochenunterricht, dich mit anderen verbundener zu fühlen?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was war dein schönster 'Aha-Moment' bezüglich Verbundenheit auf dieser Tagung?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du von dieser Tagung über dich selbst und deine Beziehungen gelernt hast?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie zeigst du jemandem, dass du dich ihm/ihr verbunden fühlst, ohne es direkt zu sagen?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Herausforderung beim Aufbau von echter Verbundenheit in einer Gruppe?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist dein Lieblingsort auf diesem Tagungsgelände, um dich verbunden zu fühlen?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie können wir sicherstellen, dass sich auch ruhigere oder schüchterne Menschen in unserer Gemeinschaft verbunden fühlen?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Geste der Verbundenheit, die für dich eine große Bedeutung hat?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein gemeinsames Erlebnis dieser BST, das du nicht vergessen wirst?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was bedeutet Vertrauen für dich im Kontext von Verbundenheit?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie wichtig ist es dir, dass sich jeder in unserer Gruppe wohl und akzeptiert fühlt?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du tun kannst, um die Verbundenheit in dieser Gruppe aktiv zu stärken?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Lied oder ein Kunstwerk, das für dich das Gefühl von Verbundenheit ausdrückt?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie unterscheidet sich die Verbundenheit hier von der in anderen sozialen Kreisen?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du dich besonders dankbar für die Gemeinschaft hier gefühlt hast?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Aspekt der Waldorf-Pädagogik, der deiner Meinung nach Verbundenheit besonders fördert?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist deine Vision für eine ideale, verbundene Gemeinschaft?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist das Wichtigste, das du jemandem mitgeben würdest, der sich nach mehr Verbundenheit sehnt?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie können wir Konflikte so lösen, dass die Verbundenheit gestärkt wird?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Tradition oder ein Ritual, das für dich Verbundenheit symbolisiert?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie beeinflusst Empathie deine Fähigkeit, dich mit anderen zu verbinden?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du die 'besondere Verbundenheit' der Waldorf-Gemeinschaft gespürt hast?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Sache, die jeder tun kann, um ein Gefühl der Verbundenheit zu fördern?",false
-"35. BST: Verbundenheit",truth,"{playerName}, wie können wir sicherstellen, dass niemand bei Begriffen wie 'Eurythmie' verwirrt ist und sich dadurch weniger verbunden fühlt?",false
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Eigenschaft von {targetPlayerName}, die deiner Meinung nach zur Verbundenheit in der Gruppe beiträgt?",true
-"35. BST: Verbundenheit",truth,"{playerName}, in welchem Moment während dieser BST hast du dich mit {targetPlayerName} besonders verbunden gefühlt?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was schätzt du an der Art und Weise, wie {targetPlayerName} mit anderen umgeht, um Verbundenheit zu schaffen?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du gerne mit {targetPlayerName} teilen würdest, um eure Verbundenheit zu vertiefen?",true
-"35. BST: Verbundenheit",truth,"{playerName}, wie hat {targetPlayerName} dir geholfen, dich hier willkommener oder verbundener zu fühlen?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein gemeinsames Interesse oder eine Erfahrung, die dich mit {targetPlayerName} verbindet?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Rat, den du {targetPlayerName} geben würdest, um sich noch verbundener mit der Gruppe zu fühlen?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Geste der Wertschätzung, die du {targetPlayerName} zeigen möchtest?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist das Erste, was dir in den Sinn kommt, wenn du an deine Verbindung zu {targetPlayerName} denkst?",true
-"35. BST: Verbundenheit",truth,"{playerName}, wie könntest du {targetPlayerName} unterstützen, wenn er/sie sich einmal nicht verbunden fühlt?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist eine Lektion über Verbundenheit, die du von {targetPlayerName} gelernt hast?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Aspekt von {targetPlayerName}s Persönlichkeit, den du für den Aufbau von Gemeinschaft besonders wertvoll findest?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Wunsch, den du für die zukünftige Verbindung zwischen dir und {targetPlayerName} hast?",true
-"35. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du dankbar warst, {targetPlayerName} in dieser Gruppe zu haben?",true
-"35. BST: Verbundenheit",truth,"{playerName}, wie würdest du {targetPlayerName} mit drei Worten beschreiben, die Verbundenheit ausdrücken?",true
-"35. BST: Verbundenheit",dare,"{playerName}, schreibe eine kurze anonyme Nachricht der Wertschätzung und gib sie an jemanden in der Runde weiter.",false
-"35. BST: Verbundenheit",dare,"{playerName}, starte eine Runde 'Komplimente-Dusche': Jeder sagt der Person links von sich ein nettes Wort.",false
-"35. BST: Verbundenheit",dare,"{playerName}, teile eine persönliche Geschichte darüber, wann du dich besonders verbunden gefühlt hast (max. 1 Minute).",false
-"35. BST: Verbundenheit",dare,"{playerName}, schlage eine kleine Gruppenaktivität vor, die die Verbundenheit stärken könnte (z.B. gemeinsam ein Lied singen).",false
-"35. BST: Verbundenheit",dare,"{playerName}, mache drei Menschen in dieser Runde ein aufrichtiges Kompliment.",false
-"35. BST: Verbundenheit",dare,"{playerName}, zeige eine Geste des Dankes gegenüber der ganzen Gruppe.",false
-"35. BST: Verbundenheit",dare,"{playerName}, finde etwas, das dich mit jeder Person in dieser Runde verbindet (eine Gemeinsamkeit).",false
-"35. BST: Verbundenheit",dare,"{playerName}, umarme drei verschiedene Personen für mindestens 5 Sekunden.",false
-"35. BST: Verbundenheit",dare,"{playerName}, schaue einer Person deiner Wahl für 30 Sekunden in die Augen und lächle sie an (ohne zu reden).",false
-"35. BST: Verbundenheit",dare,"{playerName}, erzähle, was du an dieser BST bisher am meisten geschätzt hast.",false
-"35. BST: Verbundenheit",dare,"{playerName}, schreibe auf einen Zettel, was 'Verbundenheit' für dich bedeutet, und lies es vor.",false
-"35. BST: Verbundenheit",dare,"{playerName}, initiiere einen gemeinsamen Augenblick der Stille für 30 Sekunden, um die Atmosphäre zu spüren.",false
-"35. BST: Verbundenheit",dare,"{playerName}, bedanke dich bei einer Person, die dir während dieser Tagung geholfen oder dich inspiriert hat.",false
-"35. BST: Verbundenheit",dare,"{playerName}, teile eine Hoffnung oder einen Wunsch für die Gemeinschaft dieser Gruppe.",false
-"35. BST: Verbundenheit",dare,"{playerName}, male ein kleines Symbol, das für dich Verbundenheit darstellt, und zeige es.",false
-"35. BST: Verbundenheit",dare,"{playerName}, sage jedem in der Runde, was du an ihm/ihr als Teil dieser Gemeinschaft schätzt.",false
-"35. BST: Verbundenheit",dare,"{playerName}, beginne einen Satz mit 'Ich fühle mich verbunden, wenn...' und vervollständige ihn.",false
-"35. BST: Verbundenheit",dare,"{playerName}, gib der Person rechts von dir ein High-Five und sage etwas Positives über sie.",false
-"35. BST: Verbundenheit",dare,"{playerName}, mache eine kleine Eurythmie-Geste, die 'Zuhören' oder 'Verstehen' ausdrückt.",false
-"35. BST: Verbundenheit",dare,"{playerName}, erzähle von einer Situation, in der du dich von einer Gruppe ausgeschlossen gefühlt hast und was geholfen hätte.",false
-"35. BST: Verbundenheit",dare,"{playerName}, schlage eine kleine, gemeinsame Aktion vor, um jemandem außerhalb der Gruppe eine Freude zu machen.",false
-"35. BST: Verbundenheit",dare,"{playerName}, teile einen positiven Gedanken oder ein Gefühl, das du gerade hast, mit der Gruppe.",false
-"35. BST: Verbundenheit",dare,"{playerName}, lies einen kurzen Text oder ein Gedicht über Freundschaft oder Gemeinschaft vor.",false
-"35. BST: Verbundenheit",dare,"{playerName}, halte kurz die Hand der Person links und rechts von dir und sage 'Schön, dass du da bist'.",false
-"35. BST: Verbundenheit",dare,"{playerName}, zünde (symbolisch oder echt) eine Kerze an für die Verbundenheit in dieser Gruppe.",false
-"35. BST: Verbundenheit",dare,"{playerName}, erstelle einen kurzen 'Verbundenheits-Rap' oder ein Liedchen.",false
-"35. BST: Verbundenheit",dare,"{playerName}, gib jedem in der Runde einen 'Luft-High-Five' mit einem Lächeln.",false
-"35. BST: Verbundenheit",dare,"{playerName}, nenne eine Sache, die du von dieser BST mit nach Hause nehmen wirst, um Verbundenheit zu leben.",false
-"35. BST: Verbundenheit",dare,"{playerName}, schließe für einen Moment die Augen und denke an eine Person, mit der du dich sehr verbunden fühlst. Teile das Gefühl (nicht den Namen).",false
-"35. BST: Verbundenheit",dare,"{playerName}, organisiere eine kurze Runde 'Stille Post' mit einem positiven Wort zum Thema Verbundenheit.",false
-"35. BST: Verbundenheit",dare,"{playerName}, sage {targetPlayerName} aufrichtig, was du an eurer Verbindung schätzt.",true
-"35. BST: Verbundenheit",dare,"{playerName}, gib {targetPlayerName} eine Umarmung, die wirklich von Herzen kommt.",true
-"35. BST: Verbundenheit",dare,"{playerName}, schreibe {targetPlayerName} eine kleine Notiz mit einer positiven Botschaft und gib sie ihm/ihr.",true
-"35. BST: Verbundenheit",dare,"{playerName}, teile eine schöne Erinnerung, die du mit {targetPlayerName} auf dieser BST (oder allgemein) hast.",true
-"35. BST: Verbundenheit",dare,"{playerName}, frage {targetPlayerName}, was du tun kannst, um ihn/sie besser zu unterstützen.",true
-"35. BST: Verbundenheit",dare,"{playerName}, mache mit {targetPlayerName} einen Plan, wie ihr nach der BST in Kontakt bleiben könnt.",true
-"35. BST: Verbundenheit",dare,"{playerName}, erzähle {targetPlayerName}, welche positive Eigenschaft du an ihm/ihr besonders bewunderst.",true
-"35. BST: Verbundenheit",dare,"{playerName}, bedanke dich bei {targetPlayerName} für etwas Bestimmtes, das er/sie getan oder gesagt hat.",true
-"35. BST: Verbundenheit",dare,"{playerName}, schaut euch 15 Sekunden lang an und versucht, die Emotionen des anderen zu 'lesen', dann sprecht darüber.",true
-"35. BST: Verbundenheit",dare,"{playerName}, finde drei Dinge, die dich und {targetPlayerName} verbinden, und teile sie.",true
-"35. BST: Verbundenheit",dare,"{playerName}, male {targetPlayerName} ein kleines Bild, das eure Verbindung symbolisiert.",true
-"35. BST: Verbundenheit",dare,"{playerName}, schenke {targetPlayerName} einen kleinen Gegenstand (z.B. einen Stein, eine Feder) als Symbol eurer Verbundenheit.",true
-"35. BST: Verbundenheit",dare,"{playerName}, singt zusammen mit {targetPlayerName} ein kurzes, bekanntes Lied über Freundschaft.",true
-"35. BST: Verbundenheit",dare,"{playerName}, halte eine kurze Rede (30 Sek.) darüber, warum {targetPlayerName} ein wichtiger Teil dieser Gemeinschaft ist.",true
-"35. BST: Verbundenheit",dare,"{playerName}, erstelle mit {targetPlayerName} einen gemeinsamen 'Verbundenheits-Gruß' (wie einen speziellen Handschlag).",true
+"36. BST: Verbundenheit",truth,"{playerName}, in welchem Moment während dieser BST hast du dich am meisten verstanden gefühlt, ohne viele Worte sagen zu müssen?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was bedeutet für dich 'echtes Engagement' im Kontext unserer Gemeinschaft hier?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie hat ein Gespräch oder eine Begegnung auf dieser Tagung deine Sicht auf Verbundenheit verändert?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein kleiner Akt der Fürsorge, den du hier beobachtet oder erlebt hast, der dich berührt hat?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist für dich der Unterschied zwischen oberflächlicher Freundlichkeit und tiefer Verbundenheit?",false
+"36. BST: Verbundenheit",truth,"{playerName}, erinnerst du dich an einen Moment, in dem du dich hier besonders 'gesehen' gefühlt hast?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie können wir das Gefühl der Verbundenheit von dieser Tagung mit in unseren Alltag nehmen?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was bedeutet das Zitat 'It's a long hard fight, to learn to care for each other, to trust in one another' für dich persönlich?",false
+"36. BST: Verbundenheit",truth,"{playerName}, welche Rolle spielt Zuhören für dich beim Aufbau von Verbundenheit?",false
+"36. BST: Verbundenheit",truth,"{playerName}, hast du hier jemanden neu kennengelernt, bei dem es sich sofort 'richtig' angefühlt hat? Wer und warum?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine Eigenschaft, die du an Waldorfschülern im Allgemeinen schätzt, wenn es um Gemeinschaft geht?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie hilft dir Eurythmie oder Epochenunterricht, dich mit anderen verbundener zu fühlen?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was war dein schönster 'Aha-Moment' bezüglich Verbundenheit auf dieser Tagung?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du von dieser Tagung über dich selbst und deine Beziehungen gelernt hast?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie zeigst du jemandem, dass du dich ihm/ihr verbunden fühlst, ohne es direkt zu sagen?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine Herausforderung beim Aufbau von echter Verbundenheit in einer Gruppe?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist dein Lieblingsort auf diesem Tagungsgelände, um dich verbunden zu fühlen?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie können wir sicherstellen, dass sich auch ruhigere oder schüchterne Menschen in unserer Gemeinschaft verbunden fühlen?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Geste der Verbundenheit, die für dich eine große Bedeutung hat?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein gemeinsames Erlebnis dieser BST, das du nicht vergessen wirst?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was bedeutet Vertrauen für dich im Kontext von Verbundenheit?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie wichtig ist es dir, dass sich jeder in unserer Gruppe wohl und akzeptiert fühlt?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du tun kannst, um die Verbundenheit in dieser Gruppe aktiv zu stärken?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein Lied oder ein Kunstwerk, das für dich das Gefühl von Verbundenheit ausdrückt?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie unterscheidet sich die Verbundenheit hier von der in anderen sozialen Kreisen?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du dich besonders dankbar für die Gemeinschaft hier gefühlt hast?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein Aspekt der Waldorf-Pädagogik, der deiner Meinung nach Verbundenheit besonders fördert?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist deine Vision für eine ideale, verbundene Gemeinschaft?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist das Wichtigste, das du jemandem mitgeben würdest, der sich nach mehr Verbundenheit sehnt?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie können wir Konflikte so lösen, dass die Verbundenheit gestärkt wird?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine Tradition oder ein Ritual, das für dich Verbundenheit symbolisiert?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie beeinflusst Empathie deine Fähigkeit, dich mit anderen zu verbinden?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du die 'besondere Verbundenheit' der Waldorf-Gemeinschaft gespürt hast?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Sache, die jeder tun kann, um ein Gefühl der Verbundenheit zu fördern?",false
+"36. BST: Verbundenheit",truth,"{playerName}, wie können wir sicherstellen, dass niemand bei Begriffen wie 'Eurythmie' verwirrt ist und sich dadurch weniger verbunden fühlt?",false
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine Eigenschaft von {targetPlayerName}, die deiner Meinung nach zur Verbundenheit in der Gruppe beiträgt?",true
+"36. BST: Verbundenheit",truth,"{playerName}, in welchem Moment während dieser BST hast du dich mit {targetPlayerName} besonders verbunden gefühlt?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was schätzt du an der Art und Weise, wie {targetPlayerName} mit anderen umgeht, um Verbundenheit zu schaffen?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine Sache, die du gerne mit {targetPlayerName} teilen würdest, um eure Verbundenheit zu vertiefen?",true
+"36. BST: Verbundenheit",truth,"{playerName}, wie hat {targetPlayerName} dir geholfen, dich hier willkommener oder verbundener zu fühlen?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein gemeinsames Interesse oder eine Erfahrung, die dich mit {targetPlayerName} verbindet?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein Rat, den du {targetPlayerName} geben würdest, um sich noch verbundener mit der Gruppe zu fühlen?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine kleine Geste der Wertschätzung, die du {targetPlayerName} zeigen möchtest?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist das Erste, was dir in den Sinn kommt, wenn du an deine Verbindung zu {targetPlayerName} denkst?",true
+"36. BST: Verbundenheit",truth,"{playerName}, wie könntest du {targetPlayerName} unterstützen, wenn er/sie sich einmal nicht verbunden fühlt?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist eine Lektion über Verbundenheit, die du von {targetPlayerName} gelernt hast?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein Aspekt von {targetPlayerName}s Persönlichkeit, den du für den Aufbau von Gemeinschaft besonders wertvoll findest?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein Wunsch, den du für die zukünftige Verbindung zwischen dir und {targetPlayerName} hast?",true
+"36. BST: Verbundenheit",truth,"{playerName}, was ist ein Moment, in dem du dankbar warst, {targetPlayerName} in dieser Gruppe zu haben?",true
+"36. BST: Verbundenheit",truth,"{playerName}, wie würdest du {targetPlayerName} mit drei Worten beschreiben, die Verbundenheit ausdrücken?",true
+"36. BST: Verbundenheit",dare,"{playerName}, schreibe eine kurze anonyme Nachricht der Wertschätzung und gib sie an jemanden in der Runde weiter.",false
+"36. BST: Verbundenheit",dare,"{playerName}, starte eine Runde 'Komplimente-Dusche': Jeder sagt der Person links von sich ein nettes Wort.",false
+"36. BST: Verbundenheit",dare,"{playerName}, teile eine persönliche Geschichte darüber, wann du dich besonders verbunden gefühlt hast (max. 1 Minute).",false
+"36. BST: Verbundenheit",dare,"{playerName}, schlage eine kleine Gruppenaktivität vor, die die Verbundenheit stärken könnte (z.B. gemeinsam ein Lied singen).",false
+"36. BST: Verbundenheit",dare,"{playerName}, mache drei Menschen in dieser Runde ein aufrichtiges Kompliment.",false
+"36. BST: Verbundenheit",dare,"{playerName}, zeige eine Geste des Dankes gegenüber der ganzen Gruppe.",false
+"36. BST: Verbundenheit",dare,"{playerName}, finde etwas, das dich mit jeder Person in dieser Runde verbindet (eine Gemeinsamkeit).",false
+"36. BST: Verbundenheit",dare,"{playerName}, umarme drei verschiedene Personen für mindestens 5 Sekunden.",false
+"36. BST: Verbundenheit",dare,"{playerName}, schaue einer Person deiner Wahl für 30 Sekunden in die Augen und lächle sie an (ohne zu reden).",false
+"36. BST: Verbundenheit",dare,"{playerName}, erzähle, was du an dieser BST bisher am meisten geschätzt hast.",false
+"36. BST: Verbundenheit",dare,"{playerName}, schreibe auf einen Zettel, was 'Verbundenheit' für dich bedeutet, und lies es vor.",false
+"36. BST: Verbundenheit",dare,"{playerName}, initiiere einen gemeinsamen Augenblick der Stille für 30 Sekunden, um die Atmosphäre zu spüren.",false
+"36. BST: Verbundenheit",dare,"{playerName}, bedanke dich bei einer Person, die dir während dieser Tagung geholfen oder dich inspiriert hat.",false
+"36. BST: Verbundenheit",dare,"{playerName}, teile eine Hoffnung oder einen Wunsch für die Gemeinschaft dieser Gruppe.",false
+"36. BST: Verbundenheit",dare,"{playerName}, male ein kleines Symbol, das für dich Verbundenheit darstellt, und zeige es.",false
+"36. BST: Verbundenheit",dare,"{playerName}, sage jedem in der Runde, was du an ihm/ihr als Teil dieser Gemeinschaft schätzt.",false
+"36. BST: Verbundenheit",dare,"{playerName}, beginne einen Satz mit 'Ich fühle mich verbunden, wenn...' und vervollständige ihn.",false
+"36. BST: Verbundenheit",dare,"{playerName}, gib der Person rechts von dir ein High-Five und sage etwas Positives über sie.",false
+"36. BST: Verbundenheit",dare,"{playerName}, mache eine kleine Eurythmie-Geste, die 'Zuhören' oder 'Verstehen' ausdrückt.",false
+"36. BST: Verbundenheit",dare,"{playerName}, erzähle von einer Situation, in der du dich von einer Gruppe ausgeschlossen gefühlt hast und was geholfen hätte.",false
+"36. BST: Verbundenheit",dare,"{playerName}, schlage eine kleine, gemeinsame Aktion vor, um jemandem außerhalb der Gruppe eine Freude zu machen.",false
+"36. BST: Verbundenheit",dare,"{playerName}, teile einen positiven Gedanken oder ein Gefühl, das du gerade hast, mit der Gruppe.",false
+"36. BST: Verbundenheit",dare,"{playerName}, lies einen kurzen Text oder ein Gedicht über Freundschaft oder Gemeinschaft vor.",false
+"36. BST: Verbundenheit",dare,"{playerName}, halte kurz die Hand der Person links und rechts von dir und sage 'Schön, dass du da bist'.",false
+"36. BST: Verbundenheit",dare,"{playerName}, zünde (symbolisch oder echt) eine Kerze an für die Verbundenheit in dieser Gruppe.",false
+"36. BST: Verbundenheit",dare,"{playerName}, erstelle einen kurzen 'Verbundenheits-Rap' oder ein Liedchen.",false
+"36. BST: Verbundenheit",dare,"{playerName}, gib jedem in der Runde einen 'Luft-High-Five' mit einem Lächeln.",false
+"36. BST: Verbundenheit",dare,"{playerName}, nenne eine Sache, die du von dieser BST mit nach Hause nehmen wirst, um Verbundenheit zu leben.",false
+"36. BST: Verbundenheit",dare,"{playerName}, schließe für einen Moment die Augen und denke an eine Person, mit der du dich sehr verbunden fühlst. Teile das Gefühl (nicht den Namen).",false
+"36. BST: Verbundenheit",dare,"{playerName}, organisiere eine kurze Runde 'Stille Post' mit einem positiven Wort zum Thema Verbundenheit.",false
+"36. BST: Verbundenheit",dare,"{playerName}, sage {targetPlayerName} aufrichtig, was du an eurer Verbindung schätzt.",true
+"36. BST: Verbundenheit",dare,"{playerName}, gib {targetPlayerName} eine Umarmung, die wirklich von Herzen kommt.",true
+"36. BST: Verbundenheit",dare,"{playerName}, schreibe {targetPlayerName} eine kleine Notiz mit einer positiven Botschaft und gib sie ihm/ihr.",true
+"36. BST: Verbundenheit",dare,"{playerName}, teile eine schöne Erinnerung, die du mit {targetPlayerName} auf dieser BST (oder allgemein) hast.",true
+"36. BST: Verbundenheit",dare,"{playerName}, frage {targetPlayerName}, was du tun kannst, um ihn/sie besser zu unterstützen.",true
+"36. BST: Verbundenheit",dare,"{playerName}, mache mit {targetPlayerName} einen Plan, wie ihr nach der BST in Kontakt bleiben könnt.",true
+"36. BST: Verbundenheit",dare,"{playerName}, erzähle {targetPlayerName}, welche positive Eigenschaft du an ihm/ihr besonders bewunderst.",true
+"36. BST: Verbundenheit",dare,"{playerName}, bedanke dich bei {targetPlayerName} für etwas Bestimmtes, das er/sie getan oder gesagt hat.",true
+"36. BST: Verbundenheit",dare,"{playerName}, schaut euch 15 Sekunden lang an und versucht, die Emotionen des anderen zu 'lesen', dann sprecht darüber.",true
+"36. BST: Verbundenheit",dare,"{playerName}, finde drei Dinge, die dich und {targetPlayerName} verbinden, und teile sie.",true
+"36. BST: Verbundenheit",dare,"{playerName}, male {targetPlayerName} ein kleines Bild, das eure Verbindung symbolisiert.",true
+"36. BST: Verbundenheit",dare,"{playerName}, schenke {targetPlayerName} einen kleinen Gegenstand (z.B. einen Stein, eine Feder) als Symbol eurer Verbundenheit.",true
+"36. BST: Verbundenheit",dare,"{playerName}, singt zusammen mit {targetPlayerName} ein kurzes, bekanntes Lied über Freundschaft.",true
+"36. BST: Verbundenheit",dare,"{playerName}, halte eine kurze Rede (30 Sek.) darüber, warum {targetPlayerName} ein wichtiger Teil dieser Gemeinschaft ist.",true
+"36. BST: Verbundenheit",dare,"{playerName}, erstelle mit {targetPlayerName} einen gemeinsamen 'Verbundenheits-Gruß' (wie einen speziellen Handschlag).",true
