@@ -1,350 +1,160 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
-import Layout from "@/components/Layout";
-import { useRouter, useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
-import {
-  getPlayerById,
-  getRandomQuestion,
-  getAllPlayers,
-  checkDatabaseCompatibility,
-  clearOldDatabase,
-} from "@/lib/db";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Shuffle } from "lucide-react";
+import ThreeBand from "@/components/ThreeBand";
+import FitText from "@/components/FitText";
+import ActionRow from "@/components/ActionRow";
 import DatabaseResetModal from "@/components/DatabaseResetModal";
-import { getRandomTargetPlayer, debugTargetingLogic } from "@/lib/targeting";
+import {
+  GameTask,
+  Player,
+  getAllPlayers,
+  getGameSession,
+  saveGameSession,
+} from "@/lib/db";
+import { renderTemplate } from "@/lib/task";
+import { drawTask, nextPlayerAfter, roundOf } from "@/app/_game/game";
+import { useDbGuard } from "@/app/_game/useDbGuard";
 
-type TaskType = "truth" | "dare";
-
-// Helper functions to manage recent IDs in sessionStorage
-const getRecentIds = (key: string): number[] => {
-  if (typeof window === "undefined") return [];
-  const stored = sessionStorage.getItem(key);
-  return stored ? JSON.parse(stored) : [];
-};
-
-const addRecentId = (key: string, id: number, limit: number = 5) => {
-  if (typeof window === "undefined") return;
-  const ids = getRecentIds(key);
-  const updatedIds = [id, ...ids.filter((i) => i !== id)].slice(0, limit);
-  sessionStorage.setItem(key, JSON.stringify(updatedIds));
-};
-
-// Styles based on Figma data
-const titleTextStyle =
-  "text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)]";
-const taskTextStyle =
-  "text-white font-bold text-xl md:text-2xl lg:text-3xl leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] text-left";
-const weiterButtonStyle =
-  "font-bold text-5xl md:text-6xl lg:text-7xl leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)] text-center";
-
-// Motion props for the Weiter button
-const buttonMotionProps = {
-  whileHover: { scale: 1.05 },
-  whileTap: { scale: 0.95 },
-};
-
-function TaskScreenContent() {
+/** Aufgabe: Frage oben, „Andere Frage“ unten, Weiter = nächste Person. */
+export default function TaskPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const guard = useDbGuard();
 
-  // State management
-  const [taskText, setTaskText] = useState<string>("");
-  const [taskType, setTaskType] = useState<TaskType>("truth");
-  const [isLoading, setIsLoading] = useState(true);
-  const [showResetModal, setShowResetModal] = useState(false);
+  const [players, setPlayers] = useState<Player[]>([]);
+  const [current, setCurrent] = useState<Player | null>(null);
+  const [task, setTask] = useState<GameTask | null>(null);
+  const [packName, setPackName] = useState("");
+  const [turns, setTurns] = useState(0);
+  const [version, setVersion] = useState(0); // animiert eine neue Frage
+  const [toast, setToast] = useState<string | null>(null);
+  const busy = useRef(false);
 
-  // Load task data from URL parameters
   useEffect(() => {
-    async function loadTaskData() {
+    if (!guard.ok) return;
+    let alive = true;
+    (async () => {
       try {
-        // Check database compatibility first
-        const { compatible, needsReset } = await checkDatabaseCompatibility();
-        if (!compatible && needsReset) {
-          // Show reset modal instead of immediate redirect
-          setShowResetModal(true);
-          setIsLoading(false);
+        const list = await getAllPlayers();
+        const s = getGameSession();
+        const cur = list.find((p) => p.id === s.current_player_id);
+        if (!alive) return;
+        if (!s.playing || s.phase !== "task" || !s.task || !cur || list.length < 2) {
+          router.replace("/play");
           return;
         }
-
-        const playerId = searchParams.get("player");
-        const type = searchParams.get("type") as TaskType;
-
-        if (!playerId || !type || (type !== "truth" && type !== "dare")) {
-          console.error("Invalid URL parameters");
-          router.push("/play");
-          return;
-        }
-
-        // Get player details
-        const player = await getPlayerById(parseInt(playerId));
-        if (!player) {
-          console.error("Player not found");
-          router.push("/play");
-          return;
-        }
-
-        // Get all players for targeting
-        const allPlayers = await getAllPlayers();
-
-        // Debug targeting logic (remove this in production)
-        // debugTargetingLogic(allPlayers);
-
-        // Get selected pack name from sessionStorage, fallback to "Entspannt"
-        const selectedPackName =
-          sessionStorage.getItem("selectedPackName") || "Entspannt";
-
-        // Get recent IDs from sessionStorage
-        const recentQuestionIds = getRecentIds("recentQuestionIds");
-        const recentTargetIds = getRecentIds("recentTargetIds");
-
-        // Get random question - try up to 5 times to find a suitable question
-        let question = null;
-        let targetPlayer = null; // Store the target player here
-        let attempts = 0;
-        const maxAttempts = 10; // Increased attempts for better filtering
-
-        while (!question && attempts < maxAttempts) {
-          const candidateQuestion = await getRandomQuestion(
-            selectedPackName,
-            type,
-            recentQuestionIds
-          );
-
-          if (!candidateQuestion) {
-            console.error("No questions found for this type");
-            router.push("/play");
-            return;
-          }
-
-          // Check if question requires targeting
-          if (candidateQuestion.requires_target) {
-            // Get target player, excluding recent ones
-            const candidateTarget = getRandomTargetPlayer(
-              player,
-              allPlayers,
-              recentTargetIds
-            );
-
-            if (candidateTarget) {
-              // We found a valid target, use this question and target
-              question = candidateQuestion;
-              targetPlayer = candidateTarget;
-            } else {
-              // No valid targets, try to find another question
-              attempts++;
-              console.log(
-                `No valid targets for player ${player.name}, attempt ${attempts}/${maxAttempts}`
-              );
-            }
-          } else {
-            // Question doesn't require targeting, we can use it
-            question = candidateQuestion;
-          }
-        }
-
-        if (!question) {
-          console.error(
-            "Could not find a suitable question after multiple attempts. This could be due to too few questions or too restrictive targeting."
-          );
-          // As a fallback, try getting a question without the recents filter
-          question = await getRandomQuestion(selectedPackName, type);
-          if (!question) {
-            // If still no question, then there's a bigger issue
-            router.push("/play");
-            return;
-          }
-        }
-
-        // Add the chosen question to the recent list
-        addRecentId("recentQuestionIds", question.id!);
-
-        // Process the question text
-        let processedText = question.text_template;
-
-        // Replace player name placeholder (make it bold)
-        processedText = processedText.replace(
-          "{playerName}",
-          `<strong style="font-size: 1.1em;">${player.name}</strong>`
-        );
-
-        // Replace target player name if needed
-        if (question.requires_target && targetPlayer) {
-          // Add the chosen target to the recent list
-          addRecentId("recentTargetIds", targetPlayer.id!);
-
-          processedText = processedText.replace(
-            "{targetPlayerName}",
-            `<strong style="font-size: 1.1em;">${targetPlayer.name}</strong>`
-          );
-        } else if (question.requires_target) {
-          // This case handles where a question requires a target, but none could be found.
-          // We should either show a generic message or have fallback questions.
-          // For now, let's just indicate a target was needed.
-          processedText = processedText.replace(
-            "{targetPlayerName}",
-            "(niemand)"
-          );
-          console.warn(
-            "Question requires a target, but no valid target was found."
-          );
-        }
-
-        setTaskType(type);
-        setTaskText(processedText);
-        setIsLoading(false);
+        setPlayers(list);
+        setCurrent(cur);
+        setTask(s.task);
+        setPackName(s.pack_name);
+        setTurns(s.turns_played);
       } catch (error) {
-        console.error("Error loading task data:", error);
-        router.push("/play");
+        console.error("Error loading task:", error);
+        router.replace("/play");
       }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [guard.ok, router]);
+
+  const reroll = useCallback(async () => {
+    if (!current || !task || busy.current) return;
+    busy.current = true;
+    try {
+      const next = await drawTask(current, players, packName, task.type);
+      if (next) {
+        saveGameSession({ task: next });
+        setTask(next);
+        setVersion((v) => v + 1);
+      } else {
+        setToast("Keine weitere Frage");
+        setTimeout(() => setToast(null), 1700);
+      }
+    } finally {
+      busy.current = false;
     }
+  }, [current, task, players, packName]);
 
-    loadTaskData();
-  }, [searchParams, router]);
-
-  // Handle continue button click
-  const handleContinue = () => {
+  const next = () => {
+    if (!current) return;
+    const following = nextPlayerAfter(players, current.id ?? null);
+    saveGameSession({
+      current_player_id: following?.id ?? null,
+      turns_played: turns + 1,
+      phase: "reveal",
+      task: null,
+    });
     router.push("/play");
   };
 
-  // Handle reset modal confirmation
-  const handleResetConfirm = async () => {
-    try {
-      await clearOldDatabase();
-      setShowResetModal(false);
-      router.push("/setup/players?skip_continue=true");
-    } catch (error) {
-      console.error("Error clearing database:", error);
-      // Redirect anyway to avoid infinite loop
-      router.push("/setup/players?skip_continue=true");
-    }
-  };
-
-  if (isLoading) {
-    return (
-      <Layout mainClassName="p-0 flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-white font-bold text-3xl text-center"
-        >
-          Lade...
-        </motion.div>
-      </Layout>
-    );
-  }
-
-  // Top section content - either title or empty
-  const topContent = (
-    <div className="w-full h-full flex flex-col items-start justify-start px-4 pt-8">
-      {taskType === "truth" ? (
-        <>
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className={`${titleTextStyle} mb-8 px-4`}
-          >
-            Wahrheit
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.7 }}
-            className={`${taskTextStyle} px-4`}
-            dangerouslySetInnerHTML={{ __html: taskText }}
-          />
-        </>
-      ) : (
-        // Empty for dare - just show inactive/greyed out background
-        <div className="w-full h-full" />
-      )}
-    </div>
-  );
-
-  // Bottom section content - either task or empty
-  const bottomContent = (
-    <div className="w-full h-full flex flex-col items-start justify-start px-4 pt-8">
-      {taskType === "dare" ? (
-        <>
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className={`${titleTextStyle} text-[#0F0F1B] mb-8 px-4`}
-          >
-            Pflicht
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.7 }}
-            className={`${taskTextStyle} text-[#0F0F1B] px-4`}
-            dangerouslySetInnerHTML={{ __html: taskText }}
-          />
-        </>
-      ) : (
-        // Empty for truth - just show inactive/greyed out background
-        <div className="w-full h-full" />
-      )}
-    </div>
-  );
-
-  // Weiter text in middle section
-  const weiterText = (
-    <motion.div
-      onClick={handleContinue}
-      className="cursor-pointer w-full h-full flex items-center justify-center"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.5, duration: 0.5 }}
-      {...buttonMotionProps}
-    >
-      <span
-        className={`${weiterButtonStyle} ${
-          taskType === "truth" ? "text-[#FF005C]" : "text-[#00FFC6]"
-        }`}
-      >
-        Weiter
-      </span>
-    </motion.div>
-  );
+  const target = task?.target_player_id
+    ? players.find((p) => p.id === task.target_player_id)
+    : undefined;
+  const parts =
+    current && task
+      ? renderTemplate(task.text_template, current.name, target?.name)
+      : [];
+  const length = parts.reduce((n, p) => n + p.text.length, 0);
 
   return (
     <>
-      <Layout
-        topSectionContent={topContent}
-        bottomSectionContent={bottomContent}
-        mainClassName="p-0 flex items-center justify-center"
-      >
-        {weiterText}
-      </Layout>
-
-      {/* Database Reset Modal */}
+      <ThreeBand
+        screen="task"
+        back={{ label: "Pause", icon: "pause", href: "/pause" }}
+        title={current?.name ?? ""}
+        toast={toast}
+        top={
+          task ? (
+            <div className="sd-q" data-slot="content">
+              <div className="sd-grp" style={{ alignItems: "stretch" }}>
+                <FitText className="sd-q-lab sd-sh">
+                  {task.type === "truth" ? "Wahrheit" : "Pflicht"}
+                </FitText>
+                <div
+                  key={version}
+                  className={`sd-q-txt sd-sh${length > 110 ? " is-long" : ""}${
+                    version > 0 ? " sd-swap" : ""
+                  }`}
+                >
+                  {parts.map((p, i) =>
+                    p.kind === "text" ? (
+                      <React.Fragment key={i}>{p.text}</React.Fragment>
+                    ) : p.kind === "player" ? (
+                      <b key={i}>{p.text}</b>
+                    ) : (
+                      <b key={i}>
+                        <u>{p.text}</u>
+                      </b>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="sd-q" />
+          )
+        }
+        bottom={
+          <div className="sd-inner is-center">
+            <ActionRow
+              icon={<Shuffle strokeWidth={2.2} aria-hidden />}
+              label="Andere Frage"
+              onClick={reroll}
+            />
+            <div className="sd-hint" style={{ paddingLeft: 4 }}>
+              {packName} · Runde {roundOf(turns, players.length)}
+            </div>
+          </div>
+        }
+        next={{ label: "Weiter", onClick: next, disabled: !task }}
+      />
       <DatabaseResetModal
-        isOpen={showResetModal}
-        onConfirm={handleResetConfirm}
+        isOpen={guard.needsReset}
+        onConfirm={guard.confirmReset}
       />
     </>
-  );
-}
-
-export default function TaskScreen() {
-  return (
-    <Suspense
-      fallback={
-        <Layout mainClassName="p-0 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-white font-bold text-3xl text-center"
-          >
-            Lade...
-          </motion.div>
-        </Layout>
-      }
-    >
-      <TaskScreenContent />
-    </Suspense>
   );
 }

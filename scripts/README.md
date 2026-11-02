@@ -2,6 +2,25 @@
 
 This directory contains utility scripts for the SagDoch Truth or Dare app.
 
+## Inhalt (Fragen und Packs): ein Ablauf, eine Quelle
+
+`data/packs.csv` und `data/questions.csv` sind die einzige Quelle. Nichts anderes von Hand pflegen.
+
+```
+data/*.csv ──(scripts/content.ts)──► public/data/content.json  (generiert, nicht im Git)
+                                  └─► NEXT_PUBLIC_CONTENT_VERSION im JS-Bundle
+```
+
+- `next dev` und `next build` erzeugen `content.json` automatisch (siehe `next.config.ts`) und brechen bei
+  Inhaltsfehlern ab (unbekanntes Pack, kaputter Platzhalter, Pack ohne Fragen). Auffälligkeiten ohne Abbruch
+  werden als Warnung gemeldet.
+- `pnpm content` schreibt `content.json` von Hand, `pnpm content:check` prüft nur.
+- Die Version ist ein Hash über den Inhalt. Ändert sich eine Frage, laden bestehende Nutzer sie beim
+  nächsten Start automatisch nach, **ohne** `DB_VERSION` in `lib/db.ts` zu erhöhen. `DB_VERSION` ist nur
+  noch für Schema-Änderungen (Stores/Indizes) da.
+- Unveränderte Fragen behalten ihre numerische `id` beim Update, geänderte oder neue bekommen eine neue.
+- `pnpm test:task` testet die Auswahl (Zielperson, keine Wiederholungen, Platzhalter) gegen den echten Inhalt.
+
 ## generateQuestions.ts
 
 AI-powered question generation using Google's Gemini API to create new questions for existing packs.

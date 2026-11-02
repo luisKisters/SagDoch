@@ -1,8 +1,18 @@
 import { openDB, DBSchema, IDBPDatabase } from "idb";
-import Papa from "papaparse";
+import type { Content } from "../scripts/content";
 
 const DB_NAME = "truthOrDareDB";
-const DB_VERSION = 5;
+const DB_VERSION = 7;
+
+/**
+ * Version des mitgelieferten Inhalts (Fragen + Packs). Wird beim Build aus data/*.csv berechnet
+ * (siehe next.config.ts und scripts/content.ts) und in den Bundle eingebrannt.
+ * Weicht sie von der in IndexedDB gespeicherten Version ab, wird der Inhalt beim Start
+ * automatisch nachgeladen. `DB_VERSION` muss dafür NICHT erhöht werden,
+ * sie ist nur noch für Schema-Änderungen (Stores/Indizes).
+ */
+const CONTENT_VERSION = process.env.NEXT_PUBLIC_CONTENT_VERSION ?? "";
+const CONTENT_URL = "/data/content.json";
 
 // Function to check if we need to redirect due to old DB version
 export async function checkDatabaseCompatibility(): Promise<{
@@ -19,8 +29,9 @@ export async function checkDatabaseCompatibility(): Promise<{
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => resolve(null);
       request.onupgradeneeded = () => {
-        // Close the connection if upgrade is needed
-        request.result.close();
+        // Die DB existiert noch nicht. Abbrechen, damit hier keine leere v1-DB entsteht
+        // (sonst würde initDB() später ab Version 1 upgraden und die Basis-Stores überspringen).
+        request.transaction?.abort();
         resolve(null);
       };
     });
@@ -72,7 +83,9 @@ export interface Player {
 }
 
 export interface Question {
-  id?: number; // Auto-incremented
+  id?: number; // Auto-incremented, bleibt für unveränderte Fragen über Inhalts-Updates stabil
+  uid?: string; // Inhaltsstabile ID (Hash), aus content.json
+
   pack_name: string;
   type: "truth" | "dare";
   text_template: string;
@@ -122,82 +135,13 @@ interface TruthOrDareDBSchema extends DBSchema {
     key: string;
     value: UserProfile;
   };
+  meta: {
+    key: string;
+    value: { key: string; contentVersion: string; updatedAt: number };
+  };
 }
 
-// CSV Loading Functions
-async function loadQuestionsFromCSV(): Promise<Omit<Question, "id">[]> {
-  try {
-    const response = await fetch("/data/questions.csv");
-    const csvText = await response.text();
-
-    return new Promise((resolve, reject) => {
-      Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-          try {
-            const questions = results.data.map((row: any) => ({
-              pack_name: row.pack_name,
-              type: row.type as "truth" | "dare",
-              text_template: row.text_template,
-              requires_target: row.requires_target === "true",
-            }));
-            resolve(questions);
-          } catch (error) {
-            reject(error);
-          }
-        },
-        error: (error: any) => {
-          reject(error);
-        },
-      });
-    });
-  } catch (error) {
-    console.error("Error loading questions from CSV:", error);
-    // Return empty array as fallback
-    return [];
-  }
-}
-
-async function loadPacksFromCSV(): Promise<Pack[]> {
-  try {
-    const response = await fetch("/data/packs.csv");
-    const csvText = await response.text();
-
-    return new Promise((resolve, reject) => {
-      Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-          try {
-            const packs = results.data.map((row: any) => ({
-              id: row.id,
-              name: row.name,
-              description: row.description,
-              is_18_plus: row.is_18_plus === "true",
-              type: row.type as "truth_and_dare" | "only_truth" | "only_dare",
-              is_locked: row.is_locked === "true",
-              is_hidden: row.is_hidden === "true",
-              cost_in_ads: parseInt(row.cost_in_ads) || 0,
-            }));
-            resolve(packs);
-          } catch (error) {
-            reject(error);
-          }
-        },
-        error: (error: any) => {
-          reject(error);
-        },
-      });
-    });
-  } catch (error) {
-    console.error("Error loading packs from CSV:", error);
-    // Return empty array as fallback
-    return [];
-  }
-}
-
-// Fallback data in case CSV loading fails
+// Standard-Profil für neue Nutzer
 const defaultUserProfile: UserProfile = {
   id: "local_user_profile",
   promo_code_activated: false,
@@ -309,6 +253,21 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
               "V5 upgrade completed: Pack and question cache cleared for fresh CSV loading."
             );
           }
+
+          if (oldVersion < 7) {
+            // V7: Inhalts-Updates laufen jetzt über CONTENT_VERSION (meta-Store).
+            // Fragen ohne uid werden einmalig verworfen und neu geladen.
+            // Spieler und Nutzerprofil bleiben unangetastet.
+            db.createObjectStore("meta", { keyPath: "key" });
+            // Nur "pack_type" wird abgefragt. Die beiden Einzel-Indizes kosten bei jedem
+            // Schreiben einer Frage Zeit (Import beim ersten Start), ohne je gelesen zu werden.
+            const qStore = transaction.objectStore("questions");
+            for (const name of ["pack_name", "type"] as const) {
+              if (qStore.indexNames.contains(name)) qStore.deleteIndex(name);
+            }
+            transaction.objectStore("packs").clear();
+            transaction.objectStore("questions").clear();
+          }
         } catch (upgradeError) {
           console.error("Error during database upgrade:", upgradeError);
           throw upgradeError;
@@ -317,8 +276,15 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
       blocked() {
         console.warn("Database upgrade blocked by another connection");
       },
-      blocking() {
-        console.warn("Database connection is blocking another upgrade");
+      blocking(_current, _blocked, event) {
+        // Ein anderer Tab will auf eine neuere DB-Version. Verbindung freigeben,
+        // sonst hängt dessen Upgrade für immer. Der nächste getDB()-Aufruf öffnet neu.
+        console.warn("Database connection is blocking another upgrade, closing");
+        (event.target as IDBDatabase | null)?.close();
+        dbPromise = null;
+      },
+      terminated() {
+        dbPromise = null;
       },
     });
 
@@ -330,66 +296,103 @@ async function initDB(): Promise<IDBPDatabase<TruthOrDareDBSchema>> {
   }
 }
 
-// Post-initialization data loading
-async function loadInitialData(
+// ---------------------------------------------------------------------------
+// Inhalt (Fragen + Packs) synchronisieren
+// ---------------------------------------------------------------------------
+
+async function fetchContent(): Promise<Content> {
+  const response = await fetch(CONTENT_URL);
+  if (!response.ok) {
+    throw new Error(`${CONTENT_URL}: HTTP ${response.status}`);
+  }
+  const content = (await response.json()) as Content;
+  if (!content?.version || !Array.isArray(content.questions) || !Array.isArray(content.packs)) {
+    throw new Error(`${CONTENT_URL}: unerwartetes Format`);
+  }
+  return content;
+}
+
+/**
+ * Bringt Fragen und Packs in IndexedDB auf den Stand von content.json.
+ *
+ * - Schneller Pfad: Gespeicherte Version == CONTENT_VERSION des Bundles -> kein Netzwerk, nur ein Lesezugriff.
+ * - Sonst: content.json holen (kommt per Service Worker auch offline aus dem Precache),
+ *   Differenz anwenden: unveränderte Fragen behalten ihre numerische id (damit "zuletzt gestellt" stabil
+ *   bleibt), neue kommen dazu, entfernte fallen weg. Alles in EINER Transaktion, auch bei parallelen Tabs.
+ * - Ist das Netz weg und die DB schon gefüllt, wird der vorhandene Stand weiterbenutzt.
+ */
+async function syncContent(
+  db: IDBPDatabase<TruthOrDareDBSchema>
+): Promise<"current" | "updated" | "stale"> {
+  const readState = async () => {
+    const tx = db.transaction(["meta", "questions", "packs"], "readonly");
+    const [meta, questions, packs] = await Promise.all([
+      tx.objectStore("meta").get("content"),
+      tx.objectStore("questions").count(),
+      tx.objectStore("packs").count(),
+    ]);
+    return { version: meta?.contentVersion, filled: questions > 0 && packs > 0 };
+  };
+
+  const state = await readState();
+  if (state.filled && CONTENT_VERSION && state.version === CONTENT_VERSION) {
+    return "current";
+  }
+
+  let content: Content;
+  try {
+    content = await fetchContent();
+  } catch (error) {
+    if (state.filled) {
+      console.warn("Inhalt konnte nicht aktualisiert werden, nutze vorhandenen Stand:", error);
+      return "stale";
+    }
+    throw error; // leere DB und kein Inhalt: Aufrufer muss es sehen, nächster getDB() versucht es erneut
+  }
+  if (state.filled && state.version === content.version) return "current";
+
+  const tx = db.transaction(["questions", "packs", "meta"], "readwrite");
+  const questionStore = tx.objectStore("questions");
+  const packStore = tx.objectStore("packs");
+
+  // Fragen: per uid abgleichen. Alle Requests laufen parallel in der Transaktion.
+  const wanted = new Set(content.questions.map((q) => q.uid));
+  const have = new Set<string>();
+  for (const existing of await questionStore.getAll()) {
+    if (existing.uid && wanted.has(existing.uid) && !have.has(existing.uid)) {
+      have.add(existing.uid);
+    } else {
+      questionStore.delete(existing.id!); // veraltet, ohne uid oder Dublette
+    }
+  }
+  for (const q of content.questions) {
+    if (!have.has(q.uid)) questionStore.add({ ...q });
+  }
+
+  // Packs: stabile String-IDs, einfach überschreiben und Entfernte löschen.
+  const packIds = new Set(content.packs.map((p) => p.id));
+  for (const key of await packStore.getAllKeys()) {
+    if (!packIds.has(key)) packStore.delete(key);
+  }
+  for (const pack of content.packs) packStore.put(pack);
+
+  tx.objectStore("meta").put({
+    key: "content",
+    contentVersion: content.version,
+    updatedAt: Date.now(),
+  });
+  await tx.done;
+  console.log(
+    `Inhalt ${state.version ?? "(leer)"} -> ${content.version}: ${content.questions.length} Fragen, ${content.packs.length} Packs`
+  );
+  return "updated";
+}
+
+async function ensureUserProfile(
   db: IDBPDatabase<TruthOrDareDBSchema>
 ): Promise<void> {
-  try {
-    // Load data from CSV files and populate database if empty
-    const questionCount = await db.count("questions");
-    if (questionCount === 0) {
-      console.log("No questions found, loading from CSV...");
-      try {
-        const questions = await loadQuestionsFromCSV();
-        if (questions.length > 0) {
-          const tx = db.transaction("questions", "readwrite");
-          const store = tx.objectStore("questions");
-          for (const question of questions) {
-            await store.add(question as Question);
-          }
-          await tx.done;
-          console.log(`Loaded ${questions.length} questions from CSV.`);
-        } else {
-          console.warn("No questions loaded from CSV file.");
-        }
-      } catch (error) {
-        console.error("Error loading questions from CSV:", error);
-      }
-    }
-
-    const packCount = await db.count("packs");
-    if (packCount === 0) {
-      console.log("No packs found, loading from CSV...");
-      try {
-        const packs = await loadPacksFromCSV();
-        if (packs.length > 0) {
-          const tx = db.transaction("packs", "readwrite");
-          const store = tx.objectStore("packs");
-          for (const pack of packs) {
-            await store.add(pack);
-          }
-          await tx.done;
-          console.log(`Loaded ${packs.length} packs from CSV.`);
-        } else {
-          console.warn("No packs loaded from CSV file.");
-        }
-      } catch (error) {
-        console.error("Error loading packs from CSV:", error);
-      }
-    }
-
-    const profileCount = await db.count("user_profile");
-    if (profileCount === 0) {
-      console.log("No user profile found, creating default profile...");
-      const tx = db.transaction("user_profile", "readwrite");
-      const store = tx.objectStore("user_profile");
-      await store.add(defaultUserProfile);
-      await tx.done;
-      console.log("Default user profile created.");
-    }
-  } catch (error) {
-    console.error("Error during initial data loading:", error);
-    throw error;
+  if ((await db.count("user_profile")) === 0) {
+    await db.add("user_profile", defaultUserProfile);
   }
 }
 
@@ -397,9 +400,12 @@ async function loadInitialData(
 async function initializeDatabase(): Promise<
   IDBPDatabase<TruthOrDareDBSchema>
 > {
+  const t0 = performance.now();
   try {
     const db = await initDB();
-    await loadInitialData(db);
+    const [result] = await Promise.all([syncContent(db), ensureUserProfile(db)]);
+    // Sichtbar im Performance-Panel: "sagdoch:db-init" mit Ergebnis im detail.
+    performance.measure("sagdoch:db-init", { start: t0, detail: { result } });
     return db;
   } catch (error) {
     console.error("Database initialization failed:", error);
@@ -407,13 +413,29 @@ async function initializeDatabase(): Promise<
   }
 }
 
-// Export a promise that resolves to the database instance
-// This ensures the DB is initialized only once
-const dbPromise = initializeDatabase();
+// Die DB wird erst im Browser und genau einmal geöffnet (nicht beim Import, damit der
+// Server-Prerender nicht über "IndexedDB is not available" stolpert). Scheitert die
+// Initialisierung (z. B. erster Start offline ohne Cache), versucht der nächste getDB()-Aufruf es neu.
+let dbPromise: Promise<IDBPDatabase<TruthOrDareDBSchema>> | null = null;
 
-export const getDB = async () => {
+export const getDB = (): Promise<IDBPDatabase<TruthOrDareDBSchema>> => {
+  if (!dbPromise) {
+    const attempt = initializeDatabase();
+    dbPromise = attempt;
+    attempt.catch(() => {
+      if (dbPromise === attempt) dbPromise = null;
+    });
+  }
   return dbPromise;
 };
+
+/** Startet das Öffnen/Synchronisieren der DB im Hintergrund, z. B. schon auf dem Startscreen. */
+export function warmUpDatabase(): void {
+  if (typeof window !== "undefined") getDB().catch(() => {});
+}
+
+// Wie bisher: im Browser sofort beim ersten Import starten.
+warmUpDatabase();
 
 // CRUD Functions
 
@@ -512,7 +534,19 @@ export async function deleteAllPlayers(): Promise<void> {
 }
 
 /**
+ * Alle Fragen eines Packs für einen Typ (ein Index-Zugriff, ca. 50 Datensätze).
+ */
+export async function getQuestionsForPack(
+  packName: string,
+  type: "truth" | "dare"
+): Promise<Question[]> {
+  const db = await getDB();
+  return db.getAllFromIndex("questions", "pack_type", [packName, type]);
+}
+
+/**
  * Retrieves a random question of a specific type from a specific pack.
+ * Für das Spiel gibt es `getNextTask` in lib/task.ts (berücksichtigt Zielperson und "zuletzt gestellt").
  * @param packName The name of the question pack (e.g., "Default Pack").
  * @param type The type of question ("truth" or "dare").
  * @param recentQuestionIds An array of recently used question IDs to filter out
@@ -523,12 +557,7 @@ export async function getRandomQuestion(
   type: "truth" | "dare",
   recentQuestionIds: number[] = []
 ): Promise<Question | undefined> {
-  const db = await getDB();
-  // Use the 'pack_type' index to get all questions for the given pack and type
-  const allQuestions = await db.getAllFromIndex("questions", "pack_type", [
-    packName,
-    type,
-  ]);
+  const allQuestions = await getQuestionsForPack(packName, type);
   if (allQuestions.length === 0) {
     return undefined;
   }
@@ -671,4 +700,93 @@ export async function debugDatabaseHealth(): Promise<void> {
   } catch (error) {
     console.error("Database health check failed:", error);
   }
+}
+
+// ---------------------------------------------------------------------------
+// Spielstand (Pause / Fortsetzen)
+//
+// Bewusst in localStorage statt in einem neuen IndexedDB-Store: kein Schema-
+// Update nötig, synchron lesbar und unabhängig vom Laden der Fragen/Packs.
+// Die Spieler:innen selbst liegen weiter in IndexedDB (siehe oben).
+// ---------------------------------------------------------------------------
+
+export type GamePhase = "reveal" | "choice" | "task";
+
+export interface GameTask {
+  type: "truth" | "dare";
+  text_template: string;
+  requires_target: boolean;
+  target_player_id: number | null;
+}
+
+export interface GameSession {
+  /** true ab "Los", false solange nur Spieler/Pack eingerichtet werden */
+  playing: boolean;
+  pack_name: string;
+  current_player_id: number | null;
+  /** Anzahl abgeschlossener Züge; Runde = floor(turns / Spieleranzahl) + 1 */
+  turns_played: number;
+  phase: GamePhase;
+  task: GameTask | null;
+  updated_at: number;
+}
+
+const GAME_SESSION_KEY = "sagdoch.game.v1";
+
+const EMPTY_GAME_SESSION: GameSession = {
+  playing: false,
+  pack_name: "",
+  current_player_id: null,
+  turns_played: 0,
+  phase: "reveal",
+  task: null,
+  updated_at: 0,
+};
+
+/** Liest den gespeicherten Spielstand (oder einen leeren). SSR-sicher. */
+export function getGameSession(): GameSession {
+  if (typeof window === "undefined") return { ...EMPTY_GAME_SESSION };
+  try {
+    const raw = window.localStorage.getItem(GAME_SESSION_KEY);
+    if (!raw) return { ...EMPTY_GAME_SESSION };
+    return { ...EMPTY_GAME_SESSION, ...JSON.parse(raw) } as GameSession;
+  } catch {
+    return { ...EMPTY_GAME_SESSION };
+  }
+}
+
+/** Mergt `patch` in den Spielstand, speichert und gibt ihn zurück. */
+export function saveGameSession(patch: Partial<GameSession>): GameSession {
+  const next: GameSession = {
+    ...getGameSession(),
+    ...patch,
+    updated_at: Date.now(),
+  };
+  if (typeof window !== "undefined") {
+    try {
+      window.localStorage.setItem(GAME_SESSION_KEY, JSON.stringify(next));
+    } catch (error) {
+      console.error("Could not save game session:", error);
+    }
+  }
+  return next;
+}
+
+/** Beendet das Spiel. Die Spieler:innen bleiben erhalten, die Pack-Wahl auch. */
+export function endGameSession(): GameSession {
+  const { pack_name } = getGameSession();
+  if (typeof window !== "undefined") {
+    try {
+      window.localStorage.removeItem(GAME_SESSION_KEY);
+    } catch {
+      /* ignore */
+    }
+  }
+  return saveGameSession({ ...EMPTY_GAME_SESSION, pack_name });
+}
+
+/** Ob ein laufendes Spiel gespeichert ist, das fortgesetzt werden kann. */
+export function hasResumableGame(): boolean {
+  const s = getGameSession();
+  return s.playing && s.current_player_id !== null;
 }

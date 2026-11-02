@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:turbopack": "next dev --turbopack",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "content": "tsx scripts/build-content.ts",
+    "content:check": "tsx scripts/build-content.ts --check",
+    "test:task": "tsx scripts/test-task.ts",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint"
   },

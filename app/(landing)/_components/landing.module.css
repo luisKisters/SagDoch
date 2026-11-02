@@ -1,0 +1,220 @@
+/* Landingpage: gleiche drei Bänder wie die App (Pink, Nacht, Mint),
+   Farbflächen über die ganze Breite, Inhalt in einer Spalte von max. 560 px. */
+
+.page {
+  --pink: #ff005c;
+  --night: #0f0f1b;
+  --mint: #00ffc6;
+  --col: 560px;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--night);
+  color: #fff;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* In Modulen nur mit lokaler Klasse davor erlaubt */
+.page :where(h1, h2, h3, p) { margin: 0; }
+.page :where(h1, h2, h3) { font-weight: 700; }
+
+.band {
+  width: 100%;
+  padding: 44px 0;
+}
+.pink { background: var(--pink); color: #fff; }
+.night { background: var(--night); color: #fff; }
+.mint { background: var(--mint); color: var(--night); }
+
+.col {
+  width: 100%;
+  max-width: var(--col);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Erster Screen auf dem Handy = Pink + Nachtband mit Knopf, Mint schaut darunter hervor. */
+.hero {
+  flex: 1 0 auto;
+  min-height: calc(100svh - 150px);
+  display: flex;
+  align-items: center;
+  padding-top: max(44px, env(safe-area-inset-top));
+}
+.cta {
+  padding: 24px 0 28px;
+}
+.ctaNote {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8e8e99;
+}
+
+
+.h1 {
+  font-size: clamp(44px, 13vw, 72px);
+  line-height: 1.05;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.28);
+}
+.lead {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 600;
+  opacity: 0.92;
+}
+.h2 {
+  font-size: clamp(26px, 7vw, 34px);
+  line-height: 1.15;
+}
+.sectionNote {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.55;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Beispielaufgabe, so wie sie in der App oben steht */
+.sample {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.sampleLabel {
+  font-size: 26px;
+  line-height: 1.1;
+  font-weight: 700;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.28);
+}
+.sampleText {
+  margin-top: 8px;
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.sampleText b { font-weight: 800; }
+.sampleText u { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+/* Knopf wie „Weiter“, nur größer */
+.play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  height: 76px;
+  border-radius: 20px;
+  background: var(--pink);
+  color: #fff;
+  font-size: 26px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+  transition: transform 0.12s, box-shadow 0.12s;
+  -webkit-tap-highlight-color: transparent;
+}
+.play svg { width: 28px; height: 28px; flex: none; transition: transform 0.2s; }
+.play:hover svg { transform: translateX(4px); }
+.play:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
+.play:focus-visible { outline: 3px solid var(--mint); outline-offset: 4px; }
+
+/* Zeilen wie die Nebenaktionen in der App */
+.rows {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 60px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
+}
+.row svg { width: 22px; height: 22px; flex: none; }
+.rowDark { background: var(--night); color: var(--mint); }
+.rowGlass { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.row small { display: block; margin-top: 2px; font-size: 13px; font-weight: 600; opacity: 0.75; }
+
+/* Packs: weiße Karten, Pink als Schrift, wie die Spielerliste */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.cardName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--pink);
+}
+.cardText {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: #4a4a56;
+}
+.pill {
+  display: inline-flex;
+  padding: 3px 8px;
+  border-radius: 7px;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: #ffe1ea;
+  color: #b00030;
+  letter-spacing: 0;
+}
+
+.steps {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.step b { display: block; }
+
+.footer {
+  padding: 26px 0 max(26px, env(safe-area-inset-bottom));
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  background: var(--mint);
+  color: var(--night);
+  opacity: 1;
+}
+
+/* Bewegung: kurzes Einblenden, wie die Screens in der App */
+@keyframes pop {
+  from { opacity: 0; transform: translateY(12px); }
+}
+.enter > * { animation: pop 0.32s ease-out both; }
+.enter > *:nth-child(2) { animation-delay: 0.06s; }
+.enter > *:nth-child(3) { animation-delay: 0.12s; }
+
+@media (min-width: 900px) {
+  .band { padding: 64px 0; }
+  .band.cta { padding: 24px 0 28px; }
+  .hero { min-height: calc(100svh - 150px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page, .page * { animation: none !important; transition: none !important; }
+}

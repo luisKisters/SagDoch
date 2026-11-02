@@ -51,6 +51,11 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#0F0F1B",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  // Die Tastatur legt sich über den Inhalt, nichts springt (siehe LOCKED.md)
+  interactiveWidget: "overlays-content",
 };
 
 export default function RootLayout({
@@ -66,7 +71,7 @@ export default function RootLayout({
           content="pwT4xGmw1yQ0vLmlGRXKJVgSY8YKM3zydN1sSofkZ8g"
         />
       </head>
-      <body className={`${orbitron.variable} font-sans antialiased`}>
+      <body className={orbitron.variable}>
         {children}
         <Analytics />
       </body>

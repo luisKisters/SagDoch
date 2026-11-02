@@ -43,3 +43,6 @@ next-env.d.ts
 # Serwist
 public/sw*
 public/swe-worker*
+
+# Generierter Inhalt (Quelle: data/*.csv, siehe scripts/content.ts)
+public/data/

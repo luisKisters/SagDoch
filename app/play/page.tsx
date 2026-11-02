@@ -1,239 +1,356 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Layout from "@/components/Layout";
-import BackButton from "@/components/BackButton";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  getAllPlayers,
-  Player,
-  checkDatabaseCompatibility,
-  clearOldDatabase,
-} from "@/lib/db";
+import ThreeBand from "@/components/ThreeBand";
+import FitText from "@/components/FitText";
 import DatabaseResetModal from "@/components/DatabaseResetModal";
+import {
+  Pack,
+  Player,
+  getAllPacks,
+  getAllPlayers,
+  getGameSession,
+  saveGameSession,
+} from "@/lib/db";
+import { TaskType, drawTask, typesFor } from "@/app/_game/game";
+import { useDbGuard } from "@/app/_game/useDbGuard";
 
-type GameState = "rolling" | "choice_pending";
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Styles based on Figma data - matching the design
-const choiceTextStyle =
-  "text-white font-bold text-6xl md:text-8xl lg:text-9xl text-center leading-tight drop-shadow-[0_4px_4px_rgba(0,0,0,0.4)]";
-const playerNameStyle =
-  "text-white font-bold text-5xl md:text-7xl lg:text-8xl text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]";
-
-// Motion props for interactive areas
-const interactiveMotionProps = {
-  whileHover: { scale: 1.05, opacity: 0.95 },
-  whileTap: { scale: 0.95 },
-};
-
-const interactiveClassName =
-  "w-full h-full flex flex-col items-center justify-center cursor-pointer";
-
-export default function PlayScreen() {
+/** Wer ist dran → Wahrheit oder Pflicht (oder Zufall). */
+export default function PlayPage() {
   const router = useRouter();
+  const guard = useDbGuard();
 
-  // State management
-  const [allPlayers, setAllPlayers] = useState<Player[]>([]);
-  const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
-  const [gameState, setGameState] = useState<GameState>("rolling");
-  const [rollingIndex, setRollingIndex] = useState(0);
-  const [showResetModal, setShowResetModal] = useState(false);
+  const [players, setPlayers] = useState<Player[]>([]);
+  const [current, setCurrent] = useState<Player | null>(null);
+  const [pack, setPack] = useState<Pack | undefined>();
+  const [ready, setReady] = useState(false);
+  const [revealing, setRevealing] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+  const busy = useRef(false);
 
-  // Load players from IndexedDB on mount
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const nameRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
+  const optRefs = useRef<(HTMLButtonElement | null)[]>([null, null]);
+  const [hold, setHold] = useState(true);
+  const toastTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const showToast = useCallback((text: string) => {
+    setToast(text);
+    clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setToast(null), 1900);
+  }, []);
+  useEffect(() => () => clearTimeout(toastTimer.current), []);
+
+  // ---- Laden + Spielstand prüfen ----
   useEffect(() => {
-    // Only run on client side
-    if (typeof window === "undefined") return;
-
-    async function loadPlayers() {
+    if (!guard.ok) return;
+    let alive = true;
+    (async () => {
       try {
-        // Check database compatibility first
-        const { compatible, needsReset } = await checkDatabaseCompatibility();
-        if (!compatible && needsReset) {
-          // Show reset modal instead of immediate redirect
-          setShowResetModal(true);
+        const list = await getAllPlayers();
+        const session = getGameSession();
+        if (!alive) return;
+        if (!session.playing || list.length < 2) {
+          router.replace("/setup/players");
           return;
         }
-
-        const players = await getAllPlayers();
-        if (players.length < 2) {
-          // Redirect to setup if insufficient players
-          router.push("/setup/players?skip_continue=true");
+        if (session.phase === "task" && session.task) {
+          router.replace("/game/task");
           return;
         }
-        setAllPlayers(players);
-        startPlayerSelection(players);
+        let cur = list.find((p) => p.id === session.current_player_id);
+        let phase = session.phase;
+        if (!cur) {
+          cur = list[0];
+          phase = "reveal";
+          saveGameSession({ current_player_id: cur.id ?? null, phase });
+        }
+        const packs = await getAllPacks(true).catch(() => [] as Pack[]);
+        if (!alive) return;
+        setPack(packs.find((p) => p.name === session.pack_name));
+        setPlayers(list);
+        setCurrent(cur);
+        if (phase === "reveal") setRevealing(true);
+        else setHold(false);
+        setReady(true);
       } catch (error) {
-        console.error("Error loading players:", error);
-        router.push("/setup/players?skip_continue=true");
+        console.error("Error loading game:", error);
+        router.replace("/setup/players");
       }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [guard.ok, router]);
+
+  // ---- Wer ist dran: Namen rollen durch, rasten ein, fliegen in den Titel ----
+  useLayoutEffect(() => {
+    // eine Schriftgröße für alle Namen, damit beim Rollen nichts springt
+    const el = nameRef.current;
+    if (!revealing || !el || players.length === 0) return;
+    const keep = el.textContent;
+    el.style.fontSize = "";
+    let fs = parseFloat(getComputedStyle(el).fontSize);
+    const limit = (el.parentElement?.clientWidth ?? window.innerWidth) - 40;
+    const widest = () =>
+      Math.max(
+        ...players.map((p) => {
+          el.textContent = p.name;
+          return el.offsetWidth;
+        })
+      );
+    while (widest() > limit && fs > 16) {
+      fs -= 2;
+      el.style.fontSize = `${fs}px`;
     }
-    loadPlayers();
-  }, [router]);
+    el.textContent = keep;
+  }, [revealing, players]);
 
-  // Start the player selection animation
-  const startPlayerSelection = (players: Player[]) => {
-    setGameState("rolling");
-
-    // Create an extended rolling sequence for better animation
-    const createRollingSequence = (players: Player[]) => {
-      const sequence = [];
-      const totalDuration = 2500;
-      const intervalDuration = 150;
-      const totalSteps = Math.floor(totalDuration / intervalDuration);
-
-      // Create a sequence that goes through all players multiple times
-      for (let i = 0; i < totalSteps; i++) {
-        // Add some randomness but still cycle through all players
-        if (players.length >= 3) {
-          sequence.push(i % players.length);
-        } else {
-          // For 2 players, add extra variation
-          const patterns = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1];
-          sequence.push(patterns[i % patterns.length]);
-        }
-      }
-      return sequence;
+  useEffect(() => {
+    if (!revealing || !current || players.length === 0) return;
+    const el = nameRef.current;
+    if (!el) return;
+    let cancelled = false;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const after = (fn: () => void, ms: number) => {
+      timers.push(
+        setTimeout(() => {
+          if (!cancelled) fn();
+        }, ms)
+      );
     };
 
-    const rollingSequence = createRollingSequence(players);
-    let sequenceIndex = 0;
+    const finish = () => {
+      setRevealing(false);
+      setHold(false);
+      saveGameSession({ phase: "choice" });
+    };
 
-    // Rolling animation for 2.5 seconds
-    const rollingInterval = setInterval(() => {
-      if (sequenceIndex < rollingSequence.length) {
-        setRollingIndex(rollingSequence[sequenceIndex]);
-        sequenceIndex++;
+    const N = players.length;
+    const target = Math.max(
+      0,
+      players.findIndex((p) => p.id === current.id)
+    );
+    const steps = 12 + Math.floor(Math.random() * 3);
+    let n = 0;
+
+    const fly = () => {
+      const title = titleRef.current;
+      if (!title || !overlayRef.current) return finish();
+      const a = el.getBoundingClientRect();
+      const b = title.getBoundingClientRect();
+      const scale = b.height / a.height;
+      if (labelRef.current) labelRef.current.style.opacity = "0";
+      if (barRef.current) barRef.current.style.opacity = "0";
+      overlayRef.current.style.backgroundColor = "transparent";
+      el.style.transition = "transform .5s cubic-bezier(.6,0,.2,1), color .5s";
+      el.style.transformOrigin = "left top";
+      el.style.transform = `translate(${b.left - a.left}px,${
+        b.top - a.top
+      }px) scale(${scale})`;
+      el.style.color = "#fff";
+      optRefs.current.forEach((o, i) => {
+        if (o)
+          o.style.transition = `opacity .35s ${0.15 + i * 0.08}s, transform .45s ${
+            0.15 + i * 0.08
+          }s cubic-bezier(.2,1.4,.4,1)`;
+      });
+      setHold(false);
+      after(finish, 560);
+    };
+
+    const lock = () => {
+      el.textContent = current.name;
+      el.classList.remove("is-tick");
+      el.classList.add("is-lock");
+      barRef.current?.classList.add("is-full");
+      after(fly, 750);
+    };
+
+    if (prefersReducedMotion()) {
+      el.textContent = current.name;
+      el.style.color = "var(--sd-mint)";
+      after(finish, 700);
+      return () => {
+        cancelled = true;
+        timers.forEach(clearTimeout);
+      };
+    }
+
+    const tick = () => {
+      n++;
+      if (n < steps) {
+        el.textContent = players[(((target - (steps - n)) % N) + N) % N].name;
+        el.classList.remove("is-tick");
+        void el.offsetWidth;
+        el.classList.add("is-tick");
+        after(tick, 45 + Math.pow(n / steps, 3) * 320);
+      } else {
+        lock();
       }
-    }, 150); // Change name every 150ms for rolling effect
+    };
+    after(tick, 120);
 
-    // Stop rolling and select final player
-    setTimeout(() => {
-      clearInterval(rollingInterval);
-      const randomPlayer = players[Math.floor(Math.random() * players.length)];
-      setCurrentPlayer(randomPlayer);
-      setGameState("choice_pending");
-    }, 2500);
-  };
+    return () => {
+      cancelled = true;
+      timers.forEach(clearTimeout);
+    };
+  }, [revealing, current, players]);
 
-  // Handle choice selection
-  const handleChoice = (type: "truth" | "dare") => {
-    if (currentPlayer && gameState === "choice_pending") {
-      router.push(`/game/task?player=${currentPlayer.id}&type=${type}`);
-    }
-  };
-
-  // Start new round
-  const startNewRound = () => {
-    if (allPlayers.length >= 2) {
-      setCurrentPlayer(null);
-      startPlayerSelection(allPlayers);
-    }
-  };
-
-  // Render player name in middle section
-  const renderPlayerName = () => {
-    if (gameState === "rolling" && allPlayers.length > 0) {
-      return (
-        <motion.div
-          key={`rolling-${rollingIndex}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className={playerNameStyle}
-          transition={{ duration: 0.1 }}
-        >
-          {allPlayers[rollingIndex]?.name}
-        </motion.div>
-      );
-    }
-
-    if (gameState === "choice_pending" && currentPlayer) {
-      return (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className={playerNameStyle}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-        >
-          {currentPlayer.name}
-        </motion.div>
-      );
-    }
-
-    return null;
-  };
-
-  // Top section content - "Wahrheit"
-  const topContent = (
-    <motion.div
-      {...(gameState === "choice_pending" ? interactiveMotionProps : {})}
-      className={
-        gameState === "choice_pending"
-          ? interactiveClassName
-          : "w-full h-full flex flex-col items-center justify-center"
+  // ---- Wahl: Frage ziehen, speichern, weiter ----
+  const choose = useCallback(
+    async (type: TaskType) => {
+      if (!current || revealing) return;
+      const available = typesFor(pack);
+      const order = available.includes(type)
+        ? [type, ...available.filter((t) => t !== type)]
+        : available;
+      const session = getGameSession();
+      busy.current = true;
+      try {
+        for (const t of order) {
+          const task = await drawTask(current, players, session.pack_name, t);
+          if (task) {
+            saveGameSession({ phase: "task", task });
+            router.push("/game/task");
+            return;
+          }
+        }
+        busy.current = false;
+        showToast("In diesem Pack gibt es keine Fragen");
+      } catch (error) {
+        console.error("Error drawing task:", error);
+        busy.current = false;
+        showToast("Das hat nicht geklappt");
       }
-      onClick={() => gameState === "choice_pending" && handleChoice("truth")}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-        className={choiceTextStyle}
-      >
-        Wahrheit
-      </motion.div>
-    </motion.div>
+    },
+    [current, revealing, pack, players, router, showToast]
   );
 
-  // Bottom section content - "Pflicht"
-  const bottomContent = (
-    <motion.div
-      {...(gameState === "choice_pending" ? interactiveMotionProps : {})}
-      className={
-        gameState === "choice_pending"
-          ? interactiveClassName
-          : "w-full h-full flex flex-col items-center justify-center"
-      }
-      onClick={() => gameState === "choice_pending" && handleChoice("dare")}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className={`${choiceTextStyle} text-[#0F0F1B]`} // Dark text on green background
-      >
-        Pflicht
-      </motion.div>
-    </motion.div>
-  );
-
-  // Handle reset modal confirmation
-  const handleResetConfirm = async () => {
-    try {
-      await clearOldDatabase();
-      setShowResetModal(false);
-      router.push("/setup/players?skip_continue=true");
-    } catch (error) {
-      console.error("Error clearing database:", error);
-      // Redirect anyway to avoid infinite loop
-      router.push("/setup/players?skip_continue=true");
+  const pickOption = (type: TaskType) => {
+    if (busy.current || revealing) return;
+    if (!typesFor(pack).includes(type)) {
+      showToast(
+        type === "dare"
+          ? "Dieses Pack hat nur Wahrheit"
+          : "Dieses Pack hat nur Pflicht"
+      );
+      return;
     }
+    choose(type);
   };
+
+  // ---- Zufall: Wahrheit und Pflicht leuchten abwechselnd, immer langsamer ----
+  const random = () => {
+    if (busy.current || revealing) return;
+    const [t, d] = optRefs.current;
+    const available = typesFor(pack);
+    const winner: TaskType =
+      available[Math.floor(Math.random() * available.length)];
+    const els = [t, d];
+    if (!t || !d || prefersReducedMotion()) {
+      busy.current = true;
+      choose(winner);
+      return;
+    }
+    busy.current = true;
+    const parity = winner === "truth" ? 0 : 1;
+    const steps = parity === 1 ? 9 : 10;
+    let n = 0;
+    const flip = () => {
+      n++;
+      const on = n % 2;
+      els[on]!.classList.remove("sd-dim");
+      els[1 - on]!.classList.add("sd-dim");
+      if (n < steps) {
+        setTimeout(flip, 70 + Math.pow(n / steps, 2.2) * 330);
+        return;
+      }
+      els[on]!.classList.add("sd-win");
+      setTimeout(() => {
+        busy.current = false;
+        choose(winner);
+      }, 650);
+    };
+    flip();
+  };
+
+  const available = typesFor(pack);
+  const title = current?.name ?? "";
 
   return (
     <>
-      <BackButton href="/setup/players?skip_continue=true" icon="x" />
-      <Layout
-        topSectionContent={topContent}
-        bottomSectionContent={bottomContent}
-        mainClassName="p-0 flex items-center justify-center"
-      >
-        <AnimatePresence mode="wait">{renderPlayerName()}</AnimatePresence>
-      </Layout>
+      <ThreeBand
+        screen="choice"
+        back={{ label: "Pause", icon: "pause", href: "/pause" }}
+        title={title}
+        titleSize={32}
+        titleRef={titleRef}
+        titleHidden={revealing}
+        hold={hold}
+        toast={toast}
+        top={
+          <button
+            type="button"
+            ref={(n) => {
+              optRefs.current[0] = n;
+            }}
+            className={`sd-big sd-tap${
+              ready && !available.includes("truth") ? " sd-dim" : ""
+            }`}
+            data-slot="option"
+            onClick={() => pickOption("truth")}
+          >
+            <FitText className="sd-t sd-sh">Wahrheit</FitText>
+          </button>
+        }
+        bottom={
+          <button
+            type="button"
+            ref={(n) => {
+              optRefs.current[1] = n;
+            }}
+            className={`sd-big sd-tap${
+              ready && !available.includes("dare") ? " sd-dim" : ""
+            }`}
+            data-slot="option"
+            onClick={() => pickOption("dare")}
+          >
+            <FitText className="sd-t">Pflicht</FitText>
+          </button>
+        }
+        next={{ label: "Zufall", icon: "dice", onClick: random }}
+        overlay={
+          !ready ? (
+            <div className="sd-reveal" />
+          ) : revealing && current ? (
+            <div className="sd-reveal" ref={overlayRef} role="status">
+              <div className="sd-reveal-label" ref={labelRef}>
+                Wer ist dran?
+              </div>
+              <div
+                className="sd-reveal-name"
+                ref={nameRef}
+                data-slot="title"
+              >
+                {players[0]?.name ?? ""}
+              </div>
+              <div className="sd-reveal-bar" ref={barRef} />
+            </div>
+          ) : null
+        }
+      />
       <DatabaseResetModal
-        isOpen={showResetModal}
-        onConfirm={handleResetConfirm}
+        isOpen={guard.needsReset}
+        onConfirm={guard.confirmReset}
       />
     </>
   );
