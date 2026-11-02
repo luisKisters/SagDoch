@@ -3,7 +3,7 @@ import path from "node:path";
 import Papa from "papaparse";
 
 /** Wohin „Jetzt spielen“ führt. Eine Stelle, damit das Routing-Update nur hier passiert. */
-export const PLAY_HREF = "/";
+export const PLAY_HREF = "/spielen";
 
 export type LandingPack = {
   id: string;

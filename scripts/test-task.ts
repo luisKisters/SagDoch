@@ -105,6 +105,17 @@ const ok = (cond: unknown, msg: string) => { checks++; assert.ok(cond, msg); };
   ok(parts.filter((p) => p.kind === "target").length === 2, "beide {targetPlayerName}");
 }
 
+// 6b. „er/sie“ & Co. nach Gender der Zielperson
+{
+  const t = "{playerName}, frag {targetPlayerName}, ob er/sie ihm/ihr seine/ihre Jacke gibt. Er/sie lacht.";
+  const txt = (g?: string) => renderTemplate(t, "A", "B", g).map((p) => p.text).join("");
+  ok(txt("Männlich") === "A, frag B, ob er ihm seine Jacke gibt. Er lacht.", `m: ${txt("Männlich")}`);
+  ok(txt("Weiblich") === "A, frag B, ob sie ihr ihre Jacke gibt. Sie lacht.", `w: ${txt("Weiblich")}`);
+  ok(txt("Divers").includes("er/sie"), "Divers behält Doppelform");
+  const noTarget = renderTemplate("{playerName}, sag jedem, was du an ihm/ihr magst.", "A", undefined, "Männlich").map((p) => p.text).join("");
+  ok(noTarget.includes("ihm/ihr"), "ohne Zielperson bleibt Doppelform");
+}
+
 // 7. Gesamter Inhalt: 3000 Züge pro Pack/Typ, nie ein Platzhalter im Ergebnistext, nie Ziel ohne Namen
 {
   const mixed = [P("Anna", "Weiblich", "Hetero"), P("Ben", "Männlich", "Homo"), P("Cem", "Divers", "Pan"), P("Dina", "Weiblich", "Ace")];
@@ -117,7 +128,7 @@ const ok = (cond: unknown, msg: string) => { checks++; assert.ok(cond, msg); };
         const player = mixed[i % mixed.length];
         const r = pickTask({ pool: qs, player, players: mixed, seen, recentTargetIds: [] })!;
         seen = r.newLap ? [r.question.uid!] : [r.question.uid!, ...seen];
-        const text = renderTemplate(r.question.text_template, player.name, r.target?.name).map((p) => p.text).join("");
+        const text = renderTemplate(r.question.text_template, player.name, r.target?.name, r.target?.gender).map((p) => p.text).join("");
         ok(!/\{\w+\}/.test(text), `Platzhalter übrig: ${text}`);
       }
     }

@@ -26,7 +26,7 @@ export default function PausePage() {
       if (!alive) return;
       const cur = players.find((p) => p.id === s.current_player_id);
       if (!s.playing || !cur) {
-        router.replace("/");
+        router.replace("/spielen");
         return;
       }
       setInfo({
@@ -34,7 +34,7 @@ export default function PausePage() {
         pack: s.pack_name,
         round: roundOf(s.turns_played, players.length),
       });
-    })().catch(() => router.replace("/"));
+    })().catch(() => router.replace("/spielen"));
     return () => {
       alive = false;
     };
@@ -42,7 +42,7 @@ export default function PausePage() {
 
   const end = () => {
     endGameSession();
-    router.push("/");
+    router.push("/spielen");
   };
 
   return (

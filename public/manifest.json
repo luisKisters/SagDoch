@@ -88,7 +88,7 @@
   "categories": ["games", "entertainment", "social"],
   "theme_color": "#0F0F1B",
   "background_color": "#0F0F1B",
-  "start_url": "/",
+  "start_url": "/spielen",
   "display": "standalone",
   "orientation": "portrait",
   "id": "/"

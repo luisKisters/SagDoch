@@ -143,7 +143,7 @@ function PlayersScreen() {
       screen="players"
       back={{
         label: "Zurück",
-        href: fromPause ? "/pause" : "/",
+        href: fromPause ? "/pause" : "/spielen",
       }}
       title="Spieler:innen"
       toast={toast}

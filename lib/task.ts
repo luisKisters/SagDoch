@@ -35,18 +35,40 @@ const questionKey = (q: Question): string => q.uid ?? `id:${q.id}`;
 // Text
 // ---------------------------------------------------------------------------
 
+// „er/sie“ & Co. in Fragen mit Zielperson: passend zum Gender der Zielperson auflösen.
+// Bei „Divers“ oder unbekanntem Gender bleibt die Doppelform stehen.
+const PRONOUNS = /\b(er\/sie|ihn\/sie|ihm\/ihr|seinem\/ihrem|seinen\/ihren|seiner\/ihrer|seine\/ihre|sein\/ihr)\b/gi;
+
+export function resolvePronouns(text: string, targetGender?: string): string {
+  const pick =
+    targetGender === "Männlich" ? 0 : targetGender === "Weiblich" ? 1 : -1;
+  if (pick < 0) return text;
+  return text.replace(PRONOUNS, (m) => {
+    const word = m.split("/")[pick];
+    return m[0] === m[0].toUpperCase()
+      ? word[0].toUpperCase() + word.slice(1)
+      : word;
+  });
+}
+
 export function renderTemplate(
   template: string,
   playerName: string,
-  targetName?: string
+  targetName?: string,
+  targetGender?: string
 ): TaskPart[] {
   const parts: TaskPart[] = [];
+  const hasTarget = template.includes("{targetPlayerName}");
   for (const piece of template.split(/(\{playerName\}|\{targetPlayerName\})/)) {
     if (piece === "") continue;
     if (piece === "{playerName}") parts.push({ kind: "player", text: playerName });
     else if (piece === "{targetPlayerName}")
       parts.push({ kind: "target", text: targetName ?? "jemand" });
-    else parts.push({ kind: "text", text: piece });
+    else
+      parts.push({
+        kind: "text",
+        text: hasTarget ? resolvePronouns(piece, targetGender) : piece,
+      });
   }
   return parts;
 }
@@ -217,7 +239,8 @@ export async function getNextTask(args: {
   const parts = renderTemplate(
     result.question.text_template,
     player.name,
-    result.target?.name
+    result.target?.name,
+    result.target?.gender
   );
   return {
     question: result.question,

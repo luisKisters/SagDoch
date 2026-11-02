@@ -95,7 +95,7 @@ export default function TaskPage() {
     : undefined;
   const parts =
     current && task
-      ? renderTemplate(task.text_template, current.name, target?.name)
+      ? renderTemplate(task.text_template, current.name, target?.name, target?.gender)
       : [];
   const length = parts.reduce((n, p) => n + p.text.length, 0);
 

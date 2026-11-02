@@ -5,19 +5,27 @@ import Link from "next/link";
 import ThreeBand from "@/components/ThreeBand";
 import FitText from "@/components/FitText";
 import { hasResumableGame } from "@/lib/db";
+import { markPlayed } from "@/lib/played";
 
 /** Start: Wahrheit oder Pflicht (tippbar) oben, „Ich hab noch nie“ unten (kommt bald). */
 export default function StartScreen() {
   const [resume, setResume] = useState(false);
+  // Im Browser führt Zurück zur Landingpage. In der installierten App gibt es kein Zurück.
+  const [inBrowser, setInBrowser] = useState(false);
 
   useEffect(() => {
     setResume(hasResumableGame());
+    markPlayed();
+    const standalone =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      (navigator as Navigator & { standalone?: boolean }).standalone === true;
+    setInBrowser(!standalone);
   }, []);
 
   return (
     <ThreeBand
       screen="home"
-      back={null}
+      back={inBrowser ? { href: "/willkommen", label: "Über SagDoch" } : null}
       title="SagDoch"
       top={
         <Link
