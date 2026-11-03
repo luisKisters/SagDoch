@@ -1,18 +1,11 @@
 import LandingPage from "./_components/LandingPage";
 import { PLAY_HREF } from "./_lib/content";
-import { PLAYED_KEY } from "@/lib/played";
 
-// Läuft vor dem ersten Paint: Wer die App installiert hat (Standalone) oder schon gespielt hat,
-// landet direkt im Spiel statt auf der Landingpage. Bestehende Nutzer von vor diesem Flag erkennt
-// der Fallback an der vorhandenen Spiel-DB (asynchron, daher nur ein kurzer Blitz, einmalig).
+// Läuft vor dem ersten Paint: Nur wer SagDoch als App geöffnet hat (Standalone), landet direkt im
+// Spiel. Im Browser sehen alle die Landingpage, auch wer schon gespielt hat, damit möglichst viele
+// den Installieren-Hinweis sehen. „Jetzt spielen“ ist ganz oben, ist also nur einen Klick entfernt.
 const redirectScript = `(function(){try{
-var go=function(){location.replace(${JSON.stringify(PLAY_HREF)})};
-if(matchMedia("(display-mode: standalone)").matches||navigator.standalone===true){return go()}
-var ls=window.localStorage;
-if(ls.getItem(${JSON.stringify(PLAYED_KEY)})||ls.getItem("sagdoch.game.v1")){return go()}
-if(indexedDB.databases){indexedDB.databases().then(function(d){
-if(d.some(function(x){return x.name==="truthOrDareDB"})){ls.setItem(${JSON.stringify(PLAYED_KEY)},"1");go()}
-}).catch(function(){})}
+if(matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches||navigator.standalone===true){location.replace(${JSON.stringify(PLAY_HREF)})}
 }catch(e){}})();`;
 
 export default function HomePage() {

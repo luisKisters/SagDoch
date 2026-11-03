@@ -1,6 +1,7 @@
 import Band from "./Band";
 import FactRows from "./FactRows";
-import InstallSteps from "./InstallSteps";
+import InstallCard from "./InstallCard";
+import InstallShortcut, { InstallBar } from "./InstallShortcut";
 import PackList from "./PackList";
 import PlayButton from "./PlayButton";
 import SampleTasks from "./SampleTasks";
@@ -25,9 +26,14 @@ export default async function LandingPage() {
         </div>
       </Band>
 
-      <Band tone="night" className={s.cta}>
+      <Band tone="night" className={s.cta} id="start">
         <PlayButton />
-        <p className={s.ctaNote}>Kostenlos. Ohne Anmeldung.</p>
+        <InstallShortcut />
+        <p className={s.ctaNote}>Kostenlos. Ohne Anmeldung. Kein Store nötig.</p>
+      </Band>
+
+      <Band tone="night" label="Installieren" id="installieren" className={s.installBand}>
+        <InstallCard />
       </Band>
 
       <Band tone="mint" label="Was ist SagDoch">
@@ -48,18 +54,10 @@ export default async function LandingPage() {
         <PackList packs={packs} />
       </Band>
 
-      <Band tone="night" label="Installieren">
-        <h2 className={s.h2}>Als App installieren</h2>
-        <p className={s.sectionNote}>
-          SagDoch ist eine PWA. Installiert startet es mit eigenem Icon und ohne
-          Adressleiste, wie eine normale App. Ein Store ist nicht nötig.
-        </p>
-        <InstallSteps />
-      </Band>
-
-      <Band tone="mint" label="Spielen">
+      <Band tone="mint" label="Spielen" id="ende">
         <PlayButton />
       </Band>
+      <InstallBar />
     </main>
   );
 }

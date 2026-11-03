@@ -37,7 +37,7 @@
 /* Erster Screen auf dem Handy = Pink + Nachtband mit Knopf, Mint schaut darunter hervor. */
 .hero {
   flex: 1 0 auto;
-  min-height: calc(100svh - 150px);
+  min-height: calc(100svh - 240px);
   display: flex;
   align-items: center;
   padding-top: max(44px, env(safe-area-inset-top));
@@ -189,7 +189,7 @@
   flex-direction: column;
   gap: 10px;
 }
-.step b { display: block; }
+.step b { font-weight: 800; color: var(--mint); }
 
 .footer {
   padding: 26px 0 max(26px, env(safe-area-inset-bottom));
@@ -212,9 +212,193 @@
 @media (min-width: 900px) {
   .band { padding: 64px 0; }
   .band.cta { padding: 24px 0 28px; }
-  .hero { min-height: calc(100svh - 150px); }
+  .hero { min-height: calc(100svh - 240px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .page, .page * { animation: none !important; transition: none !important; }
 }
+
+/* ---------- Installieren ---------- */
+
+/* Zweiter Knopf unter „Jetzt spielen“: Mint-Rahmen, zweizeilig, fast so präsent wie Spielen */
+.ctaInstall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 64px;
+  margin-top: 12px;
+  padding: 10px 16px;
+  border: 2px solid var(--mint);
+  border-radius: 20px;
+  background: rgba(0, 255, 198, 0.08);
+  color: var(--mint);
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, transform 0.12s;
+}
+.ctaInstall svg { width: 24px; height: 24px; flex: none; }
+.ctaInstall small { display: block; margin-top: 2px; font-size: 12px; font-weight: 600; color: #fff; opacity: 0.7; }
+.ctaInstall:hover { background: rgba(0, 255, 198, 0.14); }
+.ctaInstall:active { transform: translateY(2px); }
+.ctaInstall:focus-visible { outline: 3px solid var(--mint); outline-offset: 4px; }
+
+.stepNum {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+}
+.steps .step { flex: 1; }
+.steps .row > svg { opacity: 0.7; }
+
+.installActions {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Echter Installieren-Knopf: wie „Jetzt spielen“, nur in Mint */
+.install {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 68px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--mint);
+  color: var(--night);
+  font: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.25);
+  transition: transform 0.12s, box-shadow 0.12s;
+  -webkit-tap-highlight-color: transparent;
+}
+.install svg { width: 24px; height: 24px; flex: none; }
+.install:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
+.install:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
+/* Nebenaktion als volle Zeile */
+.ghost {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ghost svg { width: 20px; height: 20px; flex: none; color: var(--mint); }
+.ghost:hover { background: rgba(255, 255, 255, 0.06); }
+.ghost:focus-visible { outline: 3px solid var(--mint); outline-offset: 4px; }
+
+.installDone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--mint);
+  color: var(--night);
+  font-size: 18px;
+  font-weight: 700;
+}
+.installDone svg { width: 28px; height: 28px; flex: none; }
+.installDone small { display: block; margin-top: 4px; font-size: 13px; font-weight: 600; opacity: 0.8; }
+
+.otherDevices { margin-top: 22px; }
+.otherDevices summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #8e8e99;
+  list-style-position: inside;
+}
+.otherDevices summary:focus-visible { outline: 2px solid var(--mint); outline-offset: 4px; border-radius: 4px; }
+.otherDevices .steps { margin-top: 14px; }
+
+/* Anleitung schließt direkt an den Knopf-Block an: eine dunkle Fläche */
+.installBand { padding-top: 16px; }
+
+/* Feste Leiste unten (nur Handy), fährt rein, sobald „Jetzt spielen“ aus dem Bild ist */
+.bar {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 536px;
+  margin: 0 auto;
+  padding: 8px 8px 8px 10px;
+  border-radius: 20px;
+  background: var(--night);
+  border: 2px solid var(--mint);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transform: translateY(calc(100% + 40px));
+  transition: transform 0.28s ease-out;
+}
+.barOn { transform: none; }
+.barMain {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  border: 0;
+  background: none;
+  color: var(--mint);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.barMain img { border-radius: 10px; flex: none; }
+.barMain small { display: block; margin-top: 1px; font-size: 12px; font-weight: 600; color: #fff; opacity: 0.7; }
+.barClose {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+}
+.barClose svg { width: 18px; height: 18px; }

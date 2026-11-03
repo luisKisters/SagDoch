@@ -12,7 +12,7 @@ export default function LandingLayout({
   return (
     <>
       {/* Overscroll und Safe-Areas zeigen sonst den hellen Standard-Hintergrund der App. */}
-      <style>{`html,body{background:#0F0F1B}`}</style>
+      <style>{`html,body{background:#0F0F1B}html{scroll-behavior:smooth}`}</style>
       {children}
     </>
   );

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Orbitron } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import { INSTALL_CAPTURE_SCRIPT } from "@/lib/install-script";
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
@@ -72,6 +73,8 @@ export default function RootLayout({
         />
       </head>
       <body className={orbitron.variable}>
+        {/* Installieren-Dialog überall abfangen: Landingpage und Pause-Screen bieten ihn an. */}
+        <script dangerouslySetInnerHTML={{ __html: INSTALL_CAPTURE_SCRIPT }} />
         {children}
         <Analytics />
       </body>

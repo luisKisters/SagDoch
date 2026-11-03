@@ -6,6 +6,7 @@ import { Layers, Users, X } from "lucide-react";
 import ThreeBand from "@/components/ThreeBand";
 import FitText from "@/components/FitText";
 import ActionRow from "@/components/ActionRow";
+import InstallRow from "@/components/InstallRow";
 import { Player, endGameSession, getAllPlayers, getGameSession } from "@/lib/db";
 import { roundOf } from "@/app/_game/game";
 
@@ -80,6 +81,7 @@ export default function PausePage() {
             label="Pack wechseln"
             href="/setup/packs?from=pause"
           />
+          <InstallRow />
           <ActionRow
             icon={<X strokeWidth={2.6} aria-hidden />}
             label="Spiel beenden"
